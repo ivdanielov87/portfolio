@@ -6,12 +6,13 @@
   right: 0;
   width: $right-bar-width;
   height: 100vh;
-  background-color: $right-bar-bg;
+  background-color: $bg-card;
+  border-left: 1px solid $border-color;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: $spacing-lg;
+  gap: $spacing-md;
   z-index: 1000;
 
   &__link {
@@ -20,12 +21,13 @@
     justify-content: center;
     width: 40px;
     height: 40px;
-    color: $right-bar-icon;
+    color: $text-muted;
     border-radius: 50%;
-    transition: color $transition-fast;
+    transition: all $transition-fast;
 
     &:hover {
-      color: $right-bar-icon-hover;
+      color: $accent-primary;
+      background-color: var(--accent-light);
     }
   }
 }

@@ -30,9 +30,15 @@
     transform: translateY(-2px);
   }
 
-  &__icon {
-    font-size: 2rem;
-    display: block;
+  &__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--accent-light);
+    color: $accent-primary;
     margin-bottom: $spacing-md;
   }
 

@@ -6,13 +6,22 @@
   align-items: center;
   background-color: $bg-primary;
 
+  &__inner {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3xl;
+    width: 100%;
+  }
+
   &__content {
-    max-width: 650px;
+    flex: 1;
   }
 
   &__greeting {
-    font-size: $font-size-base;
+    font-size: $font-size-xs;
     color: $text-muted;
+    letter-spacing: 2px;
+    font-weight: 500;
     margin-bottom: $spacing-sm;
   }
 
@@ -21,47 +30,68 @@
     font-weight: 800;
     color: $text-primary;
     line-height: 1.1;
-    margin-bottom: $spacing-lg;
+    margin-bottom: $spacing-sm;
+  }
 
-    .accent {
-      color: $accent-primary;
-    }
+  &__subtitle {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-lg;
+    font-weight: 500;
+    color: $accent-primary;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__dash {
+    display: inline-block;
+    width: 30px;
+    height: 3px;
+    background-color: $accent-primary;
+    border-radius: 2px;
   }
 
   &__description {
-    font-size: $font-size-base;
+    font-size: $font-size-sm;
     color: $text-secondary;
     line-height: 1.8;
-    margin-bottom: $spacing-2xl;
-  }
-
-  &__actions {
-    display: flex;
-    gap: $spacing-md;
-    flex-wrap: wrap;
+    margin-bottom: $spacing-xl;
+    max-width: 480px;
   }
 
   &__cta {
     display: inline-block;
-    padding: $spacing-sm $spacing-xl;
+    padding: $spacing-sm $spacing-2xl;
     background-color: $accent-primary;
     color: #111827;
     font-size: $font-size-sm;
     font-weight: 600;
-    border-radius: $radius-sm;
+    border-radius: $radius-md;
     transition: background-color $transition-fast;
 
     &:hover {
       background-color: $accent-hover;
     }
+  }
 
-    &--outline {
-      background-color: transparent;
-      color: $accent-primary;
-      border: 1px solid $accent-primary;
+  &__image {
+    flex-shrink: 0;
+    width: 280px;
+    height: 280px;
 
-      &:hover {
-        background-color: var(--accent-light);
+    &-wrapper {
+      width: 100%;
+      height: 100%;
+      border-radius: $radius-xl;
+      overflow: hidden;
+      position: relative;
+      background: lightslategray;
+      border: 3px solid $accent-primary;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
   }
@@ -73,12 +103,31 @@
   }
 }
 
+@media (max-width: $bp-md) {
+  .hero {
+    &__inner {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    &__subtitle {
+      justify-content: center;
+    }
+
+    &__description {
+      max-width: 100%;
+    }
+
+    &__image {
+      width: 220px;
+      height: 220px;
+      order: -1;
+    }
+  }
+}
+
 @media (max-width: $bp-sm) {
   .hero {
     &__title { font-size: $font-size-3xl; }
-    &__actions {
-      flex-direction: column;
-      .hero__cta { text-align: center; }
-    }
   }
 }

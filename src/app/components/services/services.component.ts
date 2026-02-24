@@ -19,32 +19,32 @@ export class ServicesComponent {
     {
       title: 'Web Development',
       description: 'Building modern, responsive websites using the latest technologies and best practices.',
-      icon: '🌐',
+      icon: 'monitor',
     },
     {
       title: 'Mobile Development',
       description: 'Creating cross-platform mobile applications with React Native and modern frameworks.',
-      icon: '📱',
+      icon: 'smartphone',
     },
     {
       title: 'UI/UX Design',
       description: 'Designing intuitive and beautiful user interfaces with focus on user experience.',
-      icon: '🎨',
+      icon: 'pen-tool',
     },
     {
       title: 'Clean Code',
       description: 'Writing maintainable, scalable, and well-documented code following industry standards.',
-      icon: '💻',
+      icon: 'code',
     },
     {
       title: 'SEO Optimization',
       description: 'Improving search engine visibility and performance for better organic reach.',
-      icon: '🔍',
+      icon: 'search',
     },
     {
       title: 'Digital Marketing',
       description: 'Strategic digital marketing solutions to grow your brand and online presence.',
-      icon: '📈',
+      icon: 'trending-up',
     },
   ];
 }
