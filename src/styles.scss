@@ -151,10 +151,10 @@ textarea {
 // Section spacing
 // ============================================
 section {
-  padding: $spacing-3xl $spacing-xl;
+  padding: $spacing-3xl $spacing-2xl;
 
   @media (min-width: $bp-lg) {
-    padding: $spacing-4xl $spacing-2xl;
+    padding: $spacing-4xl $spacing-4xl;
   }
 }
 
