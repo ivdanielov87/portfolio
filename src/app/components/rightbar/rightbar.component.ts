@@ -12,8 +12,8 @@ import { ThemeService } from '../../services/theme.service';
 export class RightbarComponent {
   navItems = [
     { name: 'Home', target: 'hero', icon: 'home' },
-    { name: 'About', target: 'about', icon: 'user' },
     { name: 'Services', target: 'services', icon: 'briefcase' },
+    { name: 'About', target: 'about', icon: 'user' },
     { name: 'Portfolio', target: 'portfolio', icon: 'folder' },
     { name: 'Contact', target: 'contact', icon: 'mail' },
   ];
