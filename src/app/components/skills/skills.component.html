@@ -1,18 +1,14 @@
-<section id="skills" class="skills">
+<section id="services" class="services">
   <div class="section-header">
-    <h2 class="section-title">Skills & Expertise</h2>
-    <p class="section-subtitle">Technologies I work with</p>
+    <h2 class="section-title">My Services</h2>
   </div>
 
-  <div class="skills__grid">
-    @for (cat of skillCategories; track cat.category) {
-      <div class="skill-category">
-        <h3 class="skill-category__title">{{ cat.category }}</h3>
-        <div class="skill-category__list">
-          @for (skill of cat.skills; track skill) {
-            <span class="skill-item">{{ skill }}</span>
-          }
-        </div>
+  <div class="services__grid">
+    @for (service of services; track service.title) {
+      <div class="service-card">
+        <span class="service-card__icon">{{ service.icon }}</span>
+        <h3 class="service-card__title">{{ service.title }}</h3>
+        <p class="service-card__description">{{ service.description }}</p>
       </div>
     }
   </div>

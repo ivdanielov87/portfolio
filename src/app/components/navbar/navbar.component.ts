@@ -46,8 +46,8 @@ export class NavbarComponent {
   navLinks = [
     { label: 'Home', target: 'hero' },
     { label: 'About', target: 'about' },
-    { label: 'Projects', target: 'projects' },
-    { label: 'Skills', target: 'skills' },
+    { label: 'Services', target: 'services' },
+    { label: 'Portfolio', target: 'portfolio' },
     { label: 'Contact', target: 'contact' },
   ];
 

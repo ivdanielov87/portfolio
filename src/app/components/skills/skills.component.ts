@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface SkillCategory {
-  category: string;
-  skills: string[];
+interface Service {
+  title: string;
+  description: string;
+  icon: string;
 }
 
 @Component({
@@ -14,18 +15,36 @@ interface SkillCategory {
   styleUrl: './skills.component.scss',
 })
 export class SkillsComponent {
-  skillCategories: SkillCategory[] = [
+  services: Service[] = [
     {
-      category: 'Frontend',
-      skills: ['Angular', 'React', 'TypeScript', 'JavaScript', 'HTML5', 'CSS3/SCSS', 'Tailwind CSS', 'RxJS'],
+      title: 'Web Development',
+      description: 'Building modern, responsive websites using the latest technologies and best practices.',
+      icon: '🌐',
     },
     {
-      category: 'Backend',
-      skills: ['Node.js', 'Express', 'Python', 'Django', 'REST APIs', 'GraphQL', 'PostgreSQL', 'MongoDB'],
+      title: 'Mobile Development',
+      description: 'Creating cross-platform mobile applications with React Native and modern frameworks.',
+      icon: '📱',
     },
     {
-      category: 'Tools & DevOps',
-      skills: ['Git', 'Docker', 'AWS', 'CI/CD', 'Jest', 'Webpack', 'Figma', 'Linux'],
+      title: 'UI/UX Design',
+      description: 'Designing intuitive and beautiful user interfaces with focus on user experience.',
+      icon: '🎨',
+    },
+    {
+      title: 'Clean Code',
+      description: 'Writing maintainable, scalable, and well-documented code following industry standards.',
+      icon: '💻',
+    },
+    {
+      title: 'SEO Optimization',
+      description: 'Improving search engine visibility and performance for better organic reach.',
+      icon: '🔍',
+    },
+    {
+      title: 'Digital Marketing',
+      description: 'Strategic digital marketing solutions to grow your brand and online presence.',
+      icon: '📈',
     },
   ];
 }

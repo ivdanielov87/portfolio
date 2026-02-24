@@ -1,23 +1,18 @@
-<section id="projects" class="projects">
+<section id="portfolio" class="portfolio">
   <div class="section-header">
-    <h2 class="section-title">Projects</h2>
-    <p class="section-subtitle">A selection of my recent work</p>
+    <h2 class="section-title">Portfolio</h2>
   </div>
 
-  <div class="projects__grid">
+  <div class="portfolio__grid">
     @for (project of projects; track project.title) {
-      <div class="project-card">
-        <div class="project-card__header">
-          <span class="project-card__icon">📁</span>
-        </div>
-        <div class="project-card__content">
-          <h3 class="project-card__title">{{ project.title }}</h3>
-          <p class="project-card__description">{{ project.description }}</p>
-          <div class="project-card__tags">
-            @for (tag of project.tags; track tag) {
-              <span class="tag">{{ tag }}</span>
-            }
+      <div class="portfolio-card">
+        <div class="portfolio-card__image">
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__category">{{ project.category }}</span>
           </div>
+        </div>
+        <div class="portfolio-card__content">
+          <h3 class="portfolio-card__title">{{ project.title }}</h3>
         </div>
       </div>
     }

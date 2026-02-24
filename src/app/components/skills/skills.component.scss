@@ -1,60 +1,51 @@
 @use '../../../styles/variables' as *;
 
-.skills {
-  background-color: $bg-secondary;
+.services {
+  background-color: $bg-primary;
 }
 
-.skills__grid {
+.services__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-lg;
 
-  @media (min-width: $bp-md) {
+  @media (min-width: $bp-sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $bp-xl) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-.skill-category {
+.service-card {
   background-color: $bg-card;
   border: 1px solid $border-color;
   border-radius: $radius-lg;
-  padding: $spacing-lg;
-  transition: border-color $transition-base;
+  padding: $spacing-xl;
+  transition: border-color $transition-base, transform $transition-base;
 
   &:hover {
     border-color: $accent-primary;
+    transform: translateY(-2px);
+  }
+
+  &__icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: $spacing-md;
   }
 
   &__title {
-    font-size: $font-size-sm;
+    font-size: $font-size-base;
     font-weight: 600;
-    color: $accent-primary;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: $spacing-md;
-    padding-bottom: $spacing-sm;
-    border-bottom: 1px solid $border-color;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
   }
 
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-sm;
-  }
-}
-
-.skill-item {
-  display: inline-block;
-  padding: $spacing-xs $spacing-md;
-  background-color: $tag-bg;
-  color: $tag-text;
-  font-size: $font-size-sm;
-  font-weight: 500;
-  border-radius: $radius-sm;
-  transition: background-color $transition-fast, color $transition-fast;
-
-  &:hover {
-    background-color: $accent-primary;
-    color: $bg-primary;
+  &__description {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    line-height: 1.6;
   }
 }

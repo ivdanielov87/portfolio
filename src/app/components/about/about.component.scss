@@ -1,0 +1,20 @@
+@use '../../../styles/variables' as *;
+
+.about {
+  background-color: $bg-secondary;
+}
+
+.about__content {
+  max-width: 700px;
+
+  p {
+    font-size: $font-size-base;
+    color: $text-secondary;
+    line-height: 1.8;
+    margin-bottom: $spacing-lg;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

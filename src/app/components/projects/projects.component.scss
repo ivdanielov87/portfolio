@@ -1,10 +1,10 @@
 @use '../../../styles/variables' as *;
 
-.projects {
-  background-color: $bg-primary;
+.portfolio {
+  background-color: $bg-secondary;
 }
 
-.projects__grid {
+.portfolio__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: $spacing-lg;
@@ -18,57 +18,60 @@
   }
 }
 
-.project-card {
+.portfolio-card {
   background-color: $bg-card;
   border: 1px solid $border-color;
   border-radius: $radius-lg;
   overflow: hidden;
   transition: transform $transition-base, border-color $transition-base;
+  cursor: pointer;
 
   &:hover {
     transform: translateY(-2px);
     border-color: $accent-primary;
-  }
 
-  &__header {
-    padding: $spacing-lg $spacing-lg 0;
-
-    .project-card__icon {
-      font-size: $font-size-2xl;
+    .portfolio-card__overlay {
+      opacity: 1;
     }
   }
 
+  &__image {
+    position: relative;
+    height: 180px;
+    background-color: $border-color;
+
+    @media (min-width: $bp-md) {
+      height: 200px;
+    }
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity $transition-base;
+  }
+
+  &__category {
+    font-size: $font-size-xs;
+    font-weight: 500;
+    color: $accent-primary;
+    background-color: $tag-bg;
+    padding: $spacing-xs $spacing-md;
+    border-radius: $radius-sm;
+  }
+
   &__content {
-    padding: $spacing-md $spacing-lg $spacing-lg;
+    padding: $spacing-md $spacing-lg;
   }
 
   &__title {
-    font-size: $font-size-base;
+    font-size: $font-size-sm;
     font-weight: 600;
     color: $text-primary;
-    margin-bottom: $spacing-sm;
   }
-
-  &__description {
-    font-size: $font-size-sm;
-    color: $text-secondary;
-    line-height: 1.6;
-    margin-bottom: $spacing-md;
-  }
-
-  &__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-xs;
-  }
-}
-
-.tag {
-  display: inline-block;
-  padding: 2px $spacing-sm;
-  background-color: $tag-bg;
-  color: $accent-primary;
-  font-size: $font-size-xs;
-  font-weight: 500;
-  border-radius: $radius-sm;
 }
