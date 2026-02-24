@@ -44,15 +44,14 @@
       }
     </div>
 
-    <nav class="sidebar__nav">
-      @for (link of navLinks; track link.target) {
-        <a
-          [href]="'#' + link.target"
-          class="sidebar__nav-link"
-          (click)="scrollTo($event, link.target)"
-        >{{ link.label }}</a>
+    <ul class="sidebar__info">
+      @for (item of personalInfo; track item.label) {
+        <li>
+          <span class="info-label">{{ item.label }}:</span>
+          <span class="info-value">{{ item.value }}</span>
+        </li>
       }
-    </nav>
+    </ul>
 
     <div class="sidebar__section">
       <h3 class="sidebar__section-title">Languages</h3>
