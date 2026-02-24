@@ -19,12 +19,8 @@ export class ContactComponent {
   sending = false;
   sendError = '';
   errors: { name?: string; email?: string; message?: string } = {};
-
-  // TODO: Replace these with your own EmailJS credentials
-  // 1. Sign up at https://www.emailjs.com/ (free tier: 200 emails/month)
-  // 2. Add an email service (Gmail) and get the Service ID
-  // 3. Create an email template and get the Template ID
-  // 4. Get your Public Key from Account > API Keys
+ 
+  // Sign up at https://www.emailjs.com/ (free tier: 200 emails/month)
   private readonly SERVICE_ID = 'service_n2h43vp';
   private readonly TEMPLATE_ID = 'template_n0q9hdr';
   private readonly PUBLIC_KEY = 'GbHc9qx4s9KHCAGqO';
