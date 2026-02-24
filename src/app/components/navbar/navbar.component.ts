@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ElementRef, AfterViewInit, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 
@@ -9,9 +9,34 @@ import { ThemeService } from '../../services/theme.service';
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss',
 })
-export class NavbarComponent {
+export class NavbarComponent implements AfterViewInit {
   themeService = inject(ThemeService);
+  private el = inject(ElementRef);
   mobileMenuOpen = false;
+  private sidebarEl!: HTMLElement;
+
+  ngAfterViewInit(): void {
+    this.sidebarEl = this.el.nativeElement.querySelector('.sidebar');
+    this.updateStickyTop();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateStickyTop();
+  }
+
+  private updateStickyTop(): void {
+    if (!this.sidebarEl) return;
+    const sidebarH = this.sidebarEl.offsetHeight;
+    const viewportH = window.innerHeight;
+    const margin = 24;
+
+    if (sidebarH > viewportH - margin * 2) {
+      this.sidebarEl.style.top = `${-(sidebarH - viewportH + margin)}px`;
+    } else {
+      this.sidebarEl.style.top = `${margin}px`;
+    }
+  }
 
   personalInfo = [
     { label: 'Age', value: '39' },
