@@ -33,24 +33,34 @@
 
   &__image {
     position: relative;
-    height: 180px;
+    height: 160px;
     background-color: $bg-secondary;
     display: flex;
-    align-items: flex-start;
-    padding: $spacing-md;
+    align-items: center;
+    justify-content: center;
   }
 
-  &__category {
-    font-size: $font-size-xs;
-    font-weight: 500;
-    color: $accent-primary;
-    background-color: $tag-bg;
-    padding: 2px $spacing-sm;
-    border-radius: $radius-sm;
+  &__preview-text {
+    font-size: $font-size-lg;
+    font-weight: 600;
+    color: $text-muted;
+    opacity: 0.4;
+    text-align: center;
+    padding: $spacing-md;
   }
 
   &__content {
     padding: $spacing-md $spacing-lg;
+  }
+
+  &__category {
+    display: block;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    color: $accent-primary;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
   }
 
   &__title {

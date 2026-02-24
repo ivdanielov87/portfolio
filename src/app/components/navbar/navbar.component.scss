@@ -80,7 +80,7 @@
     margin-bottom: $spacing-lg;
     background: lightslategray;
     flex-shrink: 0;
-    border: 3px solid $sidebar-border;
+    border: 3px solid $sidebar-accent;
 
     img {
       width: 100%;
@@ -101,7 +101,30 @@
     font-size: $font-size-sm;
     color: $sidebar-accent;
     text-align: center;
+    margin-bottom: $spacing-md;
+  }
+
+  &__social {
+    display: flex;
+    gap: $spacing-sm;
     margin-bottom: $spacing-lg;
+  }
+
+  &__social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid $sidebar-border;
+    color: $sidebar-muted;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $sidebar-accent;
+      border-color: $sidebar-accent;
+    }
   }
 
   &__nav {
@@ -184,7 +207,7 @@
 
 .progress-bar {
   width: 100%;
-  height: 3px;
+  height: 5px;
   background-color: $sidebar-border;
   border-radius: 2px;
   overflow: hidden;

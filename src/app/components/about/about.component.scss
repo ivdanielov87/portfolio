@@ -6,15 +6,51 @@
 
 .about__content {
   max-width: 700px;
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  margin-bottom: $spacing-2xl;
 
   p {
-    font-size: $font-size-base;
+    font-size: $font-size-sm;
     color: $text-secondary;
     line-height: 1.8;
-    margin-bottom: $spacing-lg;
+    margin-bottom: $spacing-md;
 
     &:last-child {
       margin-bottom: 0;
     }
+  }
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $spacing-md;
+
+  @media (min-width: $bp-sm) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.stat-card {
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  text-align: center;
+
+  &__number {
+    display: block;
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $accent-primary;
+    margin-bottom: $spacing-xs;
+  }
+
+  &__label {
+    font-size: $font-size-xs;
+    color: $text-muted;
   }
 }

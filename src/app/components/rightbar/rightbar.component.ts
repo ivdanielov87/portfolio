@@ -9,10 +9,19 @@ import { CommonModule } from '@angular/common';
   styleUrl: './rightbar.component.scss',
 })
 export class RightbarComponent {
-  socialLinks = [
-    { name: 'GitHub', url: 'https://github.com', icon: 'github' },
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'linkedin' },
-    { name: 'Twitter', url: 'https://twitter.com', icon: 'twitter' },
-    { name: 'Email', url: 'mailto:hello@example.com', icon: 'mail' },
+  navItems = [
+    { name: 'About', target: 'about', icon: 'user' },
+    { name: 'Home', target: 'hero', icon: 'home' },
+    { name: 'Services', target: 'services', icon: 'briefcase' },
+    { name: 'Portfolio', target: 'portfolio', icon: 'folder' },
+    { name: 'Contact', target: 'contact', icon: 'mail' },
   ];
+
+  scrollTo(event: Event, sectionId: string): void {
+    event.preventDefault();
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  }
 }

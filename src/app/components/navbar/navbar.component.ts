@@ -16,7 +16,15 @@ export class NavbarComponent {
   personalInfo = [
     { label: 'Age', value: '39' },
     { label: 'Residence', value: 'Bulgaria' },
+    { label: 'Freelance', value: 'Available' },
     { label: 'Address', value: 'Ruse, Tulcha 8' },
+  ];
+
+  socialLinks = [
+    { name: 'GitHub', url: 'https://github.com', icon: 'github' },
+    { name: 'Twitter', url: 'https://twitter.com', icon: 'twitter' },
+    { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'linkedin' },
+    { name: 'Website', url: '#', icon: 'link' },
   ];
 
   languages = [
@@ -25,11 +33,10 @@ export class NavbarComponent {
   ];
 
   skills = [
-    { name: 'Angular', percent: 90 },
-    { name: 'TypeScript', percent: 85 },
-    { name: 'JavaScript', percent: 90 },
-    { name: 'HTML/CSS', percent: 95 },
-    { name: 'Node.js', percent: 75 },
+    { name: 'HTML', percent: 95 },
+    { name: 'CSS', percent: 85 },
+    { name: 'JavaScript', percent: 80 },
+    { name: 'React', percent: 80 },
   ];
 
   navLinks = [
