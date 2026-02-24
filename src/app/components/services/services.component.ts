@@ -8,13 +8,13 @@ interface Service {
 }
 
 @Component({
-  selector: 'app-skills',
+  selector: 'app-services',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './skills.component.html',
-  styleUrl: './skills.component.scss',
+  templateUrl: './services.component.html',
+  styleUrl: './services.component.scss',
 })
-export class SkillsComponent {
+export class ServicesComponent {
   services: Service[] = [
     {
       title: 'Web Development',

@@ -1,50 +1,36 @@
 @use '../../../styles/variables' as *;
 
 .footer {
-  background-color: $bg-secondary;
+  background-color: $bg-primary;
   border-top: 1px solid $border-color;
-  padding: $spacing-xl $spacing-xl;
+  padding: $spacing-xl;
 
   &__inner {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     gap: $spacing-md;
   }
 
-  &__social {
+  &__nav {
     display: flex;
-    gap: $spacing-md;
-  }
-
-  &__social-link {
-    display: flex;
-    align-items: center;
+    gap: $spacing-lg;
+    flex-wrap: wrap;
     justify-content: center;
-    width: 36px;
-    height: 36px;
-    color: $text-muted;
-    border: 1px solid $border-color;
-    border-radius: 50%;
-    transition: color $transition-fast, border-color $transition-fast;
 
-    &:hover {
-      color: $accent-primary;
-      border-color: $accent-primary;
+    a {
+      font-size: $font-size-sm;
+      color: $text-muted;
+      transition: color $transition-fast;
+
+      &:hover {
+        color: $accent-primary;
+      }
     }
   }
 
   &__copyright {
     font-size: $font-size-xs;
     color: $text-muted;
-  }
-}
-
-@media (max-width: $bp-sm) {
-  .footer {
-    &__inner {
-      flex-direction: column;
-      text-align: center;
-    }
   }
 }

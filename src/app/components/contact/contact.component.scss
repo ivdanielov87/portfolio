@@ -1,7 +1,7 @@
 @use '../../../styles/variables' as *;
 
 .contact {
-  background-color: $bg-primary;
+  background-color: $bg-secondary;
 }
 
 .contact__wrapper {
@@ -13,7 +13,7 @@
   align-items: center;
   gap: $spacing-md;
   padding: $spacing-lg;
-  background-color: $accent-light;
+  background-color: var(--accent-light);
   border: 1px solid $accent-primary;
   border-radius: $radius-md;
   margin-bottom: $spacing-xl;
@@ -25,7 +25,7 @@
     width: 32px;
     height: 32px;
     background-color: $accent-primary;
-    color: $bg-primary;
+    color: #111827;
     border-radius: 50%;
     font-weight: 700;
     flex-shrink: 0;
@@ -68,24 +68,16 @@
   textarea {
     width: 100%;
     padding: $spacing-sm $spacing-md;
-    background-color: $bg-input;
+    background-color: $bg-card;
     border: 1px solid $border-color;
     border-radius: $radius-sm;
     color: $text-primary;
     font-size: $font-size-sm;
     transition: border-color $transition-fast;
 
-    &::placeholder {
-      color: $text-muted;
-    }
-
-    &:focus {
-      border-color: $accent-primary;
-    }
-
-    &.error {
-      border-color: #ef4444;
-    }
+    &::placeholder { color: $text-muted; }
+    &:focus { border-color: $accent-primary; }
+    &.error { border-color: #ef4444; }
   }
 
   textarea {
@@ -102,22 +94,18 @@
 .contact__submit {
   padding: $spacing-sm $spacing-xl;
   background-color: $accent-primary;
-  color: $bg-primary;
+  color: #111827;
   font-size: $font-size-sm;
   font-weight: 600;
   border-radius: $radius-sm;
-  transition: background-color $transition-fast, box-shadow $transition-fast;
+  transition: background-color $transition-fast;
   align-self: flex-start;
 
   &:hover {
     background-color: $accent-hover;
-    box-shadow: 0 4px 15px var(--accent-light);
   }
 }
 
-// ============================================
-// Responsive
-// ============================================
 @media (max-width: $bp-sm) {
   .contact__submit {
     width: 100%;

@@ -13,31 +13,26 @@
   </button>
 </div>
 
-<!-- Sidebar (desktop fixed / mobile slide-out) -->
+<!-- Left Sidebar -->
 <aside class="sidebar" [class.open]="mobileMenuOpen">
   <div class="sidebar__scroll">
-    <!-- Profile image -->
     <div class="sidebar__photo">
-      <img src="assets/profile.jpg" alt="Profile photo" />
+      <img src="profile.jpg" alt="Ivelin Dimitrov" />
     </div>
 
-    <!-- Name -->
     <h2 class="sidebar__name">Ivelin Dimitrov</h2>
     <p class="sidebar__title">Front-end Developer</p>
 
-    <!-- Personal info -->
-    <div class="sidebar__section">
-      <ul class="sidebar__info">
-        @for (item of personalInfo; track item.label) {
-          <li>
-            <span class="info-label">{{ item.label }}:</span>
-            <span class="info-value">{{ item.value }}</span>
-          </li>
-        }
-      </ul>
-    </div>
+    <nav class="sidebar__nav">
+      @for (link of navLinks; track link.target) {
+        <a
+          [href]="'#' + link.target"
+          class="sidebar__nav-link"
+          (click)="scrollTo($event, link.target)"
+        >{{ link.label }}</a>
+      }
+    </nav>
 
-    <!-- Languages -->
     <div class="sidebar__section">
       <h3 class="sidebar__section-title">Languages</h3>
       @for (lang of languages; track lang.name) {
@@ -53,7 +48,6 @@
       }
     </div>
 
-    <!-- Skills -->
     <div class="sidebar__section">
       <h3 class="sidebar__section-title">Skills</h3>
       @for (skill of skills; track skill.name) {
@@ -69,37 +63,18 @@
       }
     </div>
 
-    <!-- Navigation -->
-    <nav class="sidebar__nav">
-      @for (link of navLinks; track link.target) {
-        <a
-          [href]="'#' + link.target"
-          class="sidebar__nav-link"
-          (click)="scrollTo($event, link.target)"
-        >
-          {{ link.label }}
-        </a>
-      }
-    </nav>
-
-    <!-- Theme toggle -->
     <button class="sidebar__theme-toggle" (click)="themeService.toggle()" aria-label="Toggle theme">
       @if (themeService.darkMode) {
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
         <span>Light Mode</span>
       } @else {
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <span>Dark Mode</span>
       }
     </button>
   </div>
 </aside>
 
-<!-- Overlay for mobile -->
 @if (mobileMenuOpen) {
   <div class="sidebar-overlay" (click)="closeMenu()"></div>
 }

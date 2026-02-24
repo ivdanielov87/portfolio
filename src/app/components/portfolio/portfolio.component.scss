@@ -1,7 +1,7 @@
 @use '../../../styles/variables' as *;
 
 .portfolio {
-  background-color: $bg-secondary;
+  background-color: $bg-primary;
 }
 
 .portfolio__grid {
@@ -29,31 +29,15 @@
   &:hover {
     transform: translateY(-2px);
     border-color: $accent-primary;
-
-    .portfolio-card__overlay {
-      opacity: 1;
-    }
   }
 
   &__image {
     position: relative;
     height: 180px;
-    background-color: $border-color;
-
-    @media (min-width: $bp-md) {
-      height: 200px;
-    }
-  }
-
-  &__overlay {
-    position: absolute;
-    inset: 0;
+    background-color: $bg-secondary;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    transition: opacity $transition-base;
+    align-items: flex-start;
+    padding: $spacing-md;
   }
 
   &__category {
@@ -61,7 +45,7 @@
     font-weight: 500;
     color: $accent-primary;
     background-color: $tag-bg;
-    padding: $spacing-xs $spacing-md;
+    padding: 2px $spacing-sm;
     border-radius: $radius-sm;
   }
 

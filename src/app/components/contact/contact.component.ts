@@ -18,21 +18,11 @@ export class ContactComponent {
 
   validate(): boolean {
     this.errors = {};
-
-    if (!this.name.trim()) {
-      this.errors.name = 'Name is required.';
-    }
-
-    if (!this.email.trim()) {
-      this.errors.email = 'Email is required.';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
-      this.errors.email = 'Please enter a valid email address.';
-    }
-
-    if (!this.message.trim()) {
-      this.errors.message = 'Message is required.';
-    }
-
+    if (!this.name.trim()) this.errors.name = 'Name is required';
+    if (!this.email.trim()) this.errors.email = 'Email is required';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email))
+      this.errors.email = 'Invalid email format';
+    if (!this.message.trim()) this.errors.message = 'Message is required';
     return Object.keys(this.errors).length === 0;
   }
 
@@ -42,10 +32,6 @@ export class ContactComponent {
       this.name = '';
       this.email = '';
       this.message = '';
-
-      setTimeout(() => {
-        this.submitted = false;
-      }, 4000);
     }
   }
 }

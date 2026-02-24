@@ -1,8 +1,6 @@
 @use '../../../styles/variables' as *;
 
-// ============================================
 // Mobile top bar (hidden on desktop)
-// ============================================
 .mobile-topbar {
   display: none;
   position: fixed;
@@ -12,7 +10,6 @@
   z-index: 1001;
   height: 56px;
   background-color: $bg-sidebar;
-  border-bottom: 1px solid $border-color;
   padding: 0 $spacing-lg;
   align-items: center;
   justify-content: space-between;
@@ -20,7 +17,7 @@
   &__name {
     font-size: $font-size-lg;
     font-weight: 700;
-    color: $text-primary;
+    color: $sidebar-text;
   }
 
   &__toggle {
@@ -34,19 +31,13 @@
       display: block;
       width: 22px;
       height: 2px;
-      background-color: $text-primary;
+      background-color: $sidebar-text;
       border-radius: 2px;
       transition: all $transition-base;
 
-      &.open:nth-child(1) {
-        transform: translateY(7px) rotate(45deg);
-      }
-      &.open:nth-child(2) {
-        opacity: 0;
-      }
-      &.open:nth-child(3) {
-        transform: translateY(-7px) rotate(-45deg);
-      }
+      &.open:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      &.open:nth-child(2) { opacity: 0; }
+      &.open:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
     }
   }
 
@@ -55,9 +46,7 @@
   }
 }
 
-// ============================================
-// Sidebar
-// ============================================
+// Left Sidebar
 .sidebar {
   position: fixed;
   top: 0;
@@ -65,7 +54,6 @@
   width: $sidebar-width;
   height: 100vh;
   background-color: $bg-sidebar;
-  border-right: 1px solid $border-color;
   z-index: 1000;
   overflow: hidden;
 
@@ -77,23 +65,22 @@
     flex-direction: column;
     align-items: center;
 
-    &::-webkit-scrollbar {
-      width: 4px;
-    }
+    &::-webkit-scrollbar { width: 4px; }
     &::-webkit-scrollbar-thumb {
-      background: $border-light;
+      background: $sidebar-border;
       border-radius: 2px;
     }
   }
 
   &__photo {
-    width: 160px;
-    height: 160px;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     overflow: hidden;
     margin-bottom: $spacing-lg;
     background: lightslategray;
     flex-shrink: 0;
+    border: 3px solid $sidebar-border;
 
     img {
       width: 100%;
@@ -105,58 +92,26 @@
   &__name {
     font-size: $font-size-xl;
     font-weight: 700;
-    color: $text-primary;
+    color: $sidebar-text;
     text-align: center;
-    margin-bottom: $spacing-xs;
+    margin-bottom: 2px;
   }
 
   &__title {
     font-size: $font-size-sm;
-    color: $accent-primary;
+    color: $sidebar-accent;
     text-align: center;
     margin-bottom: $spacing-lg;
   }
 
-  &__section {
-    width: 100%;
-    padding: $spacing-md 0;
-    border-top: 1px solid $border-color;
-
-    &-title {
-      font-size: $font-size-sm;
-      font-weight: 600;
-      color: $text-primary;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: $spacing-md;
-    }
-  }
-
-  &__info {
-    li {
-      display: flex;
-      justify-content: space-between;
-      padding: $spacing-xs 0;
-      font-size: $font-size-sm;
-
-      .info-label {
-        color: $text-muted;
-      }
-
-      .info-value {
-        color: $text-secondary;
-        text-align: right;
-      }
-    }
-  }
-
   &__nav {
     width: 100%;
-    padding-top: $spacing-md;
-    border-top: 1px solid $border-color;
     display: flex;
     flex-direction: column;
-    gap: $spacing-xs;
+    gap: 2px;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-lg;
+    border-bottom: 1px solid $sidebar-border;
   }
 
   &__nav-link {
@@ -164,13 +119,28 @@
     padding: $spacing-sm $spacing-md;
     font-size: $font-size-sm;
     font-weight: 500;
-    color: $text-secondary;
+    color: $sidebar-muted;
     border-radius: $radius-md;
     transition: all $transition-fast;
 
     &:hover {
-      color: $accent-primary;
-      background-color: $accent-light;
+      color: $sidebar-accent;
+    }
+  }
+
+  &__section {
+    width: 100%;
+    padding-bottom: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    border-bottom: 1px solid $sidebar-border;
+
+    &-title {
+      font-size: $font-size-xs;
+      font-weight: 600;
+      color: $sidebar-muted;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: $spacing-md;
     }
   }
 
@@ -181,29 +151,25 @@
     justify-content: center;
     gap: $spacing-sm;
     padding: $spacing-sm $spacing-md;
-    margin-top: $spacing-md;
+    margin-top: auto;
     background: none;
-    color: $text-secondary;
-    font-size: $font-size-sm;
-    border: 1px solid $border-color;
+    color: $sidebar-muted;
+    font-size: $font-size-xs;
+    border: 1px solid $sidebar-border;
     border-radius: $radius-md;
     transition: all $transition-fast;
     cursor: pointer;
 
     &:hover {
-      color: $accent-primary;
-      border-color: $accent-primary;
+      color: $sidebar-accent;
+      border-color: $sidebar-accent;
     }
 
-    svg {
-      flex-shrink: 0;
-    }
+    svg { flex-shrink: 0; }
   }
 }
 
-// ============================================
 // Progress bars
-// ============================================
 .progress-item {
   margin-bottom: $spacing-sm;
 
@@ -211,29 +177,27 @@
     display: flex;
     justify-content: space-between;
     font-size: $font-size-xs;
-    color: $text-secondary;
-    margin-bottom: $spacing-xs;
+    color: $sidebar-muted;
+    margin-bottom: 4px;
   }
 }
 
 .progress-bar {
   width: 100%;
-  height: 4px;
-  background-color: $border-color;
+  height: 3px;
+  background-color: $sidebar-border;
   border-radius: 2px;
   overflow: hidden;
 
   &__fill {
     height: 100%;
-    background-color: $accent-primary;
+    background-color: $sidebar-accent;
     border-radius: 2px;
     transition: width 0.6s ease;
   }
 }
 
-// ============================================
 // Mobile overlay
-// ============================================
 .sidebar-overlay {
   display: none;
   position: fixed;
@@ -242,9 +206,7 @@
   z-index: 999;
 }
 
-// ============================================
-// Responsive: mobile slide-out
-// ============================================
+// Responsive
 @media (max-width: $bp-lg) {
   .sidebar {
     transform: translateX(-100%);
@@ -252,12 +214,8 @@
     top: 56px;
     height: calc(100vh - 56px);
 
-    &.open {
-      transform: translateX(0);
-    }
+    &.open { transform: translateX(0); }
   }
 
-  .sidebar-overlay {
-    display: block;
-  }
+  .sidebar-overlay { display: block; }
 }

@@ -2,16 +2,6 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 
-interface SkillBar {
-  name: string;
-  percent: number;
-}
-
-interface LanguageBar {
-  name: string;
-  percent: number;
-}
-
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -27,22 +17,19 @@ export class NavbarComponent {
     { label: 'Age', value: '39' },
     { label: 'Residence', value: 'Bulgaria' },
     { label: 'Address', value: 'Ruse, Tulcha 8' },
-    { label: 'Email', value: 'hello@example.com' },
-    { label: 'Phone', value: '+359 88 000 0000' },
   ];
 
-  languages: LanguageBar[] = [
+  languages = [
     { name: 'Bulgarian', percent: 100 },
     { name: 'English', percent: 90 },
   ];
 
-  skills: SkillBar[] = [
+  skills = [
     { name: 'Angular', percent: 90 },
     { name: 'TypeScript', percent: 85 },
     { name: 'JavaScript', percent: 90 },
     { name: 'HTML/CSS', percent: 95 },
     { name: 'Node.js', percent: 75 },
-    { name: 'Python', percent: 70 },
   ];
 
   navLinks = [

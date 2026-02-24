@@ -7,13 +7,12 @@
   background-color: $bg-primary;
 
   &__content {
-    max-width: 700px;
+    max-width: 650px;
   }
 
   &__greeting {
     font-size: $font-size-base;
-    color: $text-secondary;
-    font-weight: 400;
+    color: $text-muted;
     margin-bottom: $spacing-sm;
   }
 
@@ -22,20 +21,11 @@
     font-weight: 800;
     color: $text-primary;
     line-height: 1.1;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-lg;
 
     .accent {
       color: $accent-primary;
     }
-  }
-
-  &__subtitle {
-    font-size: $font-size-xl;
-    font-weight: 500;
-    color: $text-muted;
-    margin-bottom: $spacing-xl;
-    letter-spacing: 2px;
-    text-transform: uppercase;
   }
 
   &__description {
@@ -55,15 +45,14 @@
     display: inline-block;
     padding: $spacing-sm $spacing-xl;
     background-color: $accent-primary;
-    color: $bg-primary;
+    color: #111827;
     font-size: $font-size-sm;
     font-weight: 600;
     border-radius: $radius-sm;
-    transition: background-color $transition-fast, box-shadow $transition-fast;
+    transition: background-color $transition-fast;
 
     &:hover {
       background-color: $accent-hover;
-      box-shadow: 0 4px 15px var(--accent-light);
     }
 
     &--outline {
@@ -72,46 +61,24 @@
       border: 1px solid $accent-primary;
 
       &:hover {
-        background-color: $accent-light;
-        box-shadow: none;
+        background-color: var(--accent-light);
       }
     }
   }
 }
 
-// ============================================
-// Responsive
-// ============================================
 @media (max-width: $bp-lg) {
   .hero {
     padding-top: calc(56px + 2rem);
   }
 }
 
-@media (max-width: $bp-md) {
-  .hero {
-    &__title {
-      font-size: $font-size-4xl;
-    }
-
-    &__subtitle {
-      font-size: $font-size-lg;
-    }
-  }
-}
-
 @media (max-width: $bp-sm) {
   .hero {
-    &__title {
-      font-size: $font-size-3xl;
-    }
-
+    &__title { font-size: $font-size-3xl; }
     &__actions {
       flex-direction: column;
-
-      .hero__cta {
-        text-align: center;
-      }
+      .hero__cta { text-align: center; }
     }
   }
 }

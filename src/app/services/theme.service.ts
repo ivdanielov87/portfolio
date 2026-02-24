@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  private isDark = true;
+  private isDark = false;
 
   constructor() {
     const saved = localStorage.getItem('theme');
-    if (saved === 'light') {
-      this.isDark = false;
-      document.documentElement.classList.add('light-theme');
+    if (saved === 'dark') {
+      this.isDark = true;
+      document.documentElement.classList.add('dark-theme');
     }
   }
 
@@ -19,10 +19,10 @@ export class ThemeService {
   toggle(): void {
     this.isDark = !this.isDark;
     if (this.isDark) {
-      document.documentElement.classList.remove('light-theme');
+      document.documentElement.classList.add('dark-theme');
       localStorage.setItem('theme', 'dark');
     } else {
-      document.documentElement.classList.add('light-theme');
+      document.documentElement.classList.remove('dark-theme');
       localStorage.setItem('theme', 'light');
     }
   }

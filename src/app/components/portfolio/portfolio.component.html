@@ -7,9 +7,7 @@
     @for (project of projects; track project.title) {
       <div class="portfolio-card">
         <div class="portfolio-card__image">
-          <div class="portfolio-card__overlay">
-            <span class="portfolio-card__category">{{ project.category }}</span>
-          </div>
+          <span class="portfolio-card__category">{{ project.category }}</span>
         </div>
         <div class="portfolio-card__content">
           <h3 class="portfolio-card__title">{{ project.title }}</h3>

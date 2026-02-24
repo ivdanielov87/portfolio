@@ -25,7 +25,19 @@ $tag-bg: var(--tag-bg);
 $tag-text: var(--tag-text);
 
 // Sidebar
-$sidebar-width: 320px;
+$sidebar-width: 280px;
+$right-bar-width: 60px;
+
+// Sidebar-specific colors (always dark)
+$sidebar-text: var(--sidebar-text);
+$sidebar-muted: var(--sidebar-muted);
+$sidebar-border: var(--sidebar-border);
+$sidebar-accent: var(--sidebar-accent);
+
+// Right bar
+$right-bar-bg: var(--right-bar-bg);
+$right-bar-icon: var(--right-bar-icon);
+$right-bar-icon-hover: var(--right-bar-icon-hover);
 
 // ============================================
 // Spacing Constants

@@ -7,13 +7,13 @@ interface Project {
 }
 
 @Component({
-  selector: 'app-projects',
+  selector: 'app-portfolio',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './projects.component.html',
-  styleUrl: './projects.component.scss',
+  templateUrl: './portfolio.component.html',
+  styleUrl: './portfolio.component.scss',
 })
-export class ProjectsComponent {
+export class PortfolioComponent {
   projects: Project[] = [
     { title: 'E-Commerce Platform', category: 'Web Development' },
     { title: 'Brand Identity', category: 'UI/UX Design' },
