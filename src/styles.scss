@@ -91,7 +91,7 @@ html {
 
 body {
   font-family: $font-family;
-  background-color: $bg-primary;
+  background-color: #e5e7eb;
   color: $text-primary;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -132,19 +132,21 @@ textarea {
 // ============================================
 .app-layout {
   display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
   min-height: 100vh;
+  background-color: $bg-primary;
+  position: relative;
+
+  @media (min-width: 1400px) {
+    margin-top: 0;
+  }
 }
 
 .main-content {
   flex: 1;
-  margin-left: $sidebar-width;
-  margin-right: $right-bar-width;
   min-height: 100vh;
-
-  @media (max-width: $bp-lg) {
-    margin-left: 0;
-    margin-right: 0;
-  }
+  min-width: 0;
 }
 
 // ============================================
