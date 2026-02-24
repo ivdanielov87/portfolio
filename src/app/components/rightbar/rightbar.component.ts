@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-rightbar',
@@ -8,7 +9,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './rightbar.component.html',
   styleUrl: './rightbar.component.scss',
 })
-export class RightbarComponent implements OnInit, OnDestroy {
+export class RightbarComponent {
   navItems = [
     { name: 'Home', target: 'hero', icon: 'home' },
     { name: 'About', target: 'about', icon: 'user' },
@@ -18,30 +19,20 @@ export class RightbarComponent implements OnInit, OnDestroy {
   ];
 
   activeSection = 'hero';
-  private observer?: IntersectionObserver;
 
-  ngOnInit(): void {
-    this.observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            this.activeSection = entry.target.id;
-          }
-        });
-      },
-      { threshold: 0.3 }
-    );
+  constructor(public themeService: ThemeService) {}
 
-    setTimeout(() => {
-      this.navItems.forEach((item) => {
-        const el = document.getElementById(item.target);
-        if (el) this.observer!.observe(el);
-      });
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.observer?.disconnect();
+  @HostListener('window:scroll')
+  onScroll(): void {
+    const scrollY = window.scrollY + 200;
+    for (let i = this.navItems.length - 1; i >= 0; i--) {
+      const el = document.getElementById(this.navItems[i].target);
+      if (el && el.offsetTop <= scrollY) {
+        this.activeSection = this.navItems[i].target;
+        return;
+      }
+    }
+    this.activeSection = 'hero';
   }
 
   scrollTo(event: Event, sectionId: string): void {

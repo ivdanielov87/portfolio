@@ -2,29 +2,34 @@
 
 .right-bar {
   position: fixed;
-  right: 50%;
-  top: 50%;
-  transform: translate(700px, -50%);
+  top: 24px;
+  right: calc((100vw - 1400px) / 2 + 8px);
   z-index: 1000;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: $spacing-xs;
+  gap: 4px;
   background-color: $bg-card;
   border: 1px solid $border-color;
   border-radius: $radius-xl;
-  padding: $spacing-sm;
+  padding: $spacing-xs;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &__theme {
+    background: none;
+    font-family: inherit;
+  }
 
   &__link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     color: $text-muted;
     border-radius: 50%;
     transition: all $transition-fast;
+    cursor: pointer;
 
     &:hover {
       color: $accent-primary;
@@ -40,8 +45,7 @@
 
 @media (max-width: 1500px) {
   .right-bar {
-    right: 8px;
-    transform: translateY(-50%);
+    right: 12px;
   }
 }
 
