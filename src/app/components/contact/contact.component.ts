@@ -29,6 +29,11 @@ export class ContactComponent {
   private readonly TEMPLATE_ID = 'template_n0q9hdr';
   private readonly PUBLIC_KEY = 'GbHc9qx4s9KHCAGqO';
 
+  clearSuccess(): void {
+    this.submitted = false;
+    this.sendError = '';
+  }
+
   validate(): boolean {
     this.errors = {};
     if (!this.name.trim()) this.errors.name = 'Name is required';
