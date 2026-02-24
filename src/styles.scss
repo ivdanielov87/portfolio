@@ -4,6 +4,58 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 // ============================================
+// Dark Theme (default)
+// ============================================
+:root {
+  --bg-primary: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --bg-sidebar: #111111;
+  --bg-card: #1a1a1a;
+  --bg-card-hover: #222222;
+  --bg-input: #1a1a1a;
+
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+  --text-muted: #666666;
+
+  --accent-primary: #e2b714;
+  --accent-hover: #c9a312;
+  --accent-light: rgba(226, 183, 20, 0.15);
+
+  --border-color: #2a2a2a;
+  --border-light: #333333;
+
+  --tag-bg: #252525;
+  --tag-text: #d4d4d8;
+}
+
+// ============================================
+// Light Theme
+// ============================================
+:root.light-theme {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f5;
+  --bg-sidebar: #fafafa;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0f0f0;
+  --bg-input: #ffffff;
+
+  --text-primary: #1a1a1a;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+
+  --accent-primary: #c9a312;
+  --accent-hover: #b8920f;
+  --accent-light: rgba(201, 163, 18, 0.12);
+
+  --border-color: #e0e0e0;
+  --border-light: #d0d0d0;
+
+  --tag-bg: #f0f0f0;
+  --tag-text: #333333;
+}
+
+// ============================================
 // CSS Reset & Global Styles
 // ============================================
 *,

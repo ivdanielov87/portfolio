@@ -63,7 +63,7 @@
 
     &:hover {
       background-color: $accent-hover;
-      box-shadow: 0 4px 15px rgba($accent-primary, 0.3);
+      box-shadow: 0 4px 15px var(--accent-light);
     }
 
     &--outline {

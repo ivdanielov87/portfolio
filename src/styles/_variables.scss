@@ -1,32 +1,28 @@
 // ============================================
-// Dark Theme Color Palette (v0 CV/Resume Design)
+// Theme via CSS Custom Properties
 // ============================================
 
-// Background tones
-$bg-primary: #0f0f0f;
-$bg-secondary: #1a1a1a;
-$bg-sidebar: #111111;
-$bg-card: #1a1a1a;
-$bg-card-hover: #222222;
-$bg-input: #1a1a1a;
+// These SCSS vars map to CSS custom props set on :root
+$bg-primary: var(--bg-primary);
+$bg-secondary: var(--bg-secondary);
+$bg-sidebar: var(--bg-sidebar);
+$bg-card: var(--bg-card);
+$bg-card-hover: var(--bg-card-hover);
+$bg-input: var(--bg-input);
 
-// Text colors
-$text-primary: #ffffff;
-$text-secondary: #a0a0a0;
-$text-muted: #666666;
+$text-primary: var(--text-primary);
+$text-secondary: var(--text-secondary);
+$text-muted: var(--text-muted);
 
-// Accent / Brand (yellow/gold from v0)
-$accent-primary: #e2b714;
-$accent-hover: #c9a312;
-$accent-light: rgba(226, 183, 20, 0.15);
+$accent-primary: var(--accent-primary);
+$accent-hover: var(--accent-hover);
+$accent-light: var(--accent-light);
 
-// Borders
-$border-color: #2a2a2a;
-$border-light: #333333;
+$border-color: var(--border-color);
+$border-light: var(--border-light);
 
-// Status / Tags
-$tag-bg: #252525;
-$tag-text: #d4d4d8;
+$tag-bg: var(--tag-bg);
+$tag-text: var(--tag-text);
 
 // Sidebar
 $sidebar-width: 320px;

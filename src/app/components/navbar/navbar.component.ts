@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ThemeService } from '../../services/theme.service';
 
 interface SkillBar {
   name: string;
@@ -19,6 +20,7 @@ interface LanguageBar {
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  themeService = inject(ThemeService);
   mobileMenuOpen = false;
 
   personalInfo = [
