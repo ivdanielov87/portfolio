@@ -133,14 +133,12 @@ textarea {
 .app-layout {
   display: flex;
   max-width: 1400px;
-  margin: 0 auto;
-  min-height: 100vh;
+  margin: 24px auto;
+  min-height: calc(100vh - 48px);
   background-color: $bg-primary;
+  border-radius: $radius-xl;
+  overflow: hidden;
   position: relative;
-
-  @media (min-width: 1400px) {
-    margin-top: 0;
-  }
 }
 
 .main-content {
