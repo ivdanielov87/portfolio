@@ -24,6 +24,12 @@ export class RightbarComponent {
 
   @HostListener('window:scroll')
   onScroll(): void {
+    // If scrolled to bottom of page, activate last section (contact)
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50) {
+      this.activeSection = this.navItems[this.navItems.length - 1].target;
+      return;
+    }
+
     const scrollY = window.scrollY + 200;
     for (let i = this.navItems.length - 1; i >= 0; i--) {
       const el = document.getElementById(this.navItems[i].target);

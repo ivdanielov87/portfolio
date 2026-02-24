@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import emailjs from '@emailjs/browser';
@@ -11,6 +11,7 @@ import emailjs from '@emailjs/browser';
   styleUrl: './contact.component.scss',
 })
 export class ContactComponent {
+  private cdr = inject(ChangeDetectorRef);
   name = '';
   email = '';
   message = '';
@@ -24,9 +25,9 @@ export class ContactComponent {
   // 2. Add an email service (Gmail) and get the Service ID
   // 3. Create an email template and get the Template ID
   // 4. Get your Public Key from Account > API Keys
-  private readonly SERVICE_ID = 'YOUR_SERVICE_ID';
-  private readonly TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
-  private readonly PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
+  private readonly SERVICE_ID = 'service_n2h43vp';
+  private readonly TEMPLATE_ID = 'template_n0q9hdr';
+  private readonly PUBLIC_KEY = 'GbHc9qx4s9KHCAGqO';
 
   validate(): boolean {
     this.errors = {};
@@ -66,6 +67,7 @@ export class ContactComponent {
       console.error('EmailJS error:', error);
     } finally {
       this.sending = false;
+      this.cdr.detectChanges();
     }
   }
 }
