@@ -1,0 +1,146 @@
+@use '../../../styles/variables' as *;
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: rgba($bg-primary, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid $border-color;
+  transition: background-color $transition-base;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  &__logo {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    color: $text-primary;
+    letter-spacing: -0.5px;
+    transition: color $transition-fast;
+
+    .logo-accent {
+      color: $accent-primary;
+    }
+
+    &:hover {
+      color: $accent-primary;
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: $spacing-xl;
+
+    li a {
+      font-size: $font-size-sm;
+      font-weight: 500;
+      color: $text-secondary;
+      transition: color $transition-fast;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: $accent-primary;
+        transition: width $transition-base;
+      }
+
+      &:hover {
+        color: $text-primary;
+
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+
+  &__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    padding: $spacing-sm;
+
+    .bar {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background-color: $text-primary;
+      border-radius: 2px;
+      transition: all $transition-base;
+    }
+  }
+}
+
+// ============================================
+// Mobile Responsive
+// ============================================
+@media (max-width: $bp-md) {
+  .navbar {
+    &__hamburger {
+      display: flex;
+    }
+
+    &__links {
+      position: fixed;
+      top: 64px;
+      left: 0;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      background-color: rgba($bg-primary, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid $border-color;
+      padding: $spacing-lg 0;
+      transform: translateY(-120%);
+      opacity: 0;
+      transition: transform $transition-base, opacity $transition-base;
+      pointer-events: none;
+
+      &.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+
+      li {
+        width: 100%;
+        text-align: center;
+
+        a {
+          display: block;
+          padding: $spacing-md $spacing-lg;
+          font-size: $font-size-base;
+        }
+      }
+    }
+  }
+
+  // Hamburger animation when open
+  .navbar.menu-open {
+    .navbar__hamburger {
+      .bar:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .bar:nth-child(2) {
+        opacity: 0;
+      }
+      .bar:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+@use '../../../styles/variables' as *;
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding-top: 64px; // offset for fixed navbar
+
+  &__content {
+    display: flex;
+    align-items: center;
+  }
+
+  &__text {
+    max-width: 720px;
+  }
+
+  &__greeting {
+    font-size: $font-size-base;
+    color: $accent-primary;
+    font-weight: 500;
+    margin-bottom: $spacing-md;
+    letter-spacing: 1px;
+  }
+
+  &__title {
+    font-size: $font-size-5xl;
+    font-weight: 800;
+    color: $text-primary;
+    line-height: 1.1;
+    margin-bottom: $spacing-md;
+  }
+
+  &__subtitle {
+    font-size: $font-size-3xl;
+    font-weight: 600;
+    color: $text-secondary;
+    line-height: 1.2;
+    margin-bottom: $spacing-xl;
+  }
+
+  &__description {
+    font-size: $font-size-lg;
+    color: $text-muted;
+    line-height: 1.7;
+    max-width: 540px;
+    margin-bottom: $spacing-2xl;
+  }
+
+  &__cta {
+    display: inline-block;
+    padding: $spacing-md $spacing-2xl;
+    background-color: $accent-primary;
+    color: $text-primary;
+    font-size: $font-size-base;
+    font-weight: 600;
+    border-radius: $radius-md;
+    transition: background-color $transition-fast, box-shadow $transition-fast;
+
+    &:hover {
+      background-color: $accent-hover;
+      box-shadow: 0 0 20px $accent-glow;
+    }
+  }
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: $bp-md) {
+  .hero {
+    &__title {
+      font-size: $font-size-4xl;
+    }
+
+    &__subtitle {
+      font-size: $font-size-2xl;
+    }
+
+    &__description {
+      font-size: $font-size-base;
+    }
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .hero {
+    &__title {
+      font-size: $font-size-3xl;
+    }
+
+    &__subtitle {
+      font-size: $font-size-xl;
+    }
+  }
+}

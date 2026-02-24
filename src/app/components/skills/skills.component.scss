@@ -1,0 +1,86 @@
+@use '../../../styles/variables' as *;
+
+.skills {
+  background-color: $bg-secondary;
+}
+
+.section-title {
+  font-size: $font-size-4xl;
+  font-weight: 700;
+  color: $text-primary;
+  text-align: center;
+  margin-bottom: $spacing-sm;
+}
+
+.section-subtitle {
+  font-size: $font-size-lg;
+  color: $text-secondary;
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.skill-category {
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  padding: $spacing-xl;
+  transition: border-color $transition-base;
+
+  &:hover {
+    border-color: $accent-primary;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $accent-primary;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+}
+
+.skill-item {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  background-color: $tag-bg;
+  color: $tag-text;
+  font-size: $font-size-sm;
+  font-weight: 500;
+  border-radius: $radius-md;
+  transition: background-color $transition-fast, color $transition-fast;
+
+  &:hover {
+    background-color: $accent-primary;
+    color: $text-primary;
+  }
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: $bp-sm) {
+  .section-title {
+    font-size: $font-size-2xl;
+  }
+
+  .section-subtitle {
+    font-size: $font-size-base;
+  }
+}

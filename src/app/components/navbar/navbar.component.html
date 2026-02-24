@@ -1,0 +1,25 @@
+<nav class="navbar" [class.menu-open]="mobileMenuOpen">
+  <div class="container navbar__inner">
+    <a class="navbar__logo" href="#" (click)="scrollTo($event, 'hero')">
+      <span class="logo-accent">&lt;</span>Portfolio<span class="logo-accent"> /&gt;</span>
+    </a>
+
+    <ul class="navbar__links" [class.active]="mobileMenuOpen">
+      <li><a href="#hero" (click)="scrollTo($event, 'hero')">Home</a></li>
+      <li><a href="#projects" (click)="scrollTo($event, 'projects')">Projects</a></li>
+      <li><a href="#skills" (click)="scrollTo($event, 'skills')">Skills</a></li>
+      <li><a href="#contact" (click)="scrollTo($event, 'contact')">Contact</a></li>
+    </ul>
+
+    <button
+      class="navbar__hamburger"
+      (click)="toggleMenu()"
+      [attr.aria-expanded]="mobileMenuOpen"
+      aria-label="Toggle navigation menu"
+    >
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+  </div>
+</nav>

@@ -1,0 +1,140 @@
+@use '../../../styles/variables' as *;
+
+.contact {
+  background-color: $bg-primary;
+}
+
+.section-title {
+  font-size: $font-size-4xl;
+  font-weight: 700;
+  color: $text-primary;
+  text-align: center;
+  margin-bottom: $spacing-sm;
+}
+
+.section-subtitle {
+  font-size: $font-size-lg;
+  color: $text-secondary;
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+}
+
+.contact__wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.contact__success {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  padding: $spacing-lg;
+  background-color: rgba($accent-primary, 0.1);
+  border: 1px solid $accent-primary;
+  border-radius: $radius-md;
+  margin-bottom: $spacing-xl;
+
+  .success-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background-color: $accent-primary;
+    color: $text-primary;
+    border-radius: 50%;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  p {
+    color: $text-primary;
+    font-size: $font-size-sm;
+  }
+}
+
+.contact__form {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+
+  label {
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $text-secondary;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: $spacing-md;
+    background-color: $bg-input;
+    border: 1px solid $border-color;
+    border-radius: $radius-md;
+    color: $text-primary;
+    font-size: $font-size-base;
+    transition: border-color $transition-fast;
+
+    &::placeholder {
+      color: $text-muted;
+    }
+
+    &:focus {
+      border-color: $accent-primary;
+    }
+
+    &.error {
+      border-color: #ef4444;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.form-error {
+  font-size: $font-size-xs;
+  color: #ef4444;
+}
+
+.contact__submit {
+  padding: $spacing-md $spacing-2xl;
+  background-color: $accent-primary;
+  color: $text-primary;
+  font-size: $font-size-base;
+  font-weight: 600;
+  border-radius: $radius-md;
+  transition: background-color $transition-fast, box-shadow $transition-fast;
+  align-self: flex-start;
+
+  &:hover {
+    background-color: $accent-hover;
+    box-shadow: 0 0 20px $accent-glow;
+  }
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: $bp-sm) {
+  .section-title {
+    font-size: $font-size-2xl;
+  }
+
+  .section-subtitle {
+    font-size: $font-size-base;
+  }
+
+  .contact__submit {
+    width: 100%;
+    text-align: center;
+  }
+}

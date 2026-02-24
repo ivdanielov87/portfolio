@@ -1,0 +1,95 @@
+@use '../../../styles/variables' as *;
+
+.projects {
+  background-color: $bg-primary;
+}
+
+.section-title {
+  font-size: $font-size-4xl;
+  font-weight: 700;
+  color: $text-primary;
+  text-align: center;
+  margin-bottom: $spacing-sm;
+}
+
+.section-subtitle {
+  font-size: $font-size-lg;
+  color: $text-secondary;
+  text-align: center;
+  margin-bottom: $spacing-3xl;
+}
+
+.projects__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @media (min-width: $bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: $bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.project-card {
+  background-color: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $accent-primary;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  &__content {
+    padding: $spacing-xl;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: 600;
+    color: $text-primary;
+    margin-bottom: $spacing-sm;
+  }
+
+  &__description {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+    line-height: 1.6;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+}
+
+.tag {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  background-color: $tag-bg;
+  color: $tag-text;
+  font-size: $font-size-xs;
+  font-weight: 500;
+  border-radius: $radius-sm;
+}
+
+// ============================================
+// Responsive
+// ============================================
+@media (max-width: $bp-sm) {
+  .section-title {
+    font-size: $font-size-2xl;
+  }
+
+  .section-subtitle {
+    font-size: $font-size-base;
+  }
+}
