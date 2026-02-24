@@ -1,31 +1,35 @@
 // ============================================
-// Dark Theme Color Palette (v0 Portfolio Design)
+// Dark Theme Color Palette (v0 CV/Resume Design)
 // ============================================
 
 // Background tones
-$bg-primary: #0a0a0a;
-$bg-secondary: #111111;
+$bg-primary: #0f0f0f;
+$bg-secondary: #1a1a1a;
+$bg-sidebar: #111111;
 $bg-card: #1a1a1a;
 $bg-card-hover: #222222;
 $bg-input: #1a1a1a;
 
 // Text colors
 $text-primary: #ffffff;
-$text-secondary: #a1a1aa;
-$text-muted: #71717a;
+$text-secondary: #a0a0a0;
+$text-muted: #666666;
 
-// Accent / Brand
-$accent-primary: #8b5cf6;
-$accent-hover: #7c3aed;
-$accent-glow: rgba(139, 92, 246, 0.3);
+// Accent / Brand (yellow/gold from v0)
+$accent-primary: #e2b714;
+$accent-hover: #c9a312;
+$accent-light: rgba(226, 183, 20, 0.15);
 
 // Borders
-$border-color: #27272a;
-$border-light: #3f3f46;
+$border-color: #2a2a2a;
+$border-light: #333333;
 
 // Status / Tags
-$tag-bg: #27272a;
+$tag-bg: #252525;
 $tag-text: #d4d4d8;
+
+// Sidebar
+$sidebar-width: 320px;
 
 // ============================================
 // Spacing Constants

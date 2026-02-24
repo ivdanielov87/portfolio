@@ -1,17 +1,19 @@
 <section id="contact" class="contact">
-  <div class="container">
-    <h2 class="section-title">Get In Touch</h2>
+  <div class="section-header">
+    <h2 class="section-title">Contact</h2>
     <p class="section-subtitle">Have a project in mind? Let's talk.</p>
+  </div>
 
-    <div class="contact__wrapper">
-      @if (submitted) {
-        <div class="contact__success">
-          <span class="success-icon">✓</span>
-          <p>Thank you! Your message has been sent successfully.</p>
-        </div>
-      }
+  <div class="contact__wrapper">
+    @if (submitted) {
+      <div class="contact__success">
+        <span class="success-icon">✓</span>
+        <p>Thank you! Your message has been sent successfully.</p>
+      </div>
+    }
 
-      <form class="contact__form" (ngSubmit)="onSubmit()" novalidate>
+    <form class="contact__form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="form-row">
         <div class="form-group">
           <label for="name">Name</label>
           <input
@@ -41,24 +43,24 @@
             <span class="form-error">{{ errors.email }}</span>
           }
         </div>
+      </div>
 
-        <div class="form-group">
-          <label for="message">Message</label>
-          <textarea
-            id="message"
-            [(ngModel)]="message"
-            name="message"
-            rows="5"
-            placeholder="Tell me about your project..."
-            [class.error]="errors.message"
-          ></textarea>
-          @if (errors.message) {
-            <span class="form-error">{{ errors.message }}</span>
-          }
-        </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea
+          id="message"
+          [(ngModel)]="message"
+          name="message"
+          rows="5"
+          placeholder="Tell me about your project..."
+          [class.error]="errors.message"
+        ></textarea>
+        @if (errors.message) {
+          <span class="form-error">{{ errors.message }}</span>
+        }
+      </div>
 
-        <button type="submit" class="contact__submit">Send Message</button>
-      </form>
-    </div>
+      <button type="submit" class="contact__submit">Send Message</button>
+    </form>
   </div>
 </section>

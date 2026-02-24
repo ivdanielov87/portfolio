@@ -4,24 +4,8 @@
   background-color: $bg-primary;
 }
 
-.section-title {
-  font-size: $font-size-4xl;
-  font-weight: 700;
-  color: $text-primary;
-  text-align: center;
-  margin-bottom: $spacing-sm;
-}
-
-.section-subtitle {
-  font-size: $font-size-lg;
-  color: $text-secondary;
-  text-align: center;
-  margin-bottom: $spacing-3xl;
-}
-
 .contact__wrapper {
-  max-width: 600px;
-  margin: 0 auto;
+  max-width: 700px;
 }
 
 .contact__success {
@@ -29,7 +13,7 @@
   align-items: center;
   gap: $spacing-md;
   padding: $spacing-lg;
-  background-color: rgba($accent-primary, 0.1);
+  background-color: $accent-light;
   border: 1px solid $accent-primary;
   border-radius: $radius-md;
   margin-bottom: $spacing-xl;
@@ -41,7 +25,7 @@
     width: 32px;
     height: 32px;
     background-color: $accent-primary;
-    color: $text-primary;
+    color: $bg-primary;
     border-radius: 50%;
     font-weight: 700;
     flex-shrink: 0;
@@ -59,10 +43,20 @@
   gap: $spacing-lg;
 }
 
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+
+  @media (min-width: $bp-sm) {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: $spacing-sm;
+  gap: $spacing-xs;
 
   label {
     font-size: $font-size-sm;
@@ -73,12 +67,12 @@
   input,
   textarea {
     width: 100%;
-    padding: $spacing-md;
+    padding: $spacing-sm $spacing-md;
     background-color: $bg-input;
     border: 1px solid $border-color;
-    border-radius: $radius-md;
+    border-radius: $radius-sm;
     color: $text-primary;
-    font-size: $font-size-base;
+    font-size: $font-size-sm;
     transition: border-color $transition-fast;
 
     &::placeholder {
@@ -106,18 +100,18 @@
 }
 
 .contact__submit {
-  padding: $spacing-md $spacing-2xl;
+  padding: $spacing-sm $spacing-xl;
   background-color: $accent-primary;
-  color: $text-primary;
-  font-size: $font-size-base;
+  color: $bg-primary;
+  font-size: $font-size-sm;
   font-weight: 600;
-  border-radius: $radius-md;
+  border-radius: $radius-sm;
   transition: background-color $transition-fast, box-shadow $transition-fast;
   align-self: flex-start;
 
   &:hover {
     background-color: $accent-hover;
-    box-shadow: 0 0 20px $accent-glow;
+    box-shadow: 0 4px 15px rgba($accent-primary, 0.3);
   }
 }
 
@@ -125,14 +119,6 @@
 // Responsive
 // ============================================
 @media (max-width: $bp-sm) {
-  .section-title {
-    font-size: $font-size-2xl;
-  }
-
-  .section-subtitle {
-    font-size: $font-size-base;
-  }
-
   .contact__submit {
     width: 100%;
     text-align: center;

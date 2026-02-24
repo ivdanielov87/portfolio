@@ -4,23 +4,17 @@
   min-height: 100vh;
   display: flex;
   align-items: center;
-  padding-top: 64px; // offset for fixed navbar
+  background-color: $bg-primary;
 
   &__content {
-    display: flex;
-    align-items: center;
-  }
-
-  &__text {
-    max-width: 720px;
+    max-width: 700px;
   }
 
   &__greeting {
     font-size: $font-size-base;
-    color: $accent-primary;
-    font-weight: 500;
-    margin-bottom: $spacing-md;
-    letter-spacing: 1px;
+    color: $text-secondary;
+    font-weight: 400;
+    margin-bottom: $spacing-sm;
   }
 
   &__title {
@@ -29,37 +23,58 @@
     color: $text-primary;
     line-height: 1.1;
     margin-bottom: $spacing-md;
+
+    .accent {
+      color: $accent-primary;
+    }
   }
 
   &__subtitle {
-    font-size: $font-size-3xl;
-    font-weight: 600;
-    color: $text-secondary;
-    line-height: 1.2;
+    font-size: $font-size-xl;
+    font-weight: 500;
+    color: $text-muted;
     margin-bottom: $spacing-xl;
+    letter-spacing: 2px;
+    text-transform: uppercase;
   }
 
   &__description {
-    font-size: $font-size-lg;
-    color: $text-muted;
-    line-height: 1.7;
-    max-width: 540px;
+    font-size: $font-size-base;
+    color: $text-secondary;
+    line-height: 1.8;
     margin-bottom: $spacing-2xl;
+  }
+
+  &__actions {
+    display: flex;
+    gap: $spacing-md;
+    flex-wrap: wrap;
   }
 
   &__cta {
     display: inline-block;
-    padding: $spacing-md $spacing-2xl;
+    padding: $spacing-sm $spacing-xl;
     background-color: $accent-primary;
-    color: $text-primary;
-    font-size: $font-size-base;
+    color: $bg-primary;
+    font-size: $font-size-sm;
     font-weight: 600;
-    border-radius: $radius-md;
+    border-radius: $radius-sm;
     transition: background-color $transition-fast, box-shadow $transition-fast;
 
     &:hover {
       background-color: $accent-hover;
-      box-shadow: 0 0 20px $accent-glow;
+      box-shadow: 0 4px 15px rgba($accent-primary, 0.3);
+    }
+
+    &--outline {
+      background-color: transparent;
+      color: $accent-primary;
+      border: 1px solid $accent-primary;
+
+      &:hover {
+        background-color: $accent-light;
+        box-shadow: none;
+      }
     }
   }
 }
@@ -67,6 +82,12 @@
 // ============================================
 // Responsive
 // ============================================
+@media (max-width: $bp-lg) {
+  .hero {
+    padding-top: calc(56px + 2rem);
+  }
+}
+
 @media (max-width: $bp-md) {
   .hero {
     &__title {
@@ -74,11 +95,7 @@
     }
 
     &__subtitle {
-      font-size: $font-size-2xl;
-    }
-
-    &__description {
-      font-size: $font-size-base;
+      font-size: $font-size-lg;
     }
   }
 }
@@ -89,8 +106,12 @@
       font-size: $font-size-3xl;
     }
 
-    &__subtitle {
-      font-size: $font-size-xl;
+    &__actions {
+      flex-direction: column;
+
+      .hero__cta {
+        text-align: center;
+      }
     }
   }
 }

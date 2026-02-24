@@ -58,18 +58,61 @@ textarea {
 }
 
 // ============================================
-// Utility: Container
+// App layout: sidebar + main
 // ============================================
-.container {
-  width: 100%;
-  max-width: $container-max;
-  margin: 0 auto;
-  padding: 0 $container-padding;
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  margin-left: $sidebar-width;
+  min-height: 100vh;
+
+  @media (max-width: $bp-lg) {
+    margin-left: 0;
+  }
 }
 
 // ============================================
 // Section spacing
 // ============================================
 section {
-  padding: $spacing-4xl 0;
+  padding: $spacing-3xl $spacing-xl;
+
+  @media (min-width: $bp-lg) {
+    padding: $spacing-4xl $spacing-2xl;
+  }
+}
+
+// ============================================
+// Section titles
+// ============================================
+.section-header {
+  margin-bottom: $spacing-2xl;
+
+  .section-title {
+    font-size: $font-size-2xl;
+    font-weight: 700;
+    color: $text-primary;
+    margin-bottom: $spacing-xs;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    &::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background-color: $accent-primary;
+      border-radius: 2px;
+    }
+  }
+
+  .section-subtitle {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    padding-left: calc(4px + $spacing-sm);
+  }
 }

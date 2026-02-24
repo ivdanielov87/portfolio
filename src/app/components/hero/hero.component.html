@@ -1,20 +1,22 @@
 <section id="hero" class="hero">
-  <div class="container hero__content">
-    <div class="hero__text">
-      <p class="hero__greeting">Hi, my name is</p>
-      <h1 class="hero__title">John Doe</h1>
-      <h2 class="hero__subtitle">I build things for the web.</h2>
-      <p class="hero__description">
-        I'm a full-stack developer specializing in building exceptional digital
-        experiences. Currently focused on creating accessible, human-centered
-        products.
-      </p>
-      <a
-        href="#projects"
-        class="hero__cta"
-        (click)="scrollTo($event, 'projects')"
-      >
+  <div class="hero__content">
+    <p class="hero__greeting">Hello, I'm</p>
+    <h1 class="hero__title">
+      John <span class="accent">Doe</span>
+    </h1>
+    <h2 class="hero__subtitle">Full-Stack Developer</h2>
+    <p class="hero__description">
+      I'm a passionate developer based in Bulgaria, specializing in building
+      exceptional web applications. With a strong focus on Angular and modern
+      technologies, I create accessible, performant, and user-centered digital
+      experiences.
+    </p>
+    <div class="hero__actions">
+      <a href="#projects" class="hero__cta" (click)="scrollTo($event, 'projects')">
         View My Work
+      </a>
+      <a href="#contact" class="hero__cta hero__cta--outline" (click)="scrollTo($event, 'contact')">
+        Contact Me
       </a>
     </div>
   </div>

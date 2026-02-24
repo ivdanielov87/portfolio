@@ -1,25 +1,90 @@
-<nav class="navbar" [class.menu-open]="mobileMenuOpen">
-  <div class="container navbar__inner">
-    <a class="navbar__logo" href="#" (click)="scrollTo($event, 'hero')">
-      <span class="logo-accent">&lt;</span>Portfolio<span class="logo-accent"> /&gt;</span>
-    </a>
+<!-- Mobile top bar -->
+<div class="mobile-topbar">
+  <span class="mobile-topbar__name">John Doe</span>
+  <button
+    class="mobile-topbar__toggle"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="mobileMenuOpen"
+    aria-label="Toggle menu"
+  >
+    <span class="bar" [class.open]="mobileMenuOpen"></span>
+    <span class="bar" [class.open]="mobileMenuOpen"></span>
+    <span class="bar" [class.open]="mobileMenuOpen"></span>
+  </button>
+</div>
 
-    <ul class="navbar__links" [class.active]="mobileMenuOpen">
-      <li><a href="#hero" (click)="scrollTo($event, 'hero')">Home</a></li>
-      <li><a href="#projects" (click)="scrollTo($event, 'projects')">Projects</a></li>
-      <li><a href="#skills" (click)="scrollTo($event, 'skills')">Skills</a></li>
-      <li><a href="#contact" (click)="scrollTo($event, 'contact')">Contact</a></li>
-    </ul>
+<!-- Sidebar (desktop fixed / mobile slide-out) -->
+<aside class="sidebar" [class.open]="mobileMenuOpen">
+  <div class="sidebar__scroll">
+    <!-- Profile image -->
+    <div class="sidebar__photo">
+      <img src="assets/profile.jpg" alt="Profile photo" />
+    </div>
 
-    <button
-      class="navbar__hamburger"
-      (click)="toggleMenu()"
-      [attr.aria-expanded]="mobileMenuOpen"
-      aria-label="Toggle navigation menu"
-    >
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
-    </button>
+    <!-- Name -->
+    <h2 class="sidebar__name">John Doe</h2>
+    <p class="sidebar__title">Full-Stack Developer</p>
+
+    <!-- Personal info -->
+    <div class="sidebar__section">
+      <ul class="sidebar__info">
+        @for (item of personalInfo; track item.label) {
+          <li>
+            <span class="info-label">{{ item.label }}:</span>
+            <span class="info-value">{{ item.value }}</span>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <!-- Languages -->
+    <div class="sidebar__section">
+      <h3 class="sidebar__section-title">Languages</h3>
+      @for (lang of languages; track lang.name) {
+        <div class="progress-item">
+          <div class="progress-item__header">
+            <span>{{ lang.name }}</span>
+            <span>{{ lang.percent }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" [style.width.%]="lang.percent"></div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Skills -->
+    <div class="sidebar__section">
+      <h3 class="sidebar__section-title">Skills</h3>
+      @for (skill of skills; track skill.name) {
+        <div class="progress-item">
+          <div class="progress-item__header">
+            <span>{{ skill.name }}</span>
+            <span>{{ skill.percent }}%</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-bar__fill" [style.width.%]="skill.percent"></div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sidebar__nav">
+      @for (link of navLinks; track link.target) {
+        <a
+          [href]="'#' + link.target"
+          class="sidebar__nav-link"
+          (click)="scrollTo($event, link.target)"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
   </div>
-</nav>
+</aside>
+
+<!-- Overlay for mobile -->
+@if (mobileMenuOpen) {
+  <div class="sidebar-overlay" (click)="closeMenu()"></div>
+}

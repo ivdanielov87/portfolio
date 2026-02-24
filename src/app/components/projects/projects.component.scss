@@ -4,31 +4,16 @@
   background-color: $bg-primary;
 }
 
-.section-title {
-  font-size: $font-size-4xl;
-  font-weight: 700;
-  color: $text-primary;
-  text-align: center;
-  margin-bottom: $spacing-sm;
-}
-
-.section-subtitle {
-  font-size: $font-size-lg;
-  color: $text-secondary;
-  text-align: center;
-  margin-bottom: $spacing-3xl;
-}
-
 .projects__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-xl;
+  gap: $spacing-lg;
 
-  @media (min-width: $bp-md) {
+  @media (min-width: $bp-sm) {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  @media (min-width: $bp-lg) {
+  @media (min-width: $bp-xl) {
     grid-template-columns: repeat(3, 1fr);
   }
 }
@@ -38,20 +23,27 @@
   border: 1px solid $border-color;
   border-radius: $radius-lg;
   overflow: hidden;
-  transition: transform $transition-base, border-color $transition-base, box-shadow $transition-base;
+  transition: transform $transition-base, border-color $transition-base;
 
   &:hover {
-    transform: translateY(-4px);
+    transform: translateY(-2px);
     border-color: $accent-primary;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+  }
+
+  &__header {
+    padding: $spacing-lg $spacing-lg 0;
+
+    .project-card__icon {
+      font-size: $font-size-2xl;
+    }
   }
 
   &__content {
-    padding: $spacing-xl;
+    padding: $spacing-md $spacing-lg $spacing-lg;
   }
 
   &__title {
-    font-size: $font-size-xl;
+    font-size: $font-size-base;
     font-weight: 600;
     color: $text-primary;
     margin-bottom: $spacing-sm;
@@ -61,35 +53,22 @@
     font-size: $font-size-sm;
     color: $text-secondary;
     line-height: 1.6;
-    margin-bottom: $spacing-lg;
+    margin-bottom: $spacing-md;
   }
 
   &__tags {
     display: flex;
     flex-wrap: wrap;
-    gap: $spacing-sm;
+    gap: $spacing-xs;
   }
 }
 
 .tag {
   display: inline-block;
-  padding: $spacing-xs $spacing-sm;
+  padding: 2px $spacing-sm;
   background-color: $tag-bg;
-  color: $tag-text;
+  color: $accent-primary;
   font-size: $font-size-xs;
   font-weight: 500;
   border-radius: $radius-sm;
-}
-
-// ============================================
-// Responsive
-// ============================================
-@media (max-width: $bp-sm) {
-  .section-title {
-    font-size: $font-size-2xl;
-  }
-
-  .section-subtitle {
-    font-size: $font-size-base;
-  }
 }

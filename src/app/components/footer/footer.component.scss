@@ -3,51 +3,48 @@
 .footer {
   background-color: $bg-secondary;
   border-top: 1px solid $border-color;
-  padding: $spacing-2xl 0;
+  padding: $spacing-xl $spacing-xl;
 
   &__inner {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: $spacing-lg;
+    gap: $spacing-md;
   }
 
   &__social {
     display: flex;
-    gap: $spacing-lg;
+    gap: $spacing-md;
   }
 
   &__social-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
-    height: 40px;
-    color: $text-secondary;
+    width: 36px;
+    height: 36px;
+    color: $text-muted;
     border: 1px solid $border-color;
     border-radius: 50%;
-    transition: color $transition-fast, border-color $transition-fast, background-color $transition-fast;
+    transition: color $transition-fast, border-color $transition-fast;
 
     &:hover {
-      color: $text-primary;
+      color: $accent-primary;
       border-color: $accent-primary;
-      background-color: rgba($accent-primary, 0.1);
     }
   }
 
   &__copyright {
-    font-size: $font-size-sm;
+    font-size: $font-size-xs;
     color: $text-muted;
   }
 }
 
-// ============================================
-// Responsive
-// ============================================
 @media (max-width: $bp-sm) {
   .footer {
-    &__social {
-      gap: $spacing-md;
+    &__inner {
+      flex-direction: column;
+      text-align: center;
     }
   }
 }
