@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import emailjs from '@emailjs/browser';
 
 @Component({
   selector: 'app-contact',
@@ -14,7 +15,18 @@ export class ContactComponent {
   email = '';
   message = '';
   submitted = false;
+  sending = false;
+  sendError = '';
   errors: { name?: string; email?: string; message?: string } = {};
+
+  // TODO: Replace these with your own EmailJS credentials
+  // 1. Sign up at https://www.emailjs.com/ (free tier: 200 emails/month)
+  // 2. Add an email service (Gmail) and get the Service ID
+  // 3. Create an email template and get the Template ID
+  // 4. Get your Public Key from Account > API Keys
+  private readonly SERVICE_ID = 'YOUR_SERVICE_ID';
+  private readonly TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+  private readonly PUBLIC_KEY = 'YOUR_PUBLIC_KEY';
 
   validate(): boolean {
     this.errors = {};
@@ -26,12 +38,34 @@ export class ContactComponent {
     return Object.keys(this.errors).length === 0;
   }
 
-  onSubmit(): void {
-    if (this.validate()) {
+  async onSubmit(): Promise<void> {
+    if (!this.validate()) return;
+
+    this.sending = true;
+    this.sendError = '';
+
+    try {
+      await emailjs.send(
+        this.SERVICE_ID,
+        this.TEMPLATE_ID,
+        {
+          from_name: this.name,
+          from_email: this.email,
+          message: this.message,
+          to_email: 'iv.danielov@gmail.com',
+        },
+        this.PUBLIC_KEY
+      );
+
       this.submitted = true;
       this.name = '';
       this.email = '';
       this.message = '';
+    } catch (error) {
+      this.sendError = 'Failed to send message. Please try again later.';
+      console.error('EmailJS error:', error);
+    } finally {
+      this.sending = false;
     }
   }
 }

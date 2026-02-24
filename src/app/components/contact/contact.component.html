@@ -31,7 +31,13 @@
         @if (errors.message) { <span class="form-error">{{ errors.message }}</span> }
       </div>
 
-      <button type="submit" class="contact__submit">Send Message</button>
+      @if (sendError) {
+        <div class="contact__error">{{ sendError }}</div>
+      }
+
+      <button type="submit" class="contact__submit" [disabled]="sending">
+        {{ sending ? 'Sending...' : 'Send Message' }}
+      </button>
     </form>
   </div>
 </section>
