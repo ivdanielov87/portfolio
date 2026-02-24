@@ -195,25 +195,25 @@
     }
   }
 
-  &__theme-toggle {
+  &__download-cv {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: $spacing-sm;
-    padding: $spacing-sm $spacing-md;
+    padding: 12px $spacing-md;
     margin-top: auto;
-    background: none;
-    color: $text-muted;
-    font-size: $font-size-xs;
-    border: 1px solid $border-color;
-    border-radius: $radius-md;
-    transition: all $transition-fast;
+    background-color: $accent-primary;
+    color: #111827;
+    font-size: $font-size-sm;
+    font-weight: 600;
+    border-radius: $radius-lg;
+    transition: background-color $transition-fast;
     cursor: pointer;
+    text-decoration: none;
 
     &:hover {
-      color: $accent-primary;
-      border-color: $accent-primary;
+      background-color: $accent-hover;
     }
 
     svg { flex-shrink: 0; }

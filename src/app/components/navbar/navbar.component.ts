@@ -33,10 +33,12 @@ export class NavbarComponent {
   ];
 
   skills = [
-    { name: 'HTML', percent: 85 },
+    { name: 'HTML', percent: 95 },
     { name: 'CSS', percent: 85 },
-    { name: 'JavaScript', percent: 60 },
+    { name: 'JavaScript', percent: 80 },
     { name: 'React', percent: 90 },
+    { name: 'Angular', percent: 90 },
+    { name: 'TypeScript', percent: 75 },
   ];
 
   navLinks = [

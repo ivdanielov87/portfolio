@@ -3,7 +3,7 @@
 .right-bar {
   position: fixed;
   top: 24px;
-  right: calc((100vw - 1400px) / 2 + 8px);
+  right: calc((100vw - 1400px) / 2 - 56px);
   z-index: 1000;
   display: flex;
   flex-direction: column;
