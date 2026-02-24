@@ -48,15 +48,16 @@
   }
 }
 
-// Left Sidebar — light background
+// Left Sidebar — separate card block
 .sidebar {
   position: sticky;
-  top: 0;
+  top: 24px;
   width: $sidebar-width;
   min-width: $sidebar-width;
-  height: 100vh;
+  max-height: calc(100vh - 48px);
   background-color: $bg-card;
-  border-right: 1px solid $border-color;
+  border-radius: $radius-xl;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
   z-index: 1000;
   overflow: hidden;
   flex-shrink: 0;

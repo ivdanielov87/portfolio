@@ -132,29 +132,38 @@ textarea {
 // ============================================
 .app-layout {
   display: flex;
+  align-items: flex-start;
   max-width: 1400px;
   margin: 24px auto;
-  min-height: calc(100vh - 48px);
-  background-color: $bg-primary;
-  border-radius: $radius-xl;
-  overflow: hidden;
+  gap: $spacing-md;
   position: relative;
+  padding: 0 $spacing-md;
+
+  @media (max-width: $bp-lg) {
+    padding: 0;
+    gap: 0;
+  }
 }
 
 .main-content {
   flex: 1;
-  min-height: 100vh;
   min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
 }
 
 // ============================================
-// Section spacing
+// Section spacing — each section is a card
 // ============================================
 section {
-  padding: $spacing-3xl $spacing-2xl;
+  background-color: $bg-card;
+  border-radius: $radius-xl;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  padding: $spacing-2xl $spacing-xl;
 
   @media (min-width: $bp-lg) {
-    padding: $spacing-4xl $spacing-4xl;
+    padding: $spacing-2xl $spacing-2xl;
   }
 }
 
