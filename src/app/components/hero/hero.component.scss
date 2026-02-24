@@ -1,10 +1,14 @@
 @use '../../../styles/variables' as *;
 
 .hero {
-  min-height: 100vh;
   display: flex;
   align-items: center;
-  background-color: $bg-primary;
+  background-color: $bg-card;
+  border-radius: $radius-xl;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  margin: $spacing-lg;
+  padding: $spacing-2xl $spacing-xl;
 
   &__inner {
     display: flex;
