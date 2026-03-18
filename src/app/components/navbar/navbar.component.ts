@@ -39,16 +39,16 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   personalInfo = [
-    { label: 'Age', value: '39' },
+    { label: 'Email', value: 'iv.danielov@gmail.com' },
     { label: 'Residence', value: 'Bulgaria' },
     { label: 'Freelance', value: 'Available' },
-    { label: 'Address', value: 'Ruse, Tulcha 8' },
+    { label: 'Address', value: 'Ruse, Center' },
   ];
 
   socialLinks = [
-    { name: 'GitHub', url: 'https://github.com', icon: 'github' },
+    { name: 'GitHub', url: 'https://github.com/ivdanielov87', icon: 'github' },
     { name: 'Twitter', url: 'https://twitter.com', icon: 'twitter' },
-    { name: 'LinkedIn', url: 'https://linkedin.com', icon: 'linkedin' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/ivelin-dimitrov-52aaa2186/', icon: 'linkedin' },
     { name: 'Website', url: '#', icon: 'link' },
   ];
 
@@ -60,10 +60,10 @@ export class NavbarComponent implements AfterViewInit {
   skills = [
     { name: 'HTML', percent: 95 },
     { name: 'CSS', percent: 85 },
-    { name: 'JavaScript', percent: 80 },
+    { name: 'JavaScript', percent: 85 },
     { name: 'React', percent: 90 },
     { name: 'Angular', percent: 90 },
-    { name: 'TypeScript', percent: 75 },
+    { name: 'TypeScript', percent: 85 },
   ];
 
   navLinks = [

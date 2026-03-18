@@ -27,8 +27,8 @@ export class ServicesComponent {
       icon: 'smartphone',
     },
     {
-      title: 'UI/UX Design',
-      description: 'Designing intuitive and beautiful user interfaces with focus on user experience.',
+      title: 'SPA Development',
+      description: 'Architecting and building robust, highly interactive Single Page Applications (SPAs) using Angular and component-driven design.',
       icon: 'pen-tool',
     },
     {
@@ -42,8 +42,8 @@ export class ServicesComponent {
       icon: 'search',
     },
     {
-      title: 'Digital Marketing',
-      description: 'Strategic digital marketing solutions to grow your brand and online presence.',
+      title: 'AI Integration',
+      description: 'Integrating modern AI capabilities and APIs into web applications to deliver smart, automated, and enhanced user experiences.',
       icon: 'trending-up',
     },
   ];
