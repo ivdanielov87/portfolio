@@ -27,15 +27,8 @@ export class NavbarComponent implements AfterViewInit {
 
   private updateStickyTop(): void {
     if (!this.sidebarEl) return;
-    const sidebarH = this.sidebarEl.offsetHeight;
-    const viewportH = window.innerHeight;
-    const margin = 24;
-
-    if (sidebarH > viewportH - margin * 2) {
-      this.sidebarEl.style.top = `${-(sidebarH - viewportH + margin)}px`;
-    } else {
-      this.sidebarEl.style.top = `${margin}px`;
-    }
+    const margin = 40;
+    this.sidebarEl.style.top = `${margin}px`;
   }
 
   personalInfo = [
@@ -76,10 +69,16 @@ export class NavbarComponent implements AfterViewInit {
 
   toggleMenu(): void {
     this.mobileMenuOpen = !this.mobileMenuOpen;
+    if (this.mobileMenuOpen) {
+      document.body.classList.add('no-scroll');
+    } else {
+      document.body.classList.remove('no-scroll');
+    }
   }
 
   closeMenu(): void {
     this.mobileMenuOpen = false;
+    document.body.classList.remove('no-scroll');
   }
 
   scrollTo(event: Event, sectionId: string): void {

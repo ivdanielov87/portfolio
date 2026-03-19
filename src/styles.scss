@@ -106,7 +106,8 @@ a {
   text-decoration: none;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -141,8 +142,13 @@ textarea {
   position: relative;
   padding: 0 $spacing-md;
 
+  @media (max-width: 1500px) {
+    margin-right: 55px;
+  }
+
   @media (max-width: $bp-lg) {
     padding: 0;
+    margin-right: 0;
     gap: 0;
   }
 }
@@ -153,6 +159,10 @@ textarea {
   display: flex;
   flex-direction: column;
   gap: $spacing-md;
+}
+
+body.no-scroll {
+  overflow: hidden;
 }
 
 // ============================================

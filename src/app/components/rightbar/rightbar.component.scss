@@ -40,6 +40,10 @@
       color: #fff;
       background-color: $accent-primary;
     }
+
+    @media (max-width: $bp-lg) {
+      color: $text-primary;
+    }
   }
 }
 
@@ -51,6 +55,14 @@
 
 @media (max-width: $bp-lg) {
   .right-bar {
-    display: none;
+    flex-direction: row;
+    position: fixed;
+    height: 54px;
+    width: 250px;
+    top: 0;
+    left: 0;
+    z-index: 1001;
+    border: none;
+    box-shadow: none;
   }
 }
