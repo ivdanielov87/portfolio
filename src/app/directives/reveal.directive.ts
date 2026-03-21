@@ -55,7 +55,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
       },
       {
         threshold: 0.10,
-        rootMargin: '0px 0px -5% 0px',
+        rootMargin: '0px 0px -4% 0px',
       },
     );
 
