@@ -18,9 +18,11 @@ type RevealVariant = 'up' | 'left' | 'right' | 'zoom';
 })
 export class RevealDirective implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
+  private readonly mobileMediaQuery = '(max-width: 640px)';
 
   @Input('appReveal') variant: RevealVariant = 'up';
   @Input() revealDelay = 0;
+  @Input() revealDuration?: number;
 
   constructor(
     private readonly el: ElementRef<HTMLElement>,
@@ -34,6 +36,10 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     this.renderer.addClass(element, 'reveal');
     this.renderer.addClass(element, `reveal--${this.variant}`);
     this.renderer.setStyle(element, '--reveal-delay', `${this.revealDelay}ms`);
+
+    if (this.revealDuration !== undefined) {
+      this.renderer.setStyle(element, '--reveal-duration', `${this.revealDuration}ms`);
+    }
 
     if (!isPlatformBrowser(this.platformId) || this.prefersReducedMotion()) {
       this.reveal(element);
@@ -53,10 +59,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
         this.reveal(element);
       },
-      {
-        threshold: 0.10,
-        rootMargin: '0px 0px -4% 0px',
-      },
+      this.getObserverOptions(),
     );
 
     this.observer.observe(element);
@@ -68,6 +71,20 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
   private prefersReducedMotion(): boolean {
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  }
+
+  private getObserverOptions(): IntersectionObserverInit {
+    if (window.matchMedia(this.mobileMediaQuery).matches) {
+      return {
+        threshold: 0.1,
+        rootMargin: '0px 0px -2% 0px',
+      };
+    }
+
+    return {
+      threshold: 0.18,
+      rootMargin: '0px 0px -12% 0px',
+    };
   }
 
   private reveal(element: HTMLElement): void {

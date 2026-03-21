@@ -1,9 +1,9 @@
-<section id="contact" class="contact" appReveal="up">
-  <div class="section-header" appReveal="up">
-    <h2 class="section-title">Contact Me</h2>
+<section id="contact" class="contact">
+  <div class="section-header">
+    <h2 class="section-title" appReveal="up">Contact Me</h2>
   </div>
 
-  <div class="contact__wrapper" appReveal="up" [revealDelay]="100">
+  <div class="contact__wrapper">
     @if (submitted) {
       <div class="contact__success" appReveal="up">
         <span class="success-icon">✓</span>
@@ -11,7 +11,7 @@
       </div>
     }
 
-    <form class="contact__form" (ngSubmit)="onSubmit()" novalidate>
+    <form class="contact__form" (ngSubmit)="onSubmit()" novalidate appReveal="up" [revealDelay]="100">
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name</label>

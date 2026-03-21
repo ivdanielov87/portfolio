@@ -1,15 +1,15 @@
 <section id="hero" class="hero">
   <div class="hero__inner">
-    <div class="hero__content" appReveal="left">
+    <div class="hero__content">
       <p class="hero__greeting" appReveal="up" [revealDelay]="50">HELLO, I'M</p>
       <h1 class="hero__title" appReveal="up" [revealDelay]="120">Ivelin Dimitrov</h1>
       <p class="hero__subtitle" appReveal="up" [revealDelay]="190"><span class="hero__dash"></span> Front-end Developer</p>
-      <p class="hero__description" appReveal="up" [revealDelay]="260">
+      <p class="hero__description" appReveal="right" [revealDelay]="300" [revealDuration]="1150">
         I build modern, responsive, and accessible web applications using Angular, React,
         TypeScript, and the latest front-end technologies. Passionate about clean
         code and great user experiences.
       </p>
-      <a href="#contact" class="hero__cta" (click)="scrollTo($event, 'contact')" appReveal="up" [revealDelay]="330">Contact Me</a>
+      <a href="#contact" class="hero__cta" (click)="scrollTo($event, 'contact')" appReveal="left" [revealDelay]="560" [revealDuration]="1350">Contact Me</a>
     </div>
     <div class="hero__image" appReveal="right" [revealDelay]="160">
       <div class="hero__image-wrapper">
@@ -18,3 +18,4 @@
     </div>
   </div>
 </section>
+
