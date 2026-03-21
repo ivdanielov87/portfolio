@@ -90,7 +90,9 @@
     }
 
     &:focus-visible {
-      box-shadow: 0 0 0 4px var(--accent-light);
+      box-shadow:
+        0 0 0 4px var(--accent-light),
+        0 10px 24px rgba(15, 23, 42, 0.12);
     }
 
     &:active {
@@ -140,7 +142,7 @@
       background:
         linear-gradient(135deg, rgba(255, 255, 255, 0.28), transparent 45%),
         lightslategray;
-      border: 2px solid rgba(234, 179, 8, 2.35);
+      border: 2px solid rgba(234, 179, 8, 0.35);
       box-shadow:
         0 18px 38px rgba(15, 23, 42, 0.1),
         0 6px 14px rgba(15, 23, 42, 0.07);
@@ -187,6 +189,28 @@
 
         img {
           transform: scale(1.04);
+        }
+      }
+    }
+  }
+}
+
+@media (hover: none) {
+  .hero {
+    &__image:hover {
+      &::before,
+      &::after {
+        transform: none;
+      }
+
+      .hero__image-wrapper {
+        transform: none;
+        box-shadow:
+          0 18px 38px rgba(15, 23, 42, 0.1),
+          0 6px 14px rgba(15, 23, 42, 0.07);
+
+        img {
+          transform: none;
         }
       }
     }

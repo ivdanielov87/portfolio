@@ -83,6 +83,17 @@
       }
     }
 
+    &:focus-visible {
+      color: $accent-primary;
+      background-color: rgba(148, 163, 184, 0.1);
+      box-shadow: 0 0 0 4px rgba(234, 179, 8, 0.12);
+
+      &::after {
+        border-color: rgba(148, 163, 184, 0.2);
+        transform: scale(1);
+      }
+    }
+
     &.active {
       color: #fff;
       background-color: $accent-primary;
@@ -148,5 +159,27 @@
   .right-bar__link {
     width: 36px;
     height: 36px;
+  }
+}
+
+@media (hover: none) {
+  .right-bar__link:hover {
+    transform: none;
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .right-bar__link:hover::after {
+    border-color: transparent;
+    transform: scale(0.92);
+  }
+
+  .right-bar__link:hover svg {
+    transform: none;
+  }
+
+  .right-bar__link.active:hover {
+    background-color: $accent-primary;
+    box-shadow: 0 10px 22px rgba(202, 138, 4, 0.22);
   }
 }

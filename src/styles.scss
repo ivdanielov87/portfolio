@@ -109,6 +109,13 @@ a {
   text-decoration: none;
 }
 
+a,
+button,
+input,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
 ul,
 ol {
   list-style: none;
@@ -131,6 +138,11 @@ textarea {
   font-family: inherit;
   outline: none;
   border: none;
+}
+
+:where(a, button, input, textarea, [tabindex]):focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.18);
 }
 
 // ============================================
@@ -245,6 +257,25 @@ section {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .hero__cta,
+  .sidebar__photo,
+  .sidebar__social-link,
+  .sidebar__nav-link,
+  .sidebar__download-cv,
+  .right-bar__link,
+  .portfolio-card,
+  .portfolio-card__preview-text,
+  .service-card,
+  .service-card__icon-wrap,
+  .about__content,
+  .stat-card,
+  .contact__submit,
+  .form-group input,
+  .form-group textarea {
+    transition: none !important;
+    transform: none !important;
   }
 }
 

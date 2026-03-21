@@ -133,6 +133,12 @@
     box-shadow: 0 16px 28px rgba(15, 23, 42, 0.12);
   }
 
+  &:focus-visible {
+    box-shadow:
+      0 0 0 4px rgba(234, 179, 8, 0.12),
+      0 16px 28px rgba(15, 23, 42, 0.12);
+  }
+
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
@@ -164,5 +170,12 @@
   .contact__submit {
     width: 100%;
     text-align: center;
+  }
+}
+
+@media (hover: none) {
+  .contact__submit:hover {
+    transform: none;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
   }
 }
