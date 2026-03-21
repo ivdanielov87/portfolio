@@ -220,11 +220,12 @@ section {
 .reveal {
   --reveal-delay: 0ms;
   --reveal-duration: 2000ms;
+  --reveal-easing: cubic-bezier(0.22, 1, 0.36, 1);
   opacity: 0;
   will-change: transform, opacity;
   transition:
-    opacity var(--reveal-duration) ease,
-    transform var(--reveal-duration) cubic-bezier(0.22, 1, 0.36, 1);
+    opacity var(--reveal-duration) var(--reveal-easing),
+    transform var(--reveal-duration) var(--reveal-easing);
   transition-delay: var(--reveal-delay);
 }
 
@@ -327,3 +328,4 @@ section {
     gap: $spacing-md;
   }
 }
+

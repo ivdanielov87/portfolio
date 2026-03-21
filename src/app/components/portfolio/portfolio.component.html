@@ -7,8 +7,9 @@
     @for (project of projects; track project.title; let i = $index) {
       <div
         class="portfolio-card"
-        [appReveal]="i % 2 === 0 ? 'up' : 'zoom'"
-        [revealDelay]="100 + i * 70"
+        [appReveal]="i < 3 ? 'left' : 'right'"
+        [revealDelay]="i * 250"
+        [revealDuration]="2200"
       >
         <div class="portfolio-card__image">
           <span class="portfolio-card__preview-text">{{ project.title }}</span>

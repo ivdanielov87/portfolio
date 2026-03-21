@@ -343,6 +343,12 @@
     svg {
       flex-shrink: 0;
     }
+
+    &.reveal:not(.is-visible) {
+      transition:
+        opacity var(--reveal-duration, 2000ms) var(--reveal-easing, cubic-bezier(0.22, 1, 0.36, 1)),
+        transform var(--reveal-duration, 2000ms) var(--reveal-easing, cubic-bezier(0.22, 1, 0.36, 1));
+    }
   }
 }
 

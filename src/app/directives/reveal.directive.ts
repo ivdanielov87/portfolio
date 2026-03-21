@@ -18,11 +18,13 @@ type RevealVariant = 'up' | 'left' | 'right' | 'zoom';
 })
 export class RevealDirective implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
+  private revealTimeoutId?: ReturnType<typeof setTimeout>;
   private readonly mobileMediaQuery = '(max-width: 640px)';
 
   @Input('appReveal') variant: RevealVariant = 'up';
   @Input() revealDelay = 0;
   @Input() revealDuration?: number;
+  @Input() revealEasing?: string;
 
   constructor(
     private readonly el: ElementRef<HTMLElement>,
@@ -35,10 +37,13 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
     this.renderer.addClass(element, 'reveal');
     this.renderer.addClass(element, `reveal--${this.variant}`);
-    this.renderer.setStyle(element, '--reveal-delay', `${this.revealDelay}ms`);
 
     if (this.revealDuration !== undefined) {
       this.renderer.setStyle(element, '--reveal-duration', `${this.revealDuration}ms`);
+    }
+
+    if (this.revealEasing !== undefined) {
+      this.renderer.setStyle(element, '--reveal-easing', this.revealEasing);
     }
 
     if (!isPlatformBrowser(this.platformId) || this.prefersReducedMotion()) {
@@ -67,6 +72,9 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.observer?.disconnect();
+    if (this.revealTimeoutId) {
+      clearTimeout(this.revealTimeoutId);
+    }
   }
 
   private prefersReducedMotion(): boolean {
@@ -88,7 +96,14 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   }
 
   private reveal(element: HTMLElement): void {
-    this.renderer.addClass(element, 'is-visible');
+    if (this.revealDelay > 0) {
+      this.revealTimeoutId = setTimeout(() => {
+        this.renderer.addClass(element, 'is-visible');
+      }, this.revealDelay);
+    } else {
+      this.renderer.addClass(element, 'is-visible');
+    }
+
     this.observer?.disconnect();
   }
 }

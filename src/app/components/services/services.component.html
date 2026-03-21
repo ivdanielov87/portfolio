@@ -5,7 +5,12 @@
 
   <div class="services__grid">
     @for (service of services; track service.title; let i = $index) {
-      <div class="service-card" appReveal="up" [revealDelay]="80 + i * 50">
+      <div
+        class="service-card"
+        [appReveal]="i < 3 ? 'left' : 'right'"
+        [revealDelay]="i * 250"
+        [revealDuration]="2200"
+      >
         <div class="service-card__icon-wrap">
           @switch (service.icon) {
             @case ('monitor') {
