@@ -1,11 +1,15 @@
-<section id="portfolio" class="portfolio">
-  <div class="section-header">
+<section id="portfolio" class="portfolio" appReveal="up">
+  <div class="section-header" appReveal="up">
     <h2 class="section-title">Portfolio</h2>
   </div>
 
   <div class="portfolio__grid">
-    @for (project of projects; track project.title) {
-      <div class="portfolio-card">
+    @for (project of projects; track project.title; let i = $index) {
+      <div
+        class="portfolio-card"
+        [appReveal]="i % 2 === 0 ? 'up' : 'zoom'"
+        [revealDelay]="100 + i * 70"
+      >
         <div class="portfolio-card__image">
           <span class="portfolio-card__preview-text">{{ project.title }}</span>
         </div>

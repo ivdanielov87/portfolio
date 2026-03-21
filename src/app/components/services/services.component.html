@@ -1,11 +1,11 @@
-<section id="services" class="services">
-  <div class="section-header">
+<section id="services" class="services" appReveal="up">
+  <div class="section-header" appReveal="up">
     <h2 class="section-title">My Services</h2>
   </div>
 
   <div class="services__grid">
-    @for (service of services; track service.title) {
-      <div class="service-card">
+    @for (service of services; track service.title; let i = $index) {
+      <div class="service-card" appReveal="up" [revealDelay]="90 + i * 70">
         <div class="service-card__icon-wrap">
           @switch (service.icon) {
             @case ('monitor') {

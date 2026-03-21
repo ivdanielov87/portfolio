@@ -1,11 +1,11 @@
-<section id="contact" class="contact">
-  <div class="section-header">
+<section id="contact" class="contact" appReveal="up">
+  <div class="section-header" appReveal="up">
     <h2 class="section-title">Contact Me</h2>
   </div>
 
-  <div class="contact__wrapper">
+  <div class="contact__wrapper" appReveal="up" [revealDelay]="100">
     @if (submitted) {
-      <div class="contact__success">
+      <div class="contact__success" appReveal="up">
         <span class="success-icon">✓</span>
         <p>Thank you! Your message has been sent successfully.</p>
       </div>
