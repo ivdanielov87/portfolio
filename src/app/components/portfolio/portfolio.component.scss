@@ -7,7 +7,7 @@
 .portfolio__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-lg;
+  gap: 1.35rem;
 
   @media (min-width: $bp-sm) {
     grid-template-columns: repeat(2, 1fr);
@@ -19,53 +19,168 @@
 }
 
 .portfolio-card {
+  position: relative;
   background-color: $bg-card;
-  border: 1px solid $border-color;
-  border-radius: $radius-lg;
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 1.1rem;
   overflow: hidden;
-  transition: transform $transition-base, border-color $transition-base;
+  box-shadow:
+    0 14px 30px rgba(15, 23, 42, 0.05),
+    0 2px 6px rgba(15, 23, 42, 0.03);
+  transition:
+    transform $transition-base,
+    border-color $transition-base,
+    box-shadow $transition-base,
+    background-color $transition-base;
   cursor: pointer;
 
   &:hover {
-    transform: translateY(-2px);
-    border-color: $accent-primary;
+    transform: translateY(-4px);
+    border-color: rgba(234, 179, 8, 0.3);
+    box-shadow:
+      0 24px 42px rgba(15, 23, 42, 0.1),
+      0 8px 18px rgba(15, 23, 42, 0.06);
+
+    .portfolio-card__image::before {
+      opacity: 1;
+    }
+
+    .portfolio-card__image::after {
+      transform: scaleX(1);
+    }
+
+    .portfolio-card__preview-text {
+      transform: translateY(-2px) scale(1.02);
+      opacity: 0.82;
+    }
+
+    .portfolio-card__content {
+      background-color: rgba(148, 163, 184, 0.04);
+    }
   }
 
   &__image {
     position: relative;
-    height: 160px;
-    background-color: $bg-secondary;
+    height: 190px;
+    padding: $spacing-lg;
+    // background:
+    //   linear-gradient(135deg, rgba(148, 163, 184, 0.12), transparent 55%),
+    //   linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 100%),
+    //   $bg-secondary;
     display: flex;
     align-items: center;
     justify-content: center;
+    isolation: isolate;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.02), rgba(15, 23, 42, 0.16)),
+        radial-gradient(circle at top right, rgba(148, 163, 184, 0.22), transparent 42%);
+      opacity: 0.72;
+      transition: opacity $transition-base;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 1.15rem;
+      right: 1.15rem;
+      bottom: 1rem;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.5), transparent);
+      transform: scaleX(0.7);
+      transform-origin: center;
+      transition: transform $transition-slow;
+    }
   }
 
   &__preview-text {
-    font-size: $font-size-lg;
-    font-weight: 600;
-    color: $text-muted;
-    opacity: 0.4;
+    position: relative;
+    z-index: 1;
+    max-width: 12ch;
+    font-size: clamp(1.1rem, 1rem + 0.25vw, 1.3rem);
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    color: $text-primary;
+    opacity: 0.68;
     text-align: center;
     padding: $spacing-md;
+    transition:
+      transform $transition-slow,
+      opacity $transition-base;
   }
 
   &__content {
-    padding: $spacing-md $spacing-lg;
+    padding: 1rem 1.15rem 1.2rem;
+    transition: background-color $transition-base;
   }
 
   &__category {
     display: block;
     font-size: $font-size-xs;
-    font-weight: 600;
+    font-weight: 700;
     color: $accent-primary;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 4px;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.45rem;
   }
 
   &__title {
-    font-size: $font-size-sm;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.35;
     color: $text-primary;
+  }
+}
+
+:root.dark-theme .portfolio-card {
+  border-color: rgba(148, 163, 184, 0.2);
+  box-shadow:
+    0 18px 34px rgba(2, 6, 23, 0.28),
+    0 2px 6px rgba(2, 6, 23, 0.18);
+
+  &:hover {
+    box-shadow:
+      0 24px 44px rgba(2, 6, 23, 0.34),
+      0 8px 18px rgba(2, 6, 23, 0.2);
+  }
+
+  .portfolio-card__image {
+    background:
+      linear-gradient(135deg, rgba(148, 163, 184, 0.12), transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 100%),
+      $bg-secondary;
+
+    &::before {
+      background:
+        linear-gradient(180deg, rgba(15, 23, 42, 0.08), rgba(15, 23, 42, 0.32)),
+        radial-gradient(circle at top right, rgba(148, 163, 184, 0.14), transparent 42%);
+    }
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .portfolio__grid {
+    gap: $spacing-md;
+  }
+
+  .portfolio-card {
+    &__image {
+      height: 172px;
+    }
+
+    &__content {
+      padding: 0.95rem 1rem 1.1rem;
+    }
+
+    &__preview-text {
+      max-width: 100%;
+      font-size: 1.05rem;
+      padding: $spacing-sm;
+    }
   }
 }

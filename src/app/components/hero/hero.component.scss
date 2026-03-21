@@ -4,94 +4,190 @@
   display: flex;
   align-items: center;
   overflow: hidden;
-  padding: $spacing-2xl $spacing-xl;
+  padding: clamp(2.25rem, 1.8rem + 1.4vw, 3.5rem) clamp(1.25rem, 0.95rem + 1vw, 2.5rem);
 
   &__inner {
     display: flex;
     align-items: center;
-    gap: $spacing-3xl;
+    justify-content: space-between;
+    gap: clamp(2.5rem, 1.5rem + 3vw, 5rem);
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   &__content {
     flex: 1;
+    max-width: 38rem;
   }
 
   &__greeting {
     font-size: $font-size-xs;
     color: $text-muted;
-    letter-spacing: 2px;
-    font-weight: 500;
-    margin-bottom: $spacing-sm;
+    letter-spacing: 0.28em;
+    font-weight: 700;
+    margin-bottom: $spacing-md;
   }
 
   &__title {
-    font-size: $font-size-5xl;
+    font-size: clamp(2.25rem, 1.75rem + 1.5vw, 3.8rem);
     font-weight: 800;
     color: $text-primary;
-    line-height: 1.1;
-    margin-bottom: $spacing-sm;
+    line-height: 0.95;
+    letter-spacing: -0.05em;
+    margin-bottom: $spacing-md;
+    text-wrap: balance;
   }
 
   &__subtitle {
     display: flex;
     align-items: center;
-    gap: $spacing-sm;
-    font-size: $font-size-lg;
-    font-weight: 500;
+    gap: $spacing-md;
+    font-size: clamp(1.02rem, 0.94rem + 0.25vw, 1.18rem);
+    font-weight: 600;
+    letter-spacing: 0.01em;
     color: $accent-primary;
-    margin-bottom: $spacing-xl;
+    margin-bottom: $spacing-lg;
   }
 
   &__dash {
     display: inline-block;
-    width: 30px;
+    width: 42px;
     height: 3px;
     background-color: $accent-primary;
     border-radius: 2px;
+    box-shadow: 0 0 0 6px var(--accent-light);
   }
 
   &__description {
-    font-size: $font-size-sm;
+    font-size: clamp(0.96rem, 0.9rem + 0.2vw, 1.05rem);
     color: $text-secondary;
-    line-height: 1.8;
+    line-height: 1.85;
     margin-bottom: $spacing-xl;
-    max-width: 540px;
+    max-width: 34rem;
+    text-wrap: pretty;
   }
 
   &__cta {
+    position: relative;
     display: inline-block;
-    padding: $spacing-sm $spacing-2xl;
+    padding: 0.9rem 2.2rem;
     background-color: $accent-primary;
     color: #111827;
     font-size: $font-size-sm;
-    font-weight: 600;
-    border-radius: $radius-md;
-    transition: background-color $transition-fast;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    border-radius: 999px;
+    transition:
+      transform $transition-base,
+      background-color $transition-fast,
+      box-shadow $transition-base;
 
     &:hover {
       background-color: $accent-hover;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    &:focus-visible {
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+
+    &:active {
+      transform: translateY(0);
     }
   }
 
   &__image {
+    position: relative;
     flex-shrink: 0;
-    width: 280px;
-    height: 280px;
+    width: clamp(240px, 22vw, 280px);
+    height: clamp(280px, 26vw, 280px);
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      inset: auto;
+      pointer-events: none;
+      transition: transform $transition-slow, opacity $transition-slow;
+    }
+
+    &::before {
+      width: 70%;
+      height: 70%;
+      right: -8%;
+      bottom: -6%;
+      border-radius: $radius-xl;
+      background: radial-gradient(circle, var(--accent-light) 0%, transparent 72%);
+      opacity: 0.9;
+      filter: blur(10px);
+    }
+
+    &::after {
+      inset: 18px -18px -18px 18px;
+      border: 1px solid rgba(234, 179, 8, 0.28);
+      border-radius: 28px;
+      z-index: -1;
+    }
 
     &-wrapper {
       width: 100%;
       height: 100%;
-      border-radius: $radius-xl;
+      border-radius: 28px;
       overflow: hidden;
       position: relative;
-      background: lightslategray;
-      border: 3px solid $accent-primary;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.28), transparent 45%),
+        lightslategray;
+      border: 2px solid rgba(234, 179, 8, 2.35);
+      box-shadow:
+        0 18px 38px rgba(15, 23, 42, 0.1),
+        0 6px 14px rgba(15, 23, 42, 0.07);
+      transform: translateZ(0);
+      transition:
+        transform $transition-slow,
+        box-shadow $transition-slow,
+        border-color $transition-base;
+
+      &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.22), transparent 32%),
+          linear-gradient(0deg, rgba(15, 23, 42, 0.12), transparent 34%);
+        z-index: 1;
+        pointer-events: none;
+      }
 
       img {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+    }
+
+    &:hover {
+      &::before {
+        transform: scale(1.05);
+      }
+
+      &::after {
+        transform: translate3d(-4px, -4px, 0);
+      }
+
+      .hero__image-wrapper {
+        transform: translate3d(0, -6px, 0);
+        border-color: rgba(234, 179, 8, 0.48);
+        box-shadow:
+          0 24px 46px rgba(15, 23, 42, 0.14),
+          0 10px 20px rgba(15, 23, 42, 0.08);
+
+        img {
+          transform: scale(1.04);
+        }
       }
     }
   }
@@ -107,7 +203,9 @@
   .hero {
     &__inner {
       flex-direction: column;
+      align-items: stretch;
       text-align: center;
+      gap: $spacing-2xl;
     }
 
     &__subtitle {
@@ -116,18 +214,62 @@
 
     &__description {
       max-width: 100%;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     &__image {
-      width: 220px;
-      height: 220px;
       order: -1;
+      width: min(100%, 270px);
+      height: 270px;
+      margin: 0 auto;
+    }
+
+    &__cta {
+      align-self: center;
     }
   }
 }
 
 @media (max-width: $bp-sm) {
   .hero {
-    &__title { font-size: $font-size-3xl; }
+    &__greeting {
+      margin-bottom: $spacing-sm;
+    }
+
+    &__title {
+      font-size: clamp(2rem, 1.7rem + 1.4vw, 2.6rem);
+      line-height: 1;
+    }
+
+    &__subtitle {
+      gap: $spacing-sm;
+      font-size: $font-size-base;
+      margin-bottom: $spacing-md;
+    }
+
+    &__dash {
+      width: 30px;
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+
+    &__description {
+      font-size: $font-size-sm;
+      margin-bottom: $spacing-lg;
+    }
+
+    &__cta {
+      width: 100%;
+      max-width: 260px;
+      text-align: center;
+    }
+
+    &__image {
+      height: 270px;
+
+      &::after {
+        inset: 12px -12px -12px 12px;
+      }
+    }
   }
 }

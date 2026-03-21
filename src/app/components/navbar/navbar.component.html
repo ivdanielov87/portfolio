@@ -3,6 +3,7 @@
   <span class="mobile-topbar__name">Ivelin Dimitrov</span>
   <button
     class="mobile-topbar__toggle"
+    [class.is-open]="mobileMenuOpen"
     (click)="toggleMenu()"
     [attr.aria-expanded]="mobileMenuOpen"
     aria-label="Toggle menu"
@@ -43,6 +44,18 @@
         </a>
       }
     </div>
+
+    <nav class="sidebar__nav" aria-label="Section navigation">
+      @for (link of navLinks; track link.target) {
+        <a
+          [href]="'#' + link.target"
+          class="sidebar__nav-link"
+          (click)="scrollTo($event, link.target)"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </nav>
 
     <ul class="sidebar__info">
       @for (item of personalInfo; track item.label) {

@@ -5,25 +5,26 @@
 }
 
 .contact__wrapper {
-  max-width: 700px;
+  max-width: 760px;
 }
 
 .contact__success {
   display: flex;
   align-items: center;
   gap: $spacing-md;
-  padding: $spacing-lg;
-  background-color: var(--accent-light);
-  border: 1px solid $accent-primary;
-  border-radius: $radius-md;
+  padding: 1rem 1.1rem;
+  background-color: rgba(234, 179, 8, 0.1);
+  border: 1px solid rgba(234, 179, 8, 0.24);
+  border-radius: 0.95rem;
   margin-bottom: $spacing-xl;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.05);
 
   .success-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     background-color: $accent-primary;
     color: #111827;
     border-radius: 50%;
@@ -33,20 +34,20 @@
 
   p {
     color: $text-primary;
-    font-size: $font-size-sm;
+    font-size: 0.93rem;
   }
 }
 
 .contact__form {
   display: flex;
   flex-direction: column;
-  gap: $spacing-lg;
+  gap: 1.15rem;
 }
 
 .form-row {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $spacing-lg;
+  gap: 1rem;
 
   @media (min-width: $bp-sm) {
     grid-template-columns: 1fr 1fr;
@@ -56,68 +57,107 @@
 .form-group {
   display: flex;
   flex-direction: column;
-  gap: $spacing-xs;
+  gap: 0.4rem;
 
   label {
-    font-size: $font-size-sm;
-    font-weight: 500;
+    font-size: 0.88rem;
+    font-weight: 600;
     color: $text-secondary;
   }
 
   input,
   textarea {
     width: 100%;
-    padding: $spacing-sm $spacing-md;
+    padding: 0.9rem 1rem;
     background-color: $bg-card;
-    border: 1px solid $border-color;
-    border-radius: $radius-sm;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    border-radius: 0.9rem;
     color: $text-primary;
-    font-size: $font-size-sm;
-    transition: border-color $transition-fast;
+    font-size: 0.95rem;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 2px 4px rgba(15, 23, 42, 0.02);
+    transition:
+      border-color $transition-fast,
+      box-shadow $transition-base,
+      background-color $transition-base,
+      transform $transition-fast;
 
     &::placeholder { color: $text-muted; }
-    &:focus { border-color: $accent-primary; }
-    &.error { border-color: #ef4444; }
+
+    &:focus {
+      border-color: rgba(234, 179, 8, 0.38);
+      box-shadow:
+        0 0 0 4px rgba(234, 179, 8, 0.12),
+        0 8px 18px rgba(15, 23, 42, 0.05);
+      background-color: $bg-card;
+      transform: translateY(-1px);
+    }
+
+    &.error {
+      border-color: #ef4444;
+      box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+    }
   }
 
   textarea {
     resize: vertical;
-    min-height: 120px;
+    min-height: 150px;
   }
 }
 
 .form-error {
   font-size: $font-size-xs;
   color: #ef4444;
+  margin-top: 0.1rem;
 }
 
 .contact__submit {
-  padding: $spacing-sm $spacing-xl;
+  padding: 0.9rem 1.55rem;
   background-color: $accent-primary;
   color: #111827;
-  font-size: $font-size-sm;
-  font-weight: 600;
-  border-radius: $radius-sm;
-  transition: background-color $transition-fast;
+  font-size: 0.9rem;
+  font-weight: 700;
+  border-radius: 999px;
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+  transition:
+    transform $transition-base,
+    background-color $transition-fast,
+    box-shadow $transition-base,
+    opacity $transition-base;
   align-self: flex-start;
 
   &:hover {
     background-color: $accent-hover;
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(15, 23, 42, 0.12);
   }
 
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
   }
 }
 
 .contact__error {
-  font-size: $font-size-sm;
+  font-size: 0.9rem;
   color: #ef4444;
-  padding: $spacing-sm $spacing-md;
+  padding: 0.9rem 1rem;
   background-color: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.3);
-  border-radius: $radius-sm;
+  border-radius: 0.9rem;
+}
+
+:root.dark-theme .form-group {
+  input,
+  textarea {
+    border-color: rgba(148, 163, 184, 0.22);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 2px 4px rgba(2, 6, 23, 0.1);
+  }
 }
 
 @media (max-width: $bp-sm) {

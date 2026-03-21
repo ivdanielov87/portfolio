@@ -10,16 +10,23 @@
   z-index: 1001;
   height: 56px;
   background-color: $bg-card;
-  border-bottom: 1px solid $border-color;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(14px);
   padding: 0 $spacing-lg;
   max-width: 1400px;
   align-items: center;
   justify-content: space-between;
+  transition:
+    background-color $transition-base,
+    border-color $transition-base,
+    box-shadow $transition-base;
 
   &__name {
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
     font-weight: 700;
     color: $text-primary;
+    letter-spacing: -0.02em;
   }
 
   &__toggle {
@@ -27,7 +34,30 @@
     flex-direction: column;
     gap: 5px;
     background: none;
-    padding: $spacing-sm;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    background-color: rgba(255, 255, 255, 0.24);
+    transition:
+      transform $transition-base,
+      border-color $transition-base,
+      background-color $transition-base,
+      box-shadow $transition-base;
+
+    &.is-open {
+      background-color: var(--accent-light);
+      border-color: rgba(234, 179, 8, 0.3);
+    }
+
+    &:hover {
+      transform: translateY(-1px);
+      border-color: rgba(234, 179, 8, 0.35);
+      box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
+    }
 
     .bar {
       display: block;
@@ -35,7 +65,10 @@
       height: 2px;
       background-color: $text-primary;
       border-radius: 2px;
-      transition: all $transition-base;
+      transition:
+        transform $transition-base,
+        opacity $transition-base,
+        background-color $transition-base;
 
       &.open:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
@@ -51,6 +84,13 @@
 
   @media (max-width: $bp-lg) {
     display: flex;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: $bp-lg) {
+    &__name {
+      display: none;
+    }
   }
 }
 
@@ -62,35 +102,59 @@
   min-width: $sidebar-width;
   background-color: $bg-card;
   border-radius: $radius-xl;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow:
+    0 18px 42px rgba(15, 23, 42, 0.08),
+    0 4px 12px rgba(15, 23, 42, 0.05);
   z-index: 1000;
   flex-shrink: 0;
+  overflow: hidden;
+  transition:
+    background-color $transition-base,
+    border-color $transition-base,
+    box-shadow $transition-base;
 
   &__scroll {
-    padding: $spacing-xl $spacing-lg;
+    position: relative;
+    z-index: 1;
+    padding: 1.75rem 1.35rem 4rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $spacing-lg;
+    gap: 1.15rem;
     height: 100%;
     overflow-y: auto;
-    padding-bottom: 4rem;
   }
 
   &__photo {
-    width: 140px;
-    height: 140px;
+    width: 132px;
+    height: 132px;
     border-radius: 50%;
     overflow: hidden;
-    margin-bottom: $spacing-lg;
+    margin-bottom: $spacing-md;
     background: lightslategray;
     flex-shrink: 0;
     border: 3px solid $accent-primary;
+    box-shadow: 0 14px 24px rgba(15, 23, 42, 0.1);
+    transition:
+      transform $transition-slow,
+      box-shadow $transition-slow,
+      border-color $transition-base;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transition: transform $transition-slow;
+    }
+
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 30px rgba(15, 23, 42, 0.12);
+
+      img {
+        transform: scale(1.04);
+      }
     }
   }
 
@@ -99,49 +163,61 @@
     font-weight: 700;
     color: $text-primary;
     text-align: center;
-    margin-bottom: 2px;
+    margin-bottom: 0;
+    letter-spacing: -0.02em;
   }
 
   &__title {
     font-size: $font-size-sm;
     color: $text-muted;
     text-align: center;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-sm;
   }
 
   &__social {
     display: flex;
-    gap: $spacing-sm;
-    margin-bottom: $spacing-lg;
+    gap: 0.65rem;
+    margin-bottom: $spacing-md;
   }
 
   &__social-link {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 34px;
-    height: 34px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    border: 1px solid $border-color;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background-color: rgba(255, 255, 255, 0.24);
     color: $text-muted;
-    transition: all $transition-fast;
+    transition:
+      transform $transition-base,
+      color $transition-fast,
+      border-color $transition-fast,
+      background-color $transition-base,
+      box-shadow $transition-base;
 
     &:hover {
       color: $accent-primary;
-      border-color: $accent-primary;
+      border-color: rgba(234, 179, 8, 0.34);
+      background-color: var(--accent-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 18px rgba(15, 23, 42, 0.08);
     }
   }
 
   &__info {
     width: 100%;
-    padding-bottom: $spacing-md;
-    margin-bottom: $spacing-md;
-    border-bottom: 1px solid $border-color;
+    padding: $spacing-md 0;
+    margin-bottom: $spacing-sm;
+    border-top: 1px solid rgba(148, 163, 184, 0.16);
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
 
     li {
       display: flex;
       justify-content: space-between;
-      padding: $spacing-xs 0;
+      gap: $spacing-md;
+      padding: 0.45rem 0;
       font-size: $font-size-sm;
 
       .info-label {
@@ -158,25 +234,40 @@
 
   &__nav {
     width: 100%;
-    display: none;
-    flex-direction: column;
-    gap: 2px;
-    margin-bottom: $spacing-lg;
-    padding-bottom: $spacing-lg;
-    border-bottom: 1px solid $border-color;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: $spacing-sm;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
   }
 
   &__nav-link {
-    display: block;
-    padding: $spacing-sm $spacing-md;
-    font-size: $font-size-sm;
-    font-weight: 500;
-    color: $text-muted;
-    border-radius: $radius-md;
-    transition: all $transition-fast;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 82px;
+    padding: 0.55rem 0.9rem;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $text-secondary;
+    border-radius: 999px;
+    border: 1px solid transparent;
+    background-color: rgba(148, 163, 184, 0.08);
+    transition:
+      transform $transition-base,
+      color $transition-fast,
+      background-color $transition-base,
+      border-color $transition-fast;
 
     &:hover {
       color: $accent-primary;
+      background-color: var(--accent-light);
+      border-color: rgba(234, 179, 8, 0.24);
+      transform: translateY(-1px);
     }
   }
 
@@ -184,37 +275,44 @@
     width: 100%;
     padding-bottom: $spacing-md;
     margin-bottom: $spacing-md;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.16);
 
     &-title {
       font-size: $font-size-xs;
       font-weight: 700;
       color: $text-primary;
       text-transform: uppercase;
-      letter-spacing: 1.5px;
+      letter-spacing: 0.18em;
       margin-bottom: $spacing-md;
     }
   }
 
   &__download-cv {
     width: 100%;
+    flex-direction: column;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: $spacing-sm;
-    padding: 12px $spacing-md;
+    padding: 0.8rem $spacing-md;
     margin-top: auto;
     background-color: $accent-primary;
     color: #111827;
-    font-size: $font-size-sm;
-    font-weight: 600;
-    border-radius: $radius-lg;
-    transition: background-color $transition-fast;
+    font-size: $font-size-xs;
+    font-weight: 700;
+    border-radius: 999px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+    transition:
+      transform $transition-base,
+      background-color $transition-fast,
+      box-shadow $transition-base;
     cursor: pointer;
     text-decoration: none;
 
     &:hover {
       background-color: $accent-hover;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 22px rgba(15, 23, 42, 0.1);
     }
 
     svg {
@@ -225,39 +323,59 @@
 
 // Progress bars
 .progress-item {
-  margin-bottom: $spacing-sm;
+  margin-bottom: 0.85rem;
 
   &__header {
     display: flex;
     justify-content: space-between;
     font-size: $font-size-xs;
     color: $text-secondary;
-    margin-bottom: 4px;
+    margin-bottom: 0.4rem;
+
+    span:last-child {
+      color: $text-muted;
+      font-weight: 600;
+    }
   }
 }
 
 .progress-bar {
   width: 100%;
-  height: 5px;
-  background-color: $border-color;
-  border-radius: 3px;
+  height: 6px;
+  background-color: rgba(148, 163, 184, 0.18);
+  border-radius: 999px;
   overflow: hidden;
 
   &__fill {
     height: 100%;
-    background-color: $accent-primary;
-    border-radius: 3px;
-    transition: width 0.6s ease;
+    background:
+      linear-gradient(90deg, $accent-primary 0%, rgba(234, 179, 8, 0.72) 100%);
+    border-radius: 999px;
+    box-shadow: 0 0 12px rgba(234, 179, 8, 0.16);
+    transition: width 0.8s ease;
   }
 }
 
 // Mobile overlay
 .sidebar-overlay {
-  display: none;
   position: fixed;
   inset: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.42));
   z-index: 999;
+  opacity: 0;
+  animation: overlay-fade-in $transition-slow forwards;
+  backdrop-filter: blur(3px);
+}
+
+@keyframes overlay-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 // Responsive
@@ -266,21 +384,42 @@
     position: fixed;
     left: 0;
     transform: translateX(-100%);
-    transition: transform $transition-slow;
+    transition: transform $transition-slow, box-shadow $transition-base;
     top: 56px;
     height: calc(100vh - 0px);
+    width: min(88vw, 330px);
+    min-width: min(88vw, 330px);
+    border-radius: 0 1.25rem 1.25rem 0;
+    box-shadow: none;
 
     &.open {
       transform: translateX(0);
-      top: 40px;
+      top: 56px;
+      box-shadow: 0 14px 34px rgba(2, 6, 23, 0.18);
     }
   }
 
-  .sidebar__nav {
-    display: flex;
+  .sidebar__scroll {
+    padding-top: 1.5rem;
   }
 
-  .sidebar-overlay {
-    display: block;
+  .sidebar__photo {
+    width: 118px;
+    height: 118px;
+  }
+}
+
+@media (max-width: $bp-sm) {
+  .mobile-topbar {
+    padding: 0 $spacing-md;
+  }
+
+  .sidebar__info li {
+    font-size: $font-size-xs;
+  }
+
+  .sidebar__nav-link {
+    min-width: 74px;
+    padding: 0.5rem 0.7rem;
   }
 }

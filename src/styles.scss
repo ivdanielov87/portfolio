@@ -99,6 +99,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  transition:
+    background-color $transition-slow,
+    color $transition-base;
 }
 
 a {
@@ -137,7 +140,7 @@ textarea {
   display: flex;
   align-items: flex-start;
   max-width: 1400px;
-  margin: 24px auto;
+  margin: 28px auto;
   gap: $spacing-md;
   position: relative;
   padding: 0 $spacing-md;
@@ -158,7 +161,7 @@ textarea {
   min-width: 0;
   display: flex;
   flex-direction: column;
-  gap: $spacing-md;
+  gap: $spacing-lg;
 }
 
 body.no-scroll {
@@ -169,14 +172,34 @@ body.no-scroll {
 // Section spacing — each section is a card
 // ============================================
 section {
+  position: relative;
   background-color: $bg-card;
+  border: 1px solid rgba(148, 163, 184, 0.12);
   border-radius: $radius-xl;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
-  padding: $spacing-2xl $spacing-xl;
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.05),
+    0 1px 2px rgba(15, 23, 42, 0.04);
+  padding: clamp(2rem, 1.75rem + 0.8vw, 3rem) clamp(1.25rem, 0.95rem + 1vw, 2.5rem);
+  overflow: hidden;
+  transition:
+    background-color $transition-slow,
+    border-color $transition-base,
+    box-shadow $transition-base;
 
   @media (min-width: $bp-lg) {
     padding: $spacing-2xl $spacing-2xl;
   }
+
+  @media (max-width: $bp-sm) {
+    border-radius: $radius-lg;
+  }
+}
+
+:root.dark-theme section {
+  border-color: rgba(148, 163, 184, 0.18);
+  box-shadow:
+    0 18px 40px rgba(2, 6, 23, 0.38),
+    0 1px 2px rgba(2, 6, 23, 0.28);
 }
 
 // ============================================
@@ -229,23 +252,28 @@ section {
 // Section titles
 // ============================================
 .section-header {
-  margin-bottom: $spacing-2xl;
+  position: relative;
+  z-index: 1;
+  margin-bottom: clamp(1.75rem, 1.5rem + 0.8vw, 2.5rem);
 
   .section-title {
-    font-size: $font-size-2xl;
-    font-weight: 700;
+    font-size: clamp(1.55rem, 1.35rem + 0.8vw, 2rem);
+    font-weight: 750;
+    letter-spacing: -0.03em;
     color: $text-primary;
-    margin-bottom: $spacing-xs;
+    margin-bottom: $spacing-sm;
     display: flex;
     align-items: center;
     gap: $spacing-sm;
+    line-height: 1.15;
 
     &::before {
       content: '';
       width: 4px;
-      height: 24px;
+      height: 28px;
       background-color: $accent-primary;
       border-radius: 2px;
+      box-shadow: 0 0 0 6px var(--accent-light);
     }
   }
 
@@ -253,5 +281,17 @@ section {
     font-size: $font-size-sm;
     color: $text-muted;
     padding-left: calc(4px + $spacing-sm);
+    max-width: 42rem;
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: $bp-lg) {
+  .app-layout {
+    margin-top: 0;
+  }
+
+  .main-content {
+    gap: $spacing-md;
   }
 }
