@@ -17,14 +17,14 @@
 <!-- Left Sidebar -->
 <aside class="sidebar" [class.open]="mobileMenuOpen">
   <div class="sidebar__scroll">
-    <div class="sidebar__photo" appReveal="left" [revealDelay]="60" [revealDuration]="1100">
+    <div class="sidebar__photo" appReveal="left" [revealDelay]="600" [revealDuration]="1100">
       <img src="profile.jpg" alt="Ivelin Dimitrov" />
     </div>
 
-    <h2 class="sidebar__name" appReveal="left" [revealDelay]="140">Ivelin Dimitrov</h2>
-    <p class="sidebar__title" appReveal="left" [revealDelay]="210">Front-end Developer</p>
+    <h2 class="sidebar__name" appReveal="left" [revealDelay]="700">Ivelin Dimitrov</h2>
+    <p class="sidebar__title" appReveal="left" [revealDelay]="800">Front-end Developer</p>
 
-    <div class="sidebar__social" appReveal="left" [revealDelay]="280">
+    <div class="sidebar__social" appReveal="left" [revealDelay]="900">
       @for (social of socialLinks; track social.name) {
         <a [href]="social.url" target="_blank" rel="noopener noreferrer" class="sidebar__social-link" [attr.aria-label]="social.name">
           @switch (social.icon) {
@@ -45,7 +45,7 @@
       }
     </div>
 
-    <nav class="sidebar__nav" aria-label="Section navigation" appReveal="left" [revealDelay]="360">
+    <nav class="sidebar__nav" aria-label="Section navigation" appReveal="left" [revealDelay]="1000">
       @for (link of navLinks; track link.target) {
         <a
           [href]="'#' + link.target"
@@ -57,7 +57,7 @@
       }
     </nav>
 
-    <ul class="sidebar__info" appReveal="left" [revealDelay]="430">
+    <ul class="sidebar__info" appReveal="left" [revealDelay]="1000">
       @for (item of personalInfo; track item.label) {
         <li>
           <span class="info-label">{{ item.label }}:</span>
@@ -66,7 +66,7 @@
       }
     </ul>
 
-    <div class="sidebar__section" appReveal="left" [revealDelay]="520">
+    <div class="sidebar__section" appReveal="left" [revealDelay]="1000">
       <h3 class="sidebar__section-title">Languages</h3>
       @for (lang of languages; track lang.name) {
         <div class="progress-item">
@@ -81,7 +81,7 @@
       }
     </div>
 
-    <div class="sidebar__section" appReveal="left" [revealDelay]="620">
+    <div class="sidebar__section" appReveal="left" [revealDelay]="1100">
       <h3 class="sidebar__section-title">Skills</h3>
       @for (skill of skills; track skill.name) {
         <div class="progress-item">
@@ -103,7 +103,7 @@
       class="sidebar__download-cv"
       aria-label="Download CV"
       appReveal="left"
-      [revealDelay]="740"
+      [revealDelay]="520"
       [revealDuration]="1600" [revealEasing]="'ease-in-out'"
     >
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>

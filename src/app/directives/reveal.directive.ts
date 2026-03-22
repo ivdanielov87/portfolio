@@ -91,7 +91,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
     return {
       threshold: 0.1,
-      rootMargin: '-10% -10% -4% -10%',
+      rootMargin: '0px 0px -4% 0px',
     };
   }
 
@@ -99,7 +99,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     if (this.revealDelay > 0) {
       this.revealTimeoutId = setTimeout(() => {
         this.renderer.addClass(element, 'is-visible');
-      }, (this.revealDelay + 200));
+      }, (this.revealDelay));
     } else {
       this.renderer.addClass(element, 'is-visible');
     }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RevealDirective } from '../../directives/reveal.directive';
 
@@ -16,6 +16,8 @@ interface Service {
   styleUrl: './services.component.scss',
 })
 export class ServicesComponent {
+  viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1440;
+
   services: Service[] = [
     {
       title: 'Web Development',
@@ -48,4 +50,26 @@ export class ServicesComponent {
       icon: 'trending-up',
     },
   ];
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.viewportWidth = window.innerWidth;
+  }
+
+  get isMobileView(): boolean {
+    return this.viewportWidth < 1024;
+  }
+
+  getSectionTitleDelay(): number {
+    return this.isMobileView ? 0 : 1200;
+  }
+
+  getCardRevealDelay(index: number): number {
+    if (this.isMobileView) {
+      return index * 250;
+    }
+
+    const desktopBaseDelay = index < 3 ? 2000 : 0;
+    return desktopBaseDelay + index * 250;
+  }
 }
