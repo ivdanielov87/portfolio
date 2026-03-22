@@ -84,14 +84,14 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   private getObserverOptions(): IntersectionObserverInit {
     if (window.matchMedia(this.mobileMediaQuery).matches) {
       return {
-        threshold: 0.1,
-        rootMargin: '0px 0px -2% 0px',
+        threshold: 0.025,
+        rootMargin: '0px 0px -4% 0px',
       };
     }
 
     return {
-      threshold: 0.18,
-      rootMargin: '0px 0px -12% 0px',
+      threshold: 0.1,
+      rootMargin: '-10% -10% -4% -10%',
     };
   }
 
@@ -99,7 +99,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     if (this.revealDelay > 0) {
       this.revealTimeoutId = setTimeout(() => {
         this.renderer.addClass(element, 'is-visible');
-      }, this.revealDelay);
+      }, (this.revealDelay + 200));
     } else {
       this.renderer.addClass(element, 'is-visible');
     }

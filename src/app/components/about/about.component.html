@@ -3,14 +3,14 @@
     <h2 class="section-title" appReveal="left">About Me</h2>
   </div>
 
-  <div class="about__content" appReveal="up" [revealDelay]="500">
-    <p>
+  <div class="about__content" appReveal="up" [revealDelay]="300">
+    <p appReveal="left" [revealDelay]="400">
       I am a passionate front-end developer with over 7+ years of experience
       creating beautiful and functional web applications. My journey in web
       development began with a curiosity about how websites work, and it has
       grown into a fulfilling career.
     </p>
-    <p>
+    <p appReveal="right" [revealDelay]="500">
       My work involves building scalable, accessible, and maintainable web applications 
       using Angular, React, TypeScript, JavaScript, HTML, and SCSS. 
       I specialize in translating Jira requirements and Figma designs into production-ready frontend features, 
@@ -20,20 +20,20 @@
 
   <div class="about__stats">
     <div class="stat-card" appReveal="left" [revealDelay]="0">
-      <span class="stat-card__number">7+</span>
-      <span class="stat-card__label">Years Experience</span>
+      <span class="stat-card__number" appReveal="zoom" [revealDelay]="100">7+</span>
+      <span class="stat-card__label" appReveal="zoom" [revealDelay]="150">Years Experience</span>
     </div>
-    <div class="stat-card" appReveal="left" [revealDelay]="200">
-      <span class="stat-card__number">Angular & React</span>
-      <span class="stat-card__label">Deep understanding of component-based architecture</span>
+    <div class="stat-card" appReveal="left" [revealDelay]="100">
+      <span class="stat-card__number" appReveal="zoom" [revealDelay]="250">Angular & React</span>
+      <span class="stat-card__label" appReveal="zoom" [revealDelay]="300">Deep understanding of component-based architecture</span>
     </div>
-    <div class="stat-card" appReveal="right" [revealDelay]="400">
-      <span class="stat-card__number">Figma</span>
-      <span class="stat-card__label">Translating complex designs into responsive interfaces</span>
+    <div class="stat-card" appReveal="right" [revealDelay]="200">
+      <span class="stat-card__number" appReveal="zoom" [revealDelay]="450">Figma</span>
+      <span class="stat-card__label" appReveal="zoom" [revealDelay]="500 ">Translating complex designs into responsive interfaces</span>
     </div>
-    <div class="stat-card" appReveal="right" [revealDelay]="600">
-      <span class="stat-card__number">Clean Code</span>
-      <span class="stat-card__label">Writing maintainable and production-ready applications</span>
+    <div class="stat-card" appReveal="right" [revealDelay]="300">
+      <span class="stat-card__number" appReveal="zoom" [revealDelay]="600">Clean Code</span>
+      <span class="stat-card__label" appReveal="zoom" [revealDelay]="600">Writing maintainable and production-ready applications</span>
     </div>
   </div>
 </section>
