@@ -5,7 +5,7 @@
 
   <div class="services__grid">
     @for (service of services; track service.title; let i = $index) {
-    <div class="service-card" [appReveal]="i < 3 ? 'left' : 'right'" [revealDelay]="getCardRevealDelay(i)" [revealDuration]="2200">
+    <div class="service-card" [appReveal]="i < 3 ? 'left' : 'right'" [revealDelay]="getCardRevealDelay(i)" [revealDuration]="1400">
       <div class="service-card__icon-wrap">
         @switch (service.icon) {
         @case ('monitor') {
@@ -55,16 +55,8 @@
         }
         }
       </div>
-      <h3 class="service-card__title"
-        appReveal="zoom" 
-        [revealDelay]="50" 
-        [revealDuration]="100"
-        [revealEasing]="'ease-in'">{{ service.title }}</h3>
-      <p class="service-card__description" 
-        appReveal="zoom" 
-        [revealDelay]="100" 
-        [revealDuration]="300"
-        [revealEasing]="'ease-in'">
+      <h3 class="service-card__title" appReveal="zoom" [revealDelay]="getCardRevealDelay(i) + 90" [revealDuration]="900">{{ service.title }}</h3>
+      <p class="service-card__description" appReveal="zoom" [revealDelay]="getCardRevealDelay(i) + 180" [revealDuration]="1000" [revealEasing]="'ease-out'">
         {{ service.description }}
       </p>
     </div>

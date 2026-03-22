@@ -78,9 +78,11 @@
       &.open:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
       }
+
       &.open:nth-child(2) {
         opacity: 0;
       }
+
       &.open:nth-child(3) {
         transform: translateY(-7px) rotate(-45deg);
       }
@@ -99,7 +101,6 @@
   }
 }
 
-// Left Sidebar — separate card block
 .sidebar {
   position: sticky;
   top: 24px;
@@ -273,13 +274,21 @@
       transform $transition-base,
       color $transition-fast,
       background-color $transition-base,
-      border-color $transition-fast;
+      border-color $transition-fast,
+      box-shadow $transition-base;
 
     &:hover {
       color: $accent-primary;
       background-color: var(--accent-light);
       border-color: rgba(234, 179, 8, 0.24);
       transform: translateY(-1px);
+    }
+
+    &.active {
+      color: #111827;
+      background-color: $accent-primary;
+      border-color: rgba(234, 179, 8, 0.36);
+      box-shadow: 0 10px 20px rgba(234, 179, 8, 0.16);
     }
 
     &:focus-visible {
@@ -352,7 +361,13 @@
   }
 }
 
-// Progress bars
+:root.dark-theme .sidebar {
+  .sidebar__nav-link.active {
+    color: #111827;
+    box-shadow: 0 12px 22px rgba(234, 179, 8, 0.18);
+  }
+}
+
 .progress-item {
   margin-bottom: 0.85rem;
 
@@ -379,20 +394,17 @@
 
   &__fill {
     height: 100%;
-    background:
-      linear-gradient(90deg, $accent-primary 0%, rgba(234, 179, 8, 0.72) 100%);
+    background: linear-gradient(90deg, $accent-primary 0%, rgba(234, 179, 8, 0.72) 100%);
     border-radius: 999px;
     box-shadow: 0 0 12px rgba(234, 179, 8, 0.16);
     transition: width 0.8s ease;
   }
 }
 
-// Mobile overlay
 .sidebar-overlay {
   position: fixed;
   inset: 0;
-  background:
-    linear-gradient(180deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.42));
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.2), rgba(15, 23, 42, 0.42));
   z-index: 999;
   opacity: 0;
   animation: overlay-fade-in $transition-slow forwards;
@@ -409,7 +421,6 @@
   }
 }
 
-// Responsive
 @media (max-width: $bp-lg) {
   .sidebar {
     position: fixed;

@@ -19,12 +19,17 @@ type RevealVariant = 'up' | 'left' | 'right' | 'zoom';
 export class RevealDirective implements AfterViewInit, OnDestroy {
   private observer?: IntersectionObserver;
   private revealTimeoutId?: ReturnType<typeof setTimeout>;
+  private settleTimeoutId?: ReturnType<typeof setTimeout>;
   private readonly mobileMediaQuery = '(max-width: 640px)';
+  private isVisible = false;
 
   @Input('appReveal') variant: RevealVariant = 'up';
   @Input() revealDelay = 0;
   @Input() revealDuration?: number;
   @Input() revealEasing?: string;
+  @Input() revealThreshold?: number;
+  @Input() revealRootMargin?: string;
+  @Input() revealOnce = true;
 
   constructor(
     private readonly el: ElementRef<HTMLElement>,
@@ -47,22 +52,25 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     }
 
     if (!isPlatformBrowser(this.platformId) || this.prefersReducedMotion()) {
-      this.reveal(element);
+      this.show(element);
       return;
     }
 
     if (typeof IntersectionObserver === 'undefined') {
-      this.reveal(element);
+      this.show(element);
       return;
     }
 
     this.observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) {
+        if (entry.isIntersecting) {
+          this.reveal(element);
           return;
         }
 
-        this.reveal(element);
+        if (!this.revealOnce && this.isVisible) {
+          this.reset(element);
+        }
       },
       this.getObserverOptions(),
     );
@@ -75,6 +83,9 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     if (this.revealTimeoutId) {
       clearTimeout(this.revealTimeoutId);
     }
+    if (this.settleTimeoutId) {
+      clearTimeout(this.settleTimeoutId);
+    }
   }
 
   private prefersReducedMotion(): boolean {
@@ -82,6 +93,13 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   }
 
   private getObserverOptions(): IntersectionObserverInit {
+    if (this.revealThreshold !== undefined || this.revealRootMargin !== undefined) {
+      return {
+        threshold: this.revealThreshold ?? 0.1,
+        rootMargin: this.revealRootMargin ?? '0px 0px -4% 0px',
+      };
+    }
+
     if (window.matchMedia(this.mobileMediaQuery).matches) {
       return {
         threshold: 0.025,
@@ -96,14 +114,50 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   }
 
   private reveal(element: HTMLElement): void {
-    if (this.revealDelay > 0) {
-      this.revealTimeoutId = setTimeout(() => {
-        this.renderer.addClass(element, 'is-visible');
-      }, (this.revealDelay));
-    } else {
-      this.renderer.addClass(element, 'is-visible');
+    if (this.isVisible && this.revealOnce) {
+      return;
     }
 
-    this.observer?.disconnect();
+    if (this.revealTimeoutId) {
+      clearTimeout(this.revealTimeoutId);
+    }
+
+    if (this.revealDelay > 0) {
+      this.revealTimeoutId = setTimeout(() => {
+        this.show(element);
+      }, this.revealDelay);
+    } else {
+      this.show(element);
+    }
+
+    if (this.revealOnce) {
+      this.observer?.disconnect();
+    }
+  }
+
+  private show(element: HTMLElement): void {
+    this.renderer.addClass(element, 'is-visible');
+    this.isVisible = true;
+
+    if (this.settleTimeoutId) {
+      clearTimeout(this.settleTimeoutId);
+    }
+
+    this.settleTimeoutId = setTimeout(() => {
+      this.renderer.setStyle(element, 'will-change', 'auto');
+    }, this.revealDuration ?? 900);
+  }
+
+  private reset(element: HTMLElement): void {
+    if (this.revealTimeoutId) {
+      clearTimeout(this.revealTimeoutId);
+    }
+    if (this.settleTimeoutId) {
+      clearTimeout(this.settleTimeoutId);
+    }
+
+    this.renderer.removeClass(element, 'is-visible');
+    this.renderer.setStyle(element, 'will-change', 'transform, opacity');
+    this.isVisible = false;
   }
 }

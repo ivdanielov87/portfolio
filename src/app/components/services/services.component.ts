@@ -57,7 +57,7 @@ export class ServicesComponent {
   }
 
   get isMobileView(): boolean {
-    return this.viewportWidth < 1024;
+    return this.viewportWidth < 768;
   }
 
   getSectionTitleDelay(): number {
@@ -65,11 +65,8 @@ export class ServicesComponent {
   }
 
   getCardRevealDelay(index: number): number {
-    if (this.isMobileView) {
-      return index * 250;
-    }
-
-    const desktopBaseDelay = index < 3 ? 2000 : 0;
-    return desktopBaseDelay + index * 250;
+    const startDelay = this.isMobileView ? 60 : 1200;
+    const step = this.isMobileView ? 120 : 180;
+    return startDelay + index * step;
   }
 }

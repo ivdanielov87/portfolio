@@ -14,23 +14,8 @@ export class NavbarComponent implements AfterViewInit {
   themeService = inject(ThemeService);
   private el = inject(ElementRef);
   mobileMenuOpen = false;
+  activeSection = 'hero';
   private sidebarEl!: HTMLElement;
-
-  ngAfterViewInit(): void {
-    this.sidebarEl = this.el.nativeElement.querySelector('.sidebar');
-    this.updateStickyTop();
-  }
-
-  @HostListener('window:resize')
-  onResize(): void {
-    this.updateStickyTop();
-  }
-
-  private updateStickyTop(): void {
-    if (!this.sidebarEl) return;
-    const margin = 40;
-    this.sidebarEl.style.top = `${margin}px`;
-  }
 
   personalInfo = [
     { label: 'Email', value: 'iv.danielov@gmail.com' },
@@ -67,6 +52,46 @@ export class NavbarComponent implements AfterViewInit {
     { label: 'Portfolio', target: 'portfolio' },
     { label: 'Contact', target: 'contact' },
   ];
+
+  ngAfterViewInit(): void {
+    this.sidebarEl = this.el.nativeElement.querySelector('.sidebar');
+    this.updateStickyTop();
+    this.updateActiveSection();
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    this.updateStickyTop();
+  }
+
+  @HostListener('window:scroll')
+  onScroll(): void {
+    this.updateActiveSection();
+  }
+
+  private updateStickyTop(): void {
+    if (!this.sidebarEl) return;
+    const margin = 40;
+    this.sidebarEl.style.top = `${margin}px`;
+  }
+
+  private updateActiveSection(): void {
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50) {
+      this.activeSection = this.navLinks[this.navLinks.length - 1].target;
+      return;
+    }
+
+    const scrollY = window.scrollY + 220;
+    for (let i = this.navLinks.length - 1; i >= 0; i--) {
+      const section = document.getElementById(this.navLinks[i].target);
+      if (section && section.offsetTop <= scrollY) {
+        this.activeSection = this.navLinks[i].target;
+        return;
+      }
+    }
+
+    this.activeSection = 'hero';
+  }
 
   toggleMenu(): void {
     this.mobileMenuOpen = !this.mobileMenuOpen;
