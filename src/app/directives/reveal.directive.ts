@@ -12,22 +12,29 @@ import { isPlatformBrowser } from '@angular/common';
 
 type RevealVariant = 'up' | 'left' | 'right' | 'zoom';
 
+type ObserverBucket = {
+  observer: IntersectionObserver;
+  directives: Map<HTMLElement, RevealDirective>;
+};
+
 @Directive({
   selector: '[appReveal]',
   standalone: true,
 })
 export class RevealDirective implements AfterViewInit, OnDestroy {
-  private observer?: IntersectionObserver;
+  private static readonly defaultRootMargin = '0px 0px -4% 0px';
+  private static readonly reducedMotionQuery = '(prefers-reduced-motion: reduce)';
+  private static readonly observerBuckets = new Map<string, ObserverBucket>();
+
   private revealTimeoutId?: ReturnType<typeof setTimeout>;
   private settleTimeoutId?: ReturnType<typeof setTimeout>;
-  private readonly mobileMediaQuery = '(max-width: 640px)';
   private isVisible = false;
+  private observerKey?: string;
 
   @Input('appReveal') variant: RevealVariant = 'up';
   @Input() revealDelay = 0;
   @Input() revealDuration?: number;
   @Input() revealEasing?: string;
-  @Input() revealThreshold?: number;
   @Input() revealRootMargin?: string;
   @Input() revealOnce = true;
 
@@ -51,66 +58,101 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
       this.renderer.setStyle(element, '--reveal-easing', this.revealEasing);
     }
 
-    if (!isPlatformBrowser(this.platformId) || this.prefersReducedMotion()) {
+    if (this.shouldRevealImmediately()) {
       this.show(element);
       return;
     }
 
-    if (typeof IntersectionObserver === 'undefined') {
-      this.show(element);
-      return;
-    }
-
-    this.observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          this.reveal(element);
-          return;
-        }
-
-        if (!this.revealOnce && this.isVisible) {
-          this.reset(element);
-        }
-      },
-      this.getObserverOptions(),
-    );
-
-    this.observer.observe(element);
+    this.observeElement(element, this.getObserverOptions());
   }
 
   ngOnDestroy(): void {
-    this.observer?.disconnect();
-    if (this.revealTimeoutId) {
-      clearTimeout(this.revealTimeoutId);
-    }
-    if (this.settleTimeoutId) {
-      clearTimeout(this.settleTimeoutId);
-    }
+    this.unobserveElement();
+    this.clearTimeouts();
   }
 
-  private prefersReducedMotion(): boolean {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private shouldRevealImmediately(): boolean {
+    return (
+      !isPlatformBrowser(this.platformId) ||
+      typeof IntersectionObserver === 'undefined' ||
+      window.matchMedia(RevealDirective.reducedMotionQuery).matches
+    );
   }
 
   private getObserverOptions(): IntersectionObserverInit {
-    if (this.revealThreshold !== undefined || this.revealRootMargin !== undefined) {
-      return {
-        threshold: this.revealThreshold ?? 0.1,
-        rootMargin: this.revealRootMargin ?? '0px 0px -4% 0px',
-      };
-    }
-
-    if (window.matchMedia(this.mobileMediaQuery).matches) {
-      return {
-        threshold: 0.025,
-        rootMargin: '0px 0px -4% 0px',
-      };
-    }
-
     return {
-      threshold: 0.1,
-      rootMargin: '0px 0px -4% 0px',
+      rootMargin: this.revealRootMargin ?? RevealDirective.defaultRootMargin,
     };
+  }
+
+  private observeElement(element: HTMLElement, options: IntersectionObserverInit): void {
+    const bucket = this.getObserverBucket(options);
+    this.observerKey = this.getObserverKey(options);
+    bucket.directives.set(element, this);
+    bucket.observer.observe(element);
+  }
+
+  private handleIntersection(entry: IntersectionObserverEntry): void {
+    const element = this.el.nativeElement;
+
+    if (entry.isIntersecting) {
+      this.reveal(element);
+      return;
+    }
+
+    if (!this.revealOnce && this.isVisible) {
+      this.reset(element);
+    }
+  }
+
+  private unobserveElement(): void {
+    if (!this.observerKey) {
+      return;
+    }
+
+    const bucket = RevealDirective.observerBuckets.get(this.observerKey);
+    const element = this.el.nativeElement;
+
+    if (!bucket) {
+      this.observerKey = undefined;
+      return;
+    }
+
+    bucket.directives.delete(element);
+    bucket.observer.unobserve(element);
+
+    if (bucket.directives.size === 0) {
+      bucket.observer.disconnect();
+      RevealDirective.observerBuckets.delete(this.observerKey);
+    }
+
+    this.observerKey = undefined;
+  }
+
+  private getObserverKey(options: IntersectionObserverInit): string {
+    return options.rootMargin ?? RevealDirective.defaultRootMargin;
+  }
+
+  private getObserverBucket(options: IntersectionObserverInit): ObserverBucket {
+    const key = this.getObserverKey(options);
+    let bucket = RevealDirective.observerBuckets.get(key);
+
+    if (bucket) {
+      return bucket;
+    }
+
+    const directives = new Map<HTMLElement, RevealDirective>();
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        const target = entry.target as HTMLElement;
+        directives.get(target)?.handleIntersection(entry);
+      }
+    }, options);
+
+    bucket = { observer, directives };
+    RevealDirective.observerBuckets.set(key, bucket);
+
+    return bucket;
   }
 
   private reveal(element: HTMLElement): void {
@@ -118,9 +160,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
       return;
     }
 
-    if (this.revealTimeoutId) {
-      clearTimeout(this.revealTimeoutId);
-    }
+    this.clearRevealTimeout();
 
     if (this.revealDelay > 0) {
       this.revealTimeoutId = setTimeout(() => {
@@ -131,7 +171,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     }
 
     if (this.revealOnce) {
-      this.observer?.disconnect();
+      this.unobserveElement();
     }
   }
 
@@ -139,9 +179,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     this.renderer.addClass(element, 'is-visible');
     this.isVisible = true;
 
-    if (this.settleTimeoutId) {
-      clearTimeout(this.settleTimeoutId);
-    }
+    this.clearSettleTimeout();
 
     this.settleTimeoutId = setTimeout(() => {
       this.renderer.setStyle(element, 'will-change', 'auto');
@@ -149,15 +187,29 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   }
 
   private reset(element: HTMLElement): void {
-    if (this.revealTimeoutId) {
-      clearTimeout(this.revealTimeoutId);
-    }
-    if (this.settleTimeoutId) {
-      clearTimeout(this.settleTimeoutId);
-    }
+    this.clearTimeouts();
 
     this.renderer.removeClass(element, 'is-visible');
     this.renderer.setStyle(element, 'will-change', 'transform, opacity');
     this.isVisible = false;
+  }
+
+  private clearRevealTimeout(): void {
+    if (this.revealTimeoutId) {
+      clearTimeout(this.revealTimeoutId);
+      this.revealTimeoutId = undefined;
+    }
+  }
+
+  private clearSettleTimeout(): void {
+    if (this.settleTimeoutId) {
+      clearTimeout(this.settleTimeoutId);
+      this.settleTimeoutId = undefined;
+    }
+  }
+
+  private clearTimeouts(): void {
+    this.clearRevealTimeout();
+    this.clearSettleTimeout();
   }
 }
