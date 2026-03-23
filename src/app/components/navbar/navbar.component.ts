@@ -37,7 +37,6 @@ export class NavbarComponent implements AfterViewInit {
 
   socialLinks = [
     { name: 'GitHub', url: 'https://github.com/ivdanielov87', icon: 'github' },
-    { name: 'Twitter', url: 'https://twitter.com', icon: 'twitter' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/ivelin-dimitrov-52aaa2186/', icon: 'linkedin' },
     { name: 'Website', url: '#', icon: 'link' },
   ];

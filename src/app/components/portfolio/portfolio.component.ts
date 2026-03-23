@@ -24,7 +24,7 @@ export class PortfolioComponent {
     {
       title: 'E-Commerce Platform',
       category: 'Web Development',
-      summary: 'Responsive storefront UI with product browsing, cart flows, and conversion-focused interactions.',
+      summary: 'Responsive storefront UI with product browsing, cart flows and conversion-focused interactions.',
       stack: ['Angular', 'TypeScript', 'SCSS'],
       accent: 'Commerce',
       imageUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
@@ -33,7 +33,7 @@ export class PortfolioComponent {
     {
       title: 'Brand Identity',
       category: 'UI/UX Design',
-      summary: 'A polished visual system focused on typography, spacing, and consistent cross-platform presentation.',
+      summary: 'A polished visual system focused on typography, spacing and consistent cross-platform presentation.',
       stack: ['Design System', 'Figma', 'Prototype'],
       accent: 'Brand',
       imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
@@ -51,7 +51,7 @@ export class PortfolioComponent {
     {
       title: 'Analytics Dashboard',
       category: 'Web Development',
-      summary: 'Data-heavy workspace with modular widgets, dense information hierarchy, and efficient filtering.',
+      summary: 'Data-heavy workspace with modular widgets, dense information hierarchy and efficient filtering.',
       stack: ['Angular', 'Charts', 'State Mgmt'],
       accent: 'Data',
       imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
@@ -69,7 +69,7 @@ export class PortfolioComponent {
     {
       title: 'Portfolio Website',
       category: 'Web Development',
-      summary: 'Personal brand site with theme support, refined section motion, and responsive layout discipline.',
+      summary: 'Personal brand site with theme support, refined section motion and responsive layout discipline.',
       stack: ['Angular', 'Animation', 'Responsive'],
       accent: 'Personal',
       imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',

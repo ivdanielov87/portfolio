@@ -36,7 +36,7 @@ export class ServicesComponent {
     },
     {
       title: 'Clean Code',
-      description: 'Writing maintainable, scalable, and well-documented code following industry standards.',
+      description: 'Writing maintainable, scalable and well-documented code following industry standards.',
       icon: 'code',
     },
     {
@@ -46,7 +46,7 @@ export class ServicesComponent {
     },
     {
       title: 'AI Integration',
-      description: 'Integrating modern AI capabilities and APIs into web applications to deliver smart, automated, and enhanced user experiences.',
+      description: 'Integrating modern AI capabilities and APIs into web applications to deliver smart, automated and enhanced user experiences.',
       icon: 'trending-up',
     },
   ];

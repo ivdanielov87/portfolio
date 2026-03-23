@@ -7,11 +7,22 @@
     @if (submitted) {
       <div class="contact__success" appReveal="up">
         <span class="success-icon">&#10003;</span>
-        <p>Thank you! Your message has been sent successfully.</p>
+        <p>Thank you! Your message has been sent successfully. You can send another message after one minute.</p>
+      </div>
+    }
+
+    @if (isCoolingDown) {
+      <div class="contact__cooldown" appReveal="up">
+        <p>You can send another message in <strong>{{ cooldownLabel }}</strong>.</p>
       </div>
     }
 
     <form class="contact__form" (ngSubmit)="onSubmit()" novalidate appReveal="up" [revealDelay]="100">
+      <div class="contact__honeypot" aria-hidden="true">
+        <label for="company">Company</label>
+        <input type="text" id="company" [(ngModel)]="honeypot" name="company" tabindex="-1" autocomplete="off" />
+      </div>
+
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name</label>
@@ -31,12 +42,31 @@
         @if (errors.message) { <span class="form-error">{{ errors.message }}</span> }
       </div>
 
+      <div class="form-group form-group--captcha">
+        <label for="captcha">Quick verification</label>
+        <div class="contact__captcha">
+          <span class="contact__captcha-question">{{ captchaQuestion }}</span>
+          <input
+            type="text"
+            id="captcha"
+            [(ngModel)]="captchaAnswer"
+            name="captcha"
+            inputmode="numeric"
+            placeholder="Answer"
+            [class.error]="errors.captcha"
+            (input)="clearSuccess()"
+          />
+        </div>
+        <span class="contact__helper">This helps prevent automated messages.</span>
+        @if (errors.captcha) { <span class="form-error">{{ errors.captcha }}</span> }
+      </div>
+
       @if (sendError) {
         <div class="contact__error">{{ sendError }}</div>
       }
 
-      <button type="submit" class="contact__submit" [disabled]="sending">
-        {{ sending ? 'Sending...' : 'Send Message' }}
+      <button type="submit" class="contact__submit" [disabled]="sending || isCoolingDown">
+        {{ submitButtonText }}
       </button>
     </form>
   </div>
