@@ -24,10 +24,13 @@ type ObserverBucket = {
 export class RevealDirective implements AfterViewInit, OnDestroy {
   private static readonly defaultRootMargin = '0px 0px -4% 0px';
   private static readonly reducedMotionQuery = '(prefers-reduced-motion: reduce)';
+  private static readonly revealReadyClass = 'reveal-ready';
+  private static readonly revealReadyEvent = 'portfolio:reveal-ready';
   private static readonly observerBuckets = new Map<string, ObserverBucket>();
 
   private revealTimeoutId?: ReturnType<typeof setTimeout>;
   private settleTimeoutId?: ReturnType<typeof setTimeout>;
+  private revealReadyListener?: () => void;
   private isVisible = false;
   private observerKey?: string;
 
@@ -68,6 +71,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.unobserveElement();
+    this.clearRevealReadyListener();
     this.clearTimeouts();
   }
 
@@ -160,19 +164,40 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
       return;
     }
 
-    this.clearRevealTimeout();
-
-    if (this.revealDelay > 0) {
-      this.revealTimeoutId = setTimeout(() => {
-        this.show(element);
-      }, this.revealDelay);
-    } else {
-      this.show(element);
-    }
+    this.queueRevealWhenReady(element);
 
     if (this.revealOnce) {
       this.unobserveElement();
     }
+  }
+
+  private queueRevealWhenReady(element: HTMLElement): void {
+    this.clearRevealTimeout();
+
+    if (this.isRevealReady()) {
+      this.scheduleShow(element);
+      return;
+    }
+
+    this.clearRevealReadyListener();
+    const onRevealReady = (): void => {
+      this.revealReadyListener = undefined;
+      this.scheduleShow(element);
+    };
+
+    this.revealReadyListener = onRevealReady;
+    window.addEventListener(RevealDirective.revealReadyEvent, onRevealReady, { once: true });
+  }
+
+  private scheduleShow(element: HTMLElement): void {
+    if (this.revealDelay > 0) {
+      this.revealTimeoutId = setTimeout(() => {
+        this.show(element);
+      }, this.revealDelay);
+      return;
+    }
+
+    this.show(element);
   }
 
   private show(element: HTMLElement): void {
@@ -201,6 +226,13 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     }
   }
 
+  private clearRevealReadyListener(): void {
+    if (this.revealReadyListener) {
+      window.removeEventListener(RevealDirective.revealReadyEvent, this.revealReadyListener);
+      this.revealReadyListener = undefined;
+    }
+  }
+
   private clearSettleTimeout(): void {
     if (this.settleTimeoutId) {
       clearTimeout(this.settleTimeoutId);
@@ -211,5 +243,9 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   private clearTimeouts(): void {
     this.clearRevealTimeout();
     this.clearSettleTimeout();
+  }
+
+  private isRevealReady(): boolean {
+    return document.documentElement.classList.contains(RevealDirective.revealReadyClass);
   }
 }

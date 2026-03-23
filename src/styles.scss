@@ -248,6 +248,11 @@ section {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
+:root:not(.reveal-ready) .reveal {
+  transition: none !important;
+  animation: none !important;
+}
+
 :root.is-reloading .reveal,
 :root.is-reloading .hero__greeting,
 :root.is-reloading .hero__cta,
