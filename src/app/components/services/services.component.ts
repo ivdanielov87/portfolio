@@ -65,7 +65,7 @@ export class ServicesComponent {
   }
 
   getCardRevealDelay(index: number): number {
-    const startDelay = this.isMobileView ? 60 : 1200;
+    const startDelay = this.isMobileView ? 60 : index < 3 ? 2300 : 600;
     const step = this.isMobileView ? 120 : 180;
     return startDelay + index * step;
   }

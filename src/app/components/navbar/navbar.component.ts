@@ -3,6 +3,17 @@ import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 import { RevealDirective } from '../../directives/reveal.directive';
 
+interface ChipItem {
+  name: string;
+  detail?: string;
+  icon: 'globe' | 'message' | 'code' | 'palette' | 'bolt' | 'braces' | 'react' | 'angular' | 'users' | 'sparkles';
+}
+
+interface SkillGroup {
+  label: string;
+  items: ChipItem[];
+}
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -31,18 +42,48 @@ export class NavbarComponent implements AfterViewInit {
     { name: 'Website', url: '#', icon: 'link' },
   ];
 
-  languages = [
-    { name: 'Bulgarian', percent: 100 },
-    { name: 'English', percent: 90 },
+  languages: ChipItem[] = [
+    { name: 'Bulgarian', detail: 'Native', icon: 'globe' },
+    { name: 'English', detail: 'Fluent', icon: 'message' },
   ];
 
-  skills = [
-    { name: 'HTML', percent: 95 },
-    { name: 'CSS', percent: 85 },
-    { name: 'JavaScript', percent: 85 },
-    { name: 'React', percent: 90 },
-    { name: 'Angular', percent: 90 },
-    { name: 'TypeScript', percent: 85 },
+  skillGroups: SkillGroup[] = [
+    {
+      label: 'Languages',
+      items: [
+        { name: 'HTML', icon: 'code' },
+        { name: 'CSS', icon: 'palette' },
+        { name: 'JavaScript', icon: 'bolt' },
+        { name: 'TypeScript', icon: 'braces' },
+      ],
+    },
+    {
+      label: 'Frameworks',
+      items: [
+        { name: 'React', icon: 'react' },
+        { name: 'Angular', icon: 'angular' },
+        { name: 'RxJS', icon: 'bolt' },
+      ],
+    },
+    {
+      label: 'Tools & Workflow',
+      items: [
+        { name: 'REST APIs', icon: 'braces' },
+        { name: 'Figma', icon: 'palette' },
+        { name: 'Responsive Design', icon: 'palette' },
+        { name: 'Git', icon: 'code' },
+        { name: 'Large-Scale Web Apps', icon: 'angular' },
+      ],
+    },
+  ];
+
+  softSkills: ChipItem[] = [
+    { name: 'Teamwork', icon: 'users' },
+    { name: 'Dedication', icon: 'sparkles' },
+    { name: 'Effective Communication', icon: 'message' },
+    { name: 'Problem Solving', icon: 'bolt' },
+    { name: 'Adaptability', icon: 'globe' },
+    { name: 'Ownership', icon: 'code' },
   ];
 
   navLinks = [

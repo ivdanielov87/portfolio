@@ -7,7 +7,7 @@
     @for (project of projects; track project.title; let i = $index) {
       <article
         class="portfolio-card"
-        [appReveal]="i < 3 ? 'left' : 'right'"
+        appReveal="up"
         [revealDelay]="100 + i * 160"
         [revealDuration]="1400"
       >
@@ -18,9 +18,9 @@
         </div>
         <div class="portfolio-card__content">
           <span class="portfolio-card__category" appReveal="up" [revealDelay]="160 + i * 160" [revealDuration]="850">{{ project.category }}</span>
-          <h3 class="portfolio-card__title" appReveal="up" [revealDelay]="240 + i * 160" [revealDuration]="900">{{ project.title }}</h3>
+          <h3 class="portfolio-card__title" appReveal="up" [revealDelay]="160 + i * 160" [revealDuration]="900">{{ project.title }}</h3>
           <p class="portfolio-card__summary" appReveal="up" [revealDelay]="320 + i * 160" [revealDuration]="950">{{ project.summary }}</p>
-          <div class="portfolio-card__meta" appReveal="up" [revealDelay]="400 + i * 160" [revealDuration]="1000">
+          <div class="portfolio-card__meta" appReveal="up" [revealDelay]="320 + i * 160" [revealDuration]="1000">
             <div class="portfolio-card__tags">
               @for (item of project.stack; track item) {
                 <span class="portfolio-card__tag">{{ item }}</span>

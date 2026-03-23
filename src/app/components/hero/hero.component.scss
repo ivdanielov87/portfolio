@@ -19,14 +19,35 @@
   &__content {
     flex: 1;
     max-width: 38rem;
+    position: relative;
   }
 
   &__greeting {
+    display: inline-flex;
+    width: max-content;
     font-size: $font-size-sm;
     color: $text-muted;
     letter-spacing: 0.28em;
     font-weight: 700;
     margin-bottom: $spacing-md;
+    transform-origin: center;
+
+    &.reveal {
+      transition:
+        opacity var(--reveal-duration, 1750ms) cubic-bezier(0.22, 1, 0.36, 1),
+        transform var(--reveal-duration, 1750ms) cubic-bezier(0.22, 1, 0.36, 1),
+        font-size var(--reveal-duration, 1750ms) cubic-bezier(0.22, 1, 0.36, 1),
+        letter-spacing var(--reveal-duration, 1750ms) cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &.reveal:not(.is-visible) {
+      opacity: 0;
+      font-size: clamp(1.8rem, 1.35rem + 1.8vw, 2.9rem);
+      letter-spacing: 0.12em;
+      color: rgba(148, 163, 184, 0.88);
+      transform: translate3d(clamp(7.25rem, 12vw, 12.25rem), clamp(6.3rem, 11vh, 8.8rem), 0) scale(1.02);
+      animation: hero-greeting-intro 460ms ease-out 120ms forwards;
+    }
   }
 
   &__title {
@@ -201,6 +222,18 @@
   }
 }
 
+@keyframes hero-greeting-intro {
+  from {
+    opacity: 0;
+    filter: blur(8px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
 @media (hover: none) {
   .hero {
     &__image:hover {
@@ -242,6 +275,11 @@
       justify-content: center;
     }
 
+    &__greeting.reveal:not(.is-visible) {
+      transform: translate3d(0, 5.2rem, 0) scale(1.04);
+      font-size: clamp(1.65rem, 1.25rem + 1.3vw, 2.2rem);
+    }
+
     &__description {
       max-width: 100%;
       margin-left: auto;
@@ -265,6 +303,11 @@
   .hero {
     &__greeting {
       margin-bottom: $spacing-sm;
+
+      &.reveal:not(.is-visible) {
+        transform: translate3d(0, 4.2rem, 0) scale(1.02);
+        letter-spacing: 0.1em;
+      }
     }
 
     &__title {
