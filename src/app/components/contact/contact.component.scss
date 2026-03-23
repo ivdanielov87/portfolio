@@ -99,9 +99,7 @@
 
     &:focus {
       border-color: rgba(234, 179, 8, 0.38);
-      box-shadow:
-        0 0 0 4px rgba(234, 179, 8, 0.12),
-        0 8px 18px rgba(15, 23, 42, 0.05);
+      box-shadow: 0 8px 18px rgba(15, 23, 42, 0.05);
       background-color: $bg-card;
       transform: translateY(-1px);
     }
@@ -109,6 +107,11 @@
     &.error {
       border-color: #ef4444;
       box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.1);
+    }
+
+    &.warning {
+      border-color: rgba(202, 138, 4, 0.55);
+      box-shadow: none;
     }
   }
 
@@ -129,6 +132,14 @@
   margin-top: 0.1rem;
 }
 
+.form-hint {
+  font-size: $font-size-xs;
+  color: $accent-hover;
+  margin-top: 0.1rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
 .form-required {
   color: $accent-primary;
   font-weight: 700;
@@ -140,8 +151,9 @@
 
 .contact__captcha-note {
   font-size: $font-size-xs;
-  color: $text-muted;
+  color: $accent-hover;
   line-height: 1.5;
+  font-weight: 500;
 }
 
 .contact__submit {

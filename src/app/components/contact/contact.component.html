@@ -20,24 +20,29 @@
       <div class="form-row">
         <div class="form-group">
           <label for="name">Name <span class="form-required" aria-hidden="true">*</span></label>
-          <input type="text" id="name" [(ngModel)]="name" name="name" placeholder="Your name" [class.error]="errors.name" (input)="clearSuccess()" required />
+          <input type="text" id="name" [(ngModel)]="name" name="name" placeholder="Your name" [class.error]="errors.name" [class.warning]="showNameWarning" (input)="onFieldInput('name')" required minlength="2" />
+          @if (!errors.name && nameHint) { <span class="form-hint">{{ nameHint }}</span> }
           @if (errors.name) { <span class="form-error">{{ errors.name }}</span> }
         </div>
         <div class="form-group">
           <label for="email">Email <span class="form-required" aria-hidden="true">*</span></label>
-          <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="your.email&#64;example.com" [class.error]="errors.email" (input)="clearSuccess()" required />
+          <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="your.email&#64;example.com" [class.error]="errors.email" [class.warning]="showEmailWarning" (input)="onFieldInput('email')" required />
+          @if (!errors.email && emailHint) { <span class="form-hint">{{ emailHint }}</span> }
           @if (errors.email) { <span class="form-error">{{ errors.email }}</span> }
         </div>
       </div>
 
       <div class="form-group">
         <label for="message">Message <span class="form-required" aria-hidden="true">*</span></label>
-        <textarea id="message" [(ngModel)]="message" name="message" rows="5" placeholder="Tell me about your project..." [class.error]="errors.message" (input)="clearSuccess()" required></textarea>
+        <textarea id="message" [(ngModel)]="message" name="message" rows="5" placeholder="Tell me about your project..." [class.error]="errors.message" [class.warning]="showMessageWarning" (input)="onFieldInput('message')" required minlength="20"></textarea>
+        @if (!errors.message && messageHint) { <span class="form-hint">{{ messageHint }}</span> }
         @if (errors.message) { <span class="form-error">{{ errors.message }}</span> }
       </div>
 
       <div class="form-group form-group--captcha">
-        <p class="contact__captcha-note">Please confirm you're human before sending your message.</p>
+        @if (!recaptchaToken) {
+          <p class="contact__captcha-note">Please confirm you're human before sending your message.</p>
+        }
         <div #recaptchaHost id="captcha" class="contact__captcha-widget"></div>
         @if (errors.captcha) { <span class="form-error">{{ errors.captcha }}</span> }
       </div>

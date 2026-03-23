@@ -2,6 +2,14 @@ import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 
+type RightbarSectionTarget = 'hero' | 'services' | 'about' | 'portfolio' | 'contact';
+
+interface NavItem {
+  name: string;
+  target: RightbarSectionTarget;
+  icon: 'home' | 'briefcase' | 'user' | 'folder' | 'mail';
+}
+
 @Component({
   selector: 'app-rightbar',
   standalone: true,
@@ -10,7 +18,7 @@ import { ThemeService } from '../../services/theme.service';
   styleUrl: './rightbar.component.scss',
 })
 export class RightbarComponent {
-  navItems = [
+  navItems: NavItem[] = [
     { name: 'Home', target: 'hero', icon: 'home' },
     { name: 'Services', target: 'services', icon: 'briefcase' },
     { name: 'About', target: 'about', icon: 'user' },
@@ -18,7 +26,7 @@ export class RightbarComponent {
     { name: 'Contact', target: 'contact', icon: 'mail' },
   ];
 
-  activeSection = 'hero';
+  activeSection: RightbarSectionTarget = 'hero';
 
   constructor(public themeService: ThemeService) {}
 

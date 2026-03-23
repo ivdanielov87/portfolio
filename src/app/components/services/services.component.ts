@@ -5,7 +5,7 @@ import { RevealDirective } from '../../directives/reveal.directive';
 interface Service {
   title: string;
   description: string;
-  icon: string;
+  icon: 'monitor' | 'smartphone' | 'pen-tool' | 'code' | 'search' | 'trending-up';
 }
 
 @Component({
@@ -16,7 +16,7 @@ interface Service {
   styleUrl: './services.component.scss',
 })
 export class ServicesComponent {
-  viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 1440;
+  viewportWidth: number = typeof window !== 'undefined' ? window.innerWidth : 1440;
 
   services: Service[] = [
     {

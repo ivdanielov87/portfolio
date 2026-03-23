@@ -20,6 +20,15 @@ type EmailJsError = {
   text?: string;
 };
 
+type ContactErrors = {
+  name?: string;
+  email?: string;
+  message?: string;
+  captcha?: string;
+};
+
+type ContactField = 'name' | 'email' | 'message';
+
 type RecaptchaRenderOptions = {
   sitekey: string;
   theme?: 'light' | 'dark';
@@ -50,25 +59,29 @@ declare global {
 export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
   private static readonly recaptchaScriptId = 'google-recaptcha-api';
   private static recaptchaLoader?: Promise<void>;
+  private static readonly minimumNameLength = 2;
+  private static readonly minimumMessageLength = 20;
 
   private readonly cdr = inject(ChangeDetectorRef);
   private readonly isBrowser: boolean;
   private recaptchaWidgetId?: number;
   private recaptchaRendered = false;
+  private currentRecaptchaTheme: 'light' | 'dark' = 'light';
+  private themeObserver?: MutationObserver;
 
   @ViewChild('recaptchaHost') private recaptchaHost?: ElementRef<HTMLElement>;
 
-  name = '';
-  email = '';
-  message = '';
-  honeypot = '';
-  submitted = false;
-  sending = false;
-  sendError = '';
-  recaptchaToken = '';
-  recaptchaReady = false;
-  recaptchaLoadError = '';
-  errors: { name?: string; email?: string; message?: string; captcha?: string } = {};
+  name: string = '';
+  email: string = '';
+  message: string = '';
+  honeypot: string = '';
+  submitted: boolean = false;
+  sending: boolean = false;
+  sendError: string = '';
+  recaptchaToken: string = '';
+  recaptchaReady: boolean = false;
+  recaptchaLoadError: string = '';
+  errors: ContactErrors = {};
 
   // Sign up at https://www.emailjs.com/ (free tier: 200 emails/month)
   private readonly SERVICE_ID = 'service_n2h43vp';
@@ -94,10 +107,11 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.setupRecaptcha();
+    this.observeThemeChanges();
   }
 
   ngOnDestroy(): void {
-    // No-op: hook kept for symmetry with async reCAPTCHA initialization.
+    this.themeObserver?.disconnect();
   }
 
   get isRecaptchaConfigured(): boolean {
@@ -112,13 +126,76 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email.trim());
   }
 
+  get hasValidName(): boolean {
+    return this.name.trim().length >= ContactComponent.minimumNameLength;
+  }
+
+  get hasValidMessage(): boolean {
+    return this.message.trim().length >= ContactComponent.minimumMessageLength;
+  }
+
+  get nameHint(): string {
+    const trimmedName = this.name.trim();
+
+    if (!trimmedName) {
+      return '';
+    }
+
+    if (!this.hasValidName) {
+      return `Please enter at least ${ContactComponent.minimumNameLength} characters.`;
+    }
+
+    return '';
+  }
+
+  get emailHint(): string {
+    const trimmedEmail = this.email.trim();
+
+    if (!trimmedEmail) {
+      return '';
+    }
+
+    if (!this.hasValidEmail) {
+      return 'Use a valid email address, for example name@example.com.';
+    }
+
+    return '';
+  }
+
+  get messageHint(): string {
+    const trimmedMessage = this.message.trim();
+
+    if (!trimmedMessage) {
+      return '';
+    }
+
+    if (!this.hasValidMessage) {
+      const remainingCharacters = ContactComponent.minimumMessageLength - trimmedMessage.length;
+      return `Please add a bit more detail. ${remainingCharacters} more character${remainingCharacters === 1 ? '' : 's'} needed.`;
+    }
+
+    return '';
+  }
+
+  get showNameWarning(): boolean {
+    return !this.errors.name && !!this.nameHint;
+  }
+
+  get showEmailWarning(): boolean {
+    return !this.errors.email && !!this.emailHint;
+  }
+
+  get showMessageWarning(): boolean {
+    return !this.errors.message && !!this.messageHint;
+  }
+
   get isSubmitDisabled(): boolean {
     return (
       this.sending ||
       !this.isRecaptchaConfigured ||
-      !this.name.trim() ||
+      !this.hasValidName ||
       !this.hasValidEmail ||
-      !this.message.trim() ||
+      !this.hasValidMessage ||
       !this.recaptchaToken
     );
   }
@@ -133,16 +210,28 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     this.sendError = '';
   }
 
+  onFieldInput(field: ContactField): void {
+    this.clearSuccess();
+    delete this.errors[field];
+  }
+
   validate(): boolean {
     this.errors = {};
 
     if (!this.name.trim()) this.errors.name = 'Name is required';
+    else if (!this.hasValidName) {
+      this.errors.name = `Name must be at least ${ContactComponent.minimumNameLength} characters.`;
+    }
+
     if (!this.email.trim()) this.errors.email = 'Email is required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
       this.errors.email = 'Invalid email format';
     }
 
     if (!this.message.trim()) this.errors.message = 'Message is required';
+    else if (!this.hasValidMessage) {
+      this.errors.message = `Message must be at least ${ContactComponent.minimumMessageLength} characters.`;
+    }
 
     if (!this.isRecaptchaConfigured) {
       this.errors.captcha = 'reCAPTCHA is not configured yet.';
@@ -227,9 +316,9 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     ContactComponent.recaptchaLoader = new Promise<void>((resolve, reject) => {
-      const existingScript = document.getElementById(ContactComponent.recaptchaScriptId) as
-        | HTMLScriptElement
-        | null;
+      const existingScript = document.getElementById(
+        ContactComponent.recaptchaScriptId,
+      ) as HTMLScriptElement | null;
 
       if (existingScript) {
         existingScript.addEventListener('load', () => resolve(), { once: true });
@@ -257,9 +346,15 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
 
-    this.recaptchaWidgetId = window.grecaptcha.render(this.recaptchaHost.nativeElement, {
+    const mountPoint = this.createRecaptchaMountPoint();
+    if (!mountPoint) {
+      return;
+    }
+
+    this.currentRecaptchaTheme = this.getRecaptchaTheme();
+    this.recaptchaWidgetId = window.grecaptcha.render(mountPoint, {
       sitekey: this.RECAPTCHA_SITE_KEY,
-      theme: this.getRecaptchaTheme(),
+      theme: this.currentRecaptchaTheme,
       callback: (token: string) => {
         this.recaptchaToken = token;
         delete this.errors.captcha;
@@ -281,6 +376,52 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     this.recaptchaReady = true;
     this.recaptchaRendered = true;
     this.cdr.detectChanges();
+  }
+
+  private observeThemeChanges(): void {
+    if (!this.isBrowser || typeof MutationObserver === 'undefined') {
+      return;
+    }
+
+    this.themeObserver = new MutationObserver(() => {
+      const nextTheme = this.getRecaptchaTheme();
+
+      if (this.recaptchaRendered && nextTheme !== this.currentRecaptchaTheme) {
+        this.rerenderRecaptcha();
+      }
+    });
+
+    this.themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+  }
+
+  private rerenderRecaptcha(): void {
+    if (!this.recaptchaHost || !window.grecaptcha) {
+      return;
+    }
+
+    this.recaptchaToken = '';
+    this.recaptchaReady = false;
+    this.recaptchaRendered = false;
+    this.recaptchaWidgetId = undefined;
+    this.renderRecaptcha();
+  }
+
+  private createRecaptchaMountPoint(): HTMLElement | null {
+    const host = this.recaptchaHost?.nativeElement;
+    if (!host) {
+      return null;
+    }
+
+    host.replaceChildren();
+
+    const mountPoint = document.createElement('div');
+    mountPoint.className = 'contact__captcha-mount';
+    host.appendChild(mountPoint);
+
+    return mountPoint;
   }
 
   private resetRecaptcha(): void {

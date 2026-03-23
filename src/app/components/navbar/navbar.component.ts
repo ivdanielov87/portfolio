@@ -1,7 +1,9 @@
-import { Component, inject, ElementRef, AfterViewInit, HostListener } from '@angular/core';
+import { Component, inject, ElementRef, AfterViewInit, HostListener, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 import { RevealDirective } from '../../directives/reveal.directive';
+
+type SectionTarget = 'hero' | 'about' | 'services' | 'portfolio' | 'contact';
 
 interface ChipItem {
   name: string;
@@ -14,6 +16,22 @@ interface SkillGroup {
   items: ChipItem[];
 }
 
+interface PersonalInfoItem {
+  label: string;
+  value: string;
+}
+
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: 'github' | 'linkedin' | 'link';
+}
+
+interface NavLink {
+  label: string;
+  target: SectionTarget;
+}
+
 @Component({
   selector: 'app-navbar',
   standalone: true,
@@ -22,20 +40,21 @@ interface SkillGroup {
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent implements AfterViewInit {
-  themeService = inject(ThemeService);
-  private el = inject(ElementRef);
-  mobileMenuOpen = false;
-  activeSection = 'hero';
+  themeService: ThemeService = inject(ThemeService);
+  private readonly el = inject(ElementRef);
+  private readonly cdr = inject(ChangeDetectorRef);
+  mobileMenuOpen: boolean = false;
+  activeSection: SectionTarget = 'hero';
   private sidebarEl!: HTMLElement;
 
-  personalInfo = [
+  personalInfo: PersonalInfoItem[] = [
     { label: 'Email', value: 'iv.danielov@gmail.com' },
     { label: 'Residence', value: 'Bulgaria' },
     { label: 'Freelance', value: 'Available' },
     { label: 'Address', value: 'Ruse, Center' },
   ];
 
-  socialLinks = [
+  socialLinks: SocialLink[] = [
     { name: 'GitHub', url: 'https://github.com/ivdanielov87', icon: 'github' },
     { name: 'LinkedIn', url: 'https://www.linkedin.com/in/ivelin-dimitrov-52aaa2186/', icon: 'linkedin' },
     { name: 'Website', url: '#', icon: 'link' },
@@ -85,7 +104,7 @@ export class NavbarComponent implements AfterViewInit {
     { name: 'Ownership', icon: 'code' },
   ];
 
-  navLinks = [
+  navLinks: NavLink[] = [
     { label: 'Home', target: 'hero' },
     { label: 'About', target: 'about' },
     { label: 'Services', target: 'services' },
@@ -97,6 +116,7 @@ export class NavbarComponent implements AfterViewInit {
     this.sidebarEl = this.el.nativeElement.querySelector('.sidebar');
     this.updateStickyTop();
     this.updateActiveSection();
+    this.cdr.detectChanges();
   }
 
   @HostListener('window:resize')

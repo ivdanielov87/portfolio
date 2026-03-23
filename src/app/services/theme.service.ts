@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
-  private isDark = true;
+  private isDark: boolean = true;
 
   constructor() {
     const saved = localStorage.getItem('theme');
