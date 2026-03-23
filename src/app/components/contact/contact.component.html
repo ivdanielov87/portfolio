@@ -7,13 +7,7 @@
     @if (submitted) {
       <div class="contact__success" appReveal="up">
         <span class="success-icon">&#10003;</span>
-        <p>Thank you! Your message has been sent successfully. You can send another message after one minute.</p>
-      </div>
-    }
-
-    @if (isCoolingDown) {
-      <div class="contact__cooldown" appReveal="up">
-        <p>You can send another message in <strong>{{ cooldownLabel }}</strong>.</p>
+        <p>Thank you! Your message has been sent successfully.</p>
       </div>
     }
 
@@ -25,39 +19,26 @@
 
       <div class="form-row">
         <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" id="name" [(ngModel)]="name" name="name" placeholder="Your name" [class.error]="errors.name" (input)="clearSuccess()" />
+          <label for="name">Name <span class="form-required" aria-hidden="true">*</span></label>
+          <input type="text" id="name" [(ngModel)]="name" name="name" placeholder="Your name" [class.error]="errors.name" (input)="clearSuccess()" required />
           @if (errors.name) { <span class="form-error">{{ errors.name }}</span> }
         </div>
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="your.email&#64;example.com" [class.error]="errors.email" (input)="clearSuccess()" />
+          <label for="email">Email <span class="form-required" aria-hidden="true">*</span></label>
+          <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="your.email&#64;example.com" [class.error]="errors.email" (input)="clearSuccess()" required />
           @if (errors.email) { <span class="form-error">{{ errors.email }}</span> }
         </div>
       </div>
 
       <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" [(ngModel)]="message" name="message" rows="5" placeholder="Tell me about your project..." [class.error]="errors.message" (input)="clearSuccess()"></textarea>
+        <label for="message">Message <span class="form-required" aria-hidden="true">*</span></label>
+        <textarea id="message" [(ngModel)]="message" name="message" rows="5" placeholder="Tell me about your project..." [class.error]="errors.message" (input)="clearSuccess()" required></textarea>
         @if (errors.message) { <span class="form-error">{{ errors.message }}</span> }
       </div>
 
       <div class="form-group form-group--captcha">
-        <label for="captcha">Quick verification</label>
-        <div class="contact__captcha">
-          <span class="contact__captcha-question">{{ captchaQuestion }}</span>
-          <input
-            type="text"
-            id="captcha"
-            [(ngModel)]="captchaAnswer"
-            name="captcha"
-            inputmode="numeric"
-            placeholder="Answer"
-            [class.error]="errors.captcha"
-            (input)="clearSuccess()"
-          />
-        </div>
-        <span class="contact__helper">This helps prevent automated messages.</span>
+        <p class="contact__captcha-note">Please confirm you're human before sending your message.</p>
+        <div #recaptchaHost id="captcha" class="contact__captcha-widget"></div>
         @if (errors.captcha) { <span class="form-error">{{ errors.captcha }}</span> }
       </div>
 
@@ -65,7 +46,7 @@
         <div class="contact__error">{{ sendError }}</div>
       }
 
-      <button type="submit" class="contact__submit" [disabled]="sending || isCoolingDown">
+      <button type="submit" class="contact__submit" [disabled]="isSubmitDisabled">
         {{ submitButtonText }}
       </button>
     </form>
