@@ -2,6 +2,7 @@ import {
   AfterViewInit,
   Directive,
   ElementRef,
+  HostBinding,
   Inject,
   Input,
   OnDestroy,
@@ -41,6 +42,39 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   @Input() revealRootMargin?: string;
   @Input() revealOnce = true;
 
+  @HostBinding('class.reveal')
+  protected readonly revealClass = true;
+
+  @HostBinding('class.reveal--up')
+  get isUpVariant(): boolean {
+    return this.variant === 'up';
+  }
+
+  @HostBinding('class.reveal--left')
+  get isLeftVariant(): boolean {
+    return this.variant === 'left';
+  }
+
+  @HostBinding('class.reveal--right')
+  get isRightVariant(): boolean {
+    return this.variant === 'right';
+  }
+
+  @HostBinding('class.reveal--zoom')
+  get isZoomVariant(): boolean {
+    return this.variant === 'zoom';
+  }
+
+  @HostBinding('style.--reveal-duration')
+  get revealDurationStyle(): string | null {
+    return this.revealDuration !== undefined ? `${this.revealDuration}ms` : null;
+  }
+
+  @HostBinding('style.--reveal-easing')
+  get revealEasingStyle(): string | null {
+    return this.revealEasing ?? null;
+  }
+
   constructor(
     private readonly el: ElementRef<HTMLElement>,
     private readonly renderer: Renderer2,
@@ -49,17 +83,6 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     const element = this.el.nativeElement;
-
-    this.renderer.addClass(element, 'reveal');
-    this.renderer.addClass(element, `reveal--${this.variant}`);
-
-    if (this.revealDuration !== undefined) {
-      this.renderer.setStyle(element, '--reveal-duration', `${this.revealDuration}ms`);
-    }
-
-    if (this.revealEasing !== undefined) {
-      this.renderer.setStyle(element, '--reveal-easing', this.revealEasing);
-    }
 
     if (this.shouldRevealImmediately()) {
       this.show(element);
