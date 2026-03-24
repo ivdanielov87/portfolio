@@ -99,6 +99,9 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+:root.ui-ready body {
   transition:
     background-color $transition-slow,
     color $transition-base;
@@ -193,10 +196,6 @@ section {
     0 1px 2px rgba(15, 23, 42, 0.04);
   padding: clamp(2rem, 1.75rem + 0.8vw, 3rem) clamp(1.25rem, 0.95rem + 1vw, 2.5rem);
   overflow: hidden;
-  transition:
-    background-color $transition-slow,
-    border-color $transition-base,
-    box-shadow $transition-base;
 
   @media (min-width: $bp-lg) {
     padding: $spacing-2xl $spacing-2xl;
@@ -205,6 +204,13 @@ section {
   @media (max-width: $bp-sm) {
     border-radius: $radius-lg;
   }
+}
+
+:root.ui-ready section {
+  transition:
+    background-color $transition-slow,
+    border-color $transition-base,
+    box-shadow $transition-base;
 }
 
 :root.dark-theme section {
