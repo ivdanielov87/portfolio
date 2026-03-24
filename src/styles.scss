@@ -253,14 +253,6 @@ section {
   animation: none !important;
 }
 
-:root.is-reloading .reveal,
-:root.is-reloading .hero__greeting,
-:root.is-reloading .hero__cta,
-:root.is-reloading .sidebar__download-cv {
-  transition: none !important;
-  animation: none !important;
-}
-
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -339,8 +331,3 @@ section {
     gap: $spacing-md;
   }
 }
-
-
-
-
-

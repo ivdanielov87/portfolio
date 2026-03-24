@@ -21,10 +21,12 @@
 
       const useDarkTheme = savedTheme !== 'light';
       const backgroundColor = useDarkTheme ? '#020617' : '#e5e7eb';
+      const colorScheme = useDarkTheme ? 'dark' : 'light';
 
       root.classList.toggle('dark-theme', useDarkTheme);
+      root.style.setProperty('--startup-bg', backgroundColor);
       root.style.backgroundColor = backgroundColor;
-      root.style.colorScheme = useDarkTheme ? 'dark' : 'light';
+      root.style.colorScheme = colorScheme;
 
       const themeColorMeta = document.querySelector('meta[name="theme-color"]');
       themeColorMeta?.setAttribute('content', backgroundColor);
@@ -36,7 +38,7 @@
     body {
       margin: 0;
       min-height: 100%;
-      background-color: #020617;
+      background-color: var(--startup-bg, #020617);
     }
 
     body,
