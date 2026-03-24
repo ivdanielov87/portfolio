@@ -7,12 +7,7 @@ export class ThemeService {
   constructor() {
     const saved = localStorage.getItem('theme');
     this.isDark = saved !== 'light';
-
-    if (this.isDark) {
-      document.documentElement.classList.add('dark-theme');
-    } else {
-      document.documentElement.classList.remove('dark-theme');
-    }
+    this.applyTheme(this.isDark);
   }
 
   get darkMode(): boolean {
@@ -21,12 +16,19 @@ export class ThemeService {
 
   toggle(): void {
     this.isDark = !this.isDark;
-    if (this.isDark) {
-      document.documentElement.classList.add('dark-theme');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark-theme');
-      localStorage.setItem('theme', 'light');
-    }
+    this.applyTheme(this.isDark);
+    localStorage.setItem('theme', this.isDark ? 'dark' : 'light');
+  }
+
+  private applyTheme(isDark: boolean): void {
+    const root = document.documentElement;
+    const backgroundColor = isDark ? '#020617' : '#e5e7eb';
+
+    root.classList.toggle('dark-theme', isDark);
+    root.style.backgroundColor = backgroundColor;
+    root.style.colorScheme = isDark ? 'dark' : 'light';
+
+    document.body?.style.setProperty('background-color', backgroundColor);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content', backgroundColor);
   }
 }

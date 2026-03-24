@@ -10,6 +10,7 @@ import {
   Renderer2,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { REVEAL_READY_CLASS, REVEAL_READY_EVENT } from './reveal.constants';
 
 type RevealVariant = 'up' | 'left' | 'right' | 'zoom';
 
@@ -25,8 +26,6 @@ type ObserverBucket = {
 export class RevealDirective implements AfterViewInit, OnDestroy {
   private static readonly defaultRootMargin = '0px 0px -4% 0px';
   private static readonly reducedMotionQuery = '(prefers-reduced-motion: reduce)';
-  private static readonly revealReadyClass = 'reveal-ready';
-  private static readonly revealReadyEvent = 'portfolio:reveal-ready';
   private static readonly observerBuckets = new Map<string, ObserverBucket>();
 
   private revealTimeoutId?: ReturnType<typeof setTimeout>;
@@ -41,6 +40,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   @Input() revealEasing?: string;
   @Input() revealRootMargin?: string;
   @Input() revealOnce = true;
+  @Input() revealWaitForReady = true;
 
   @HostBinding('class.reveal')
   protected readonly revealClass = true;
@@ -65,6 +65,11 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     return this.variant === 'zoom';
   }
 
+  @HostBinding('class.reveal--immediate')
+  get isImmediateReveal(): boolean {
+    return !this.revealWaitForReady;
+  }
+
   @HostBinding('style.--reveal-duration')
   get revealDurationStyle(): string | null {
     return this.revealDuration !== undefined ? `${this.revealDuration}ms` : null;
@@ -79,7 +84,10 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     private readonly el: ElementRef<HTMLElement>,
     private readonly renderer: Renderer2,
     @Inject(PLATFORM_ID) private readonly platformId: object,
-  ) {}
+  ) {
+    this.renderer.setStyle(this.el.nativeElement, 'opacity', '0');
+    this.renderer.setStyle(this.el.nativeElement, 'will-change', 'transform, opacity');
+  }
 
   ngAfterViewInit(): void {
     const element = this.el.nativeElement;
@@ -197,7 +205,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   private queueRevealWhenReady(element: HTMLElement): void {
     this.clearRevealTimeout();
 
-    if (this.isRevealReady()) {
+    if (!this.revealWaitForReady || this.isRevealReady()) {
       this.scheduleShow(element);
       return;
     }
@@ -209,7 +217,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     };
 
     this.revealReadyListener = onRevealReady;
-    window.addEventListener(RevealDirective.revealReadyEvent, onRevealReady, { once: true });
+    window.addEventListener(REVEAL_READY_EVENT, onRevealReady, { once: true });
   }
 
   private scheduleShow(element: HTMLElement): void {
@@ -225,10 +233,10 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
   private show(element: HTMLElement): void {
     this.renderer.addClass(element, 'is-visible');
+    this.renderer.setStyle(element, 'opacity', '1');
     this.isVisible = true;
 
     this.clearSettleTimeout();
-
     this.settleTimeoutId = setTimeout(() => {
       this.renderer.setStyle(element, 'will-change', 'auto');
     }, this.revealDuration ?? 900);
@@ -238,6 +246,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
     this.clearTimeouts();
 
     this.renderer.removeClass(element, 'is-visible');
+    this.renderer.setStyle(element, 'opacity', '0');
     this.renderer.setStyle(element, 'will-change', 'transform, opacity');
     this.isVisible = false;
   }
@@ -251,7 +260,7 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
 
   private clearRevealReadyListener(): void {
     if (this.revealReadyListener) {
-      window.removeEventListener(RevealDirective.revealReadyEvent, this.revealReadyListener);
+      window.removeEventListener(REVEAL_READY_EVENT, this.revealReadyListener);
       this.revealReadyListener = undefined;
     }
   }
@@ -269,6 +278,6 @@ export class RevealDirective implements AfterViewInit, OnDestroy {
   }
 
   private isRevealReady(): boolean {
-    return document.documentElement.classList.contains(RevealDirective.revealReadyClass);
+    return document.documentElement.classList.contains(REVEAL_READY_CLASS);
   }
 }

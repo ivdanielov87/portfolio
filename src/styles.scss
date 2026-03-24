@@ -248,7 +248,7 @@ section {
   transform: translate3d(0, 0, 0) scale(1);
 }
 
-:root:not(.reveal-ready) .reveal {
+:root:not(.reveal-ready) .reveal:not(.reveal--immediate) {
   transition: none !important;
   animation: none !important;
 }
@@ -339,6 +339,7 @@ section {
     gap: $spacing-md;
   }
 }
+
 
 
 
