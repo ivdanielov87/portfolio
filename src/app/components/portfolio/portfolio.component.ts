@@ -27,8 +27,8 @@ export class PortfolioComponent {
       summary: 'Responsive storefront UI with product browsing, cart flows and conversion-focused interactions.',
       stack: ['Angular', 'TypeScript', 'SCSS'],
       accent: 'Commerce',
-      imageUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock workspace image representing an e-commerce project',
+      imageUrl: 'https://images.unsplash.com/photo-1665686307516-1915b9616526?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1600',
+      imageAlt: 'Online shopping scene on a laptop representing an e-commerce project',
     },
     {
       title: 'Brand Identity',
@@ -36,8 +36,8 @@ export class PortfolioComponent {
       summary: 'A polished visual system focused on typography, spacing and consistent cross-platform presentation.',
       stack: ['Design System', 'Figma', 'Prototype'],
       accent: 'Brand',
-      imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock creative desktop image representing a brand identity project',
+      imageUrl: 'https://images.unsplash.com/photo-1561015314-6bd8c1e875ee?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1600',
+      imageAlt: 'Brand mockup cards representing a brand identity project',
     },
     {
       title: 'Mobile Banking App',
@@ -45,8 +45,8 @@ export class PortfolioComponent {
       summary: 'Clean mobile-first financial flows with trust-oriented UI patterns and concise dashboard views.',
       stack: ['React Native', 'UI Audit', 'Accessibility'],
       accent: 'Finance',
-      imageUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock mobile and laptop setup representing a banking application project',
+      imageUrl: '/portfolio-mobile-banking.svg',
+      imageAlt: 'Mock banking app screen representing a mobile finance project',
     },
     {
       title: 'Analytics Dashboard',
@@ -54,8 +54,8 @@ export class PortfolioComponent {
       summary: 'Data-heavy workspace with modular widgets, dense information hierarchy and efficient filtering.',
       stack: ['Angular', 'Charts', 'State Mgmt'],
       accent: 'Data',
-      imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock analytics screen image representing a dashboard project',
+      imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1600',
+      imageAlt: 'Analytics dashboard on a laptop screen representing a data visualization project',
     },
     {
       title: 'Social Media App',
@@ -63,8 +63,8 @@ export class PortfolioComponent {
       summary: 'Interactive feed experiences with strong content rhythm and polished messaging surfaces.',
       stack: ['Mobile UI', 'Performance', 'UX'],
       accent: 'Community',
-      imageUrl: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock social media device image representing a community application project',
+      imageUrl: 'https://images.unsplash.com/photo-1745848413078-f85af10e5bf2?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1600',
+      imageAlt: 'Smartphone screen with social media apps representing a social media application project',
     },
     {
       title: 'Portfolio Website',
@@ -72,8 +72,8 @@ export class PortfolioComponent {
       summary: 'Personal brand site with theme support, refined section motion and responsive layout discipline.',
       stack: ['Angular', 'Animation', 'Responsive'],
       accent: 'Personal',
-      imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock portfolio website image on a laptop screen',
+      imageUrl: 'https://images.unsplash.com/photo-1642054220942-d3c7dd1466cb?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=80&w=1600',
+      imageAlt: 'Website interface on a desktop screen representing a portfolio website project',
     },
   ];
 }

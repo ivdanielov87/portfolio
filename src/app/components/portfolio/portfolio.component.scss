@@ -5,7 +5,7 @@
   scroll-margin-top: 50px;
 }
 
-.portfolio__grid {
+.portfolio-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.35rem;
@@ -41,34 +41,34 @@
       0 24px 42px rgba(15, 23, 42, 0.1),
       0 8px 18px rgba(15, 23, 42, 0.06);
 
-    .portfolio-card__image::before {
+    .portfolio-card-image::before {
       opacity: 1;
     }
 
-    .portfolio-card__image::after {
+    .portfolio-card-image::after {
       transform: scaleX(1);
     }
 
-    .portfolio-card__image-media {
+    .portfolio-card-image-media {
       transform: scale(1.04);
     }
 
-    .portfolio-card__preview-text {
+    .portfolio-card-preview-text {
       transform: translateY(-2px) scale(1.02);
       opacity: 0.96;
     }
 
-    .portfolio-card__content {
-      background-color: rgba(148, 163, 184, 0.04);
+    .portfolio-card-content {
+      background-color: $slate-fill-subtle;
     }
 
-    .portfolio-card__link-text {
+    .portfolio-card-link-text {
       color: $accent-primary;
       transform: translateX(3px);
     }
   }
 
-  &__image {
+  &-image {
     position: relative;
     min-height: 210px;
     padding: $spacing-lg;
@@ -98,7 +98,7 @@
       right: 1.15rem;
       bottom: 1rem;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(234, 179, 8, 0.56), transparent);
+      background: linear-gradient(90deg, transparent, $accent-line, transparent);
       transform: scaleX(0.7);
       transform-origin: center;
       transition: transform $transition-slow;
@@ -106,7 +106,7 @@
     }
   }
 
-  &__image-media {
+  &-image-media {
     position: absolute;
     inset: 0;
     width: 100%;
@@ -115,7 +115,7 @@
     transition: transform $transition-slow;
   }
 
-  &__badge {
+  &-badge {
     position: absolute;
     top: 1rem;
     left: 1rem;
@@ -134,7 +134,7 @@
     backdrop-filter: blur(10px);
   }
 
-  &__preview-text {
+  &-preview-text {
     position: relative;
     z-index: 3;
     max-width: 11ch;
@@ -150,12 +150,12 @@
       opacity $transition-base;
   }
 
-  &__content {
+  &-content {
     padding: 1rem 1.15rem 1.2rem;
     transition: background-color $transition-base;
   }
 
-  &__category {
+  &-category {
     display: block;
     font-size: $font-size-xs;
     font-weight: 700;
@@ -165,7 +165,7 @@
     margin-bottom: 0.45rem;
   }
 
-  &__title {
+  &-title {
     font-size: 1rem;
     font-weight: 700;
     line-height: 1.35;
@@ -173,27 +173,27 @@
     margin-bottom: 0.55rem;
   }
 
-  &__summary {
+  &-summary {
     font-size: 0.9rem;
     line-height: 1.7;
     color: $text-secondary;
     margin-bottom: 0.9rem;
   }
 
-  &__meta {
+  &-meta {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 0.7rem;
   }
 
-  &__tags {
+  &-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 0.45rem;
   }
 
-  &__tag {
+  &-tag {
     display: inline-flex;
     align-items: center;
     padding: 0.28rem 0.55rem;
@@ -205,7 +205,7 @@
     border: 1px solid rgba(148, 163, 184, 0.14);
   }
 
-  &__link-text {
+  &-link-text {
     display: inline-flex;
     align-items: center;
     flex-shrink: 0;
@@ -228,21 +228,21 @@
       0 2px 6px rgba(15, 23, 42, 0.03);
   }
 
-  .portfolio-card:hover .portfolio-card__image::before {
+  .portfolio-card:hover .portfolio-card-image::before {
     opacity: 0.86;
   }
 
-  .portfolio-card:hover .portfolio-card__image::after {
+  .portfolio-card:hover .portfolio-card-image::after {
     transform: scaleX(0.7);
   }
 
-  .portfolio-card:hover .portfolio-card__image-media,
-  .portfolio-card:hover .portfolio-card__preview-text,
-  .portfolio-card:hover .portfolio-card__link-text {
+  .portfolio-card:hover .portfolio-card-image-media,
+  .portfolio-card:hover .portfolio-card-preview-text,
+  .portfolio-card:hover .portfolio-card-link-text {
     transform: none;
   }
 
-  .portfolio-card:hover .portfolio-card__content {
+  .portfolio-card:hover .portfolio-card-content {
     background-color: transparent;
   }
 }
@@ -259,33 +259,33 @@
       0 8px 18px rgba(2, 6, 23, 0.2);
   }
 
-  .portfolio-card__badge {
+  .portfolio-card-badge {
     background-color: rgba(15, 23, 42, 0.56);
     border-color: rgba(255, 255, 255, 0.14);
   }
 }
 
 @media (max-width: $bp-sm) {
-  .portfolio__grid {
+  .portfolio-grid {
     gap: $spacing-md;
   }
 
   .portfolio-card {
-    &__image {
+    &-image {
       min-height: 182px;
       padding: 1rem;
     }
 
-    &__content {
+    &-content {
       padding: 0.95rem 1rem 1.1rem;
     }
 
-    &__preview-text {
+    &-preview-text {
       max-width: 100%;
       font-size: 1.1rem;
     }
 
-    &__meta {
+    &-meta {
       gap: 0.65rem;
     }
   }

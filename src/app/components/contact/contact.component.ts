@@ -14,6 +14,7 @@ import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import emailjs from '@emailjs/browser';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { EMAILJS_CONFIG, RECAPTCHA_CONFIG } from '../../config/config';
 
 type EmailJsError = {
   status?: number;
@@ -59,6 +60,7 @@ declare global {
 export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
   private static readonly recaptchaScriptId = 'google-recaptcha-api';
   private static recaptchaLoader?: Promise<void>;
+  private static readonly emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   private static readonly minimumNameLength = 2;
   private static readonly minimumMessageLength = 20;
 
@@ -79,22 +81,23 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
   sending: boolean = false;
   sendError: string = '';
   recaptchaToken: string = '';
-  recaptchaReady: boolean = false;
   recaptchaLoadError: string = '';
   errors: ContactErrors = {};
 
-  // Sign up at https://www.emailjs.com/ (free tier: 200 emails/month)
-  private readonly SERVICE_ID = 'service_n2h43vp';
-  private readonly TEMPLATE_ID = 'template_n0q9hdr';
-  private readonly PUBLIC_KEY = 'GbHc9qx4s9KHCAGqO';
-  // Replace with your real Google reCAPTCHA v2 site key.
-  private readonly RECAPTCHA_SITE_KEY: string = '6LfZCJUsAAAAAHh_vubufmAZGec6P_85G75d0epP';
+  private readonly SERVICE_ID = EMAILJS_CONFIG.serviceId;
+  private readonly TEMPLATE_ID = EMAILJS_CONFIG.templateId;
+  private readonly PUBLIC_KEY = EMAILJS_CONFIG.publicKey;
+  private readonly RECAPTCHA_SITE_KEY: string = RECAPTCHA_CONFIG.siteKey;
 
   constructor(@Inject(PLATFORM_ID) platformId: object) {
     this.isBrowser = isPlatformBrowser(platformId);
   }
 
   ngOnInit(): void {
+    if (!this.isEmailJsConfigured) {
+      return;
+    }
+
     emailjs.init({
       publicKey: this.PUBLIC_KEY,
       blockHeadless: true,
@@ -118,12 +121,20 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     return this.RECAPTCHA_SITE_KEY.trim().length > 0;
   }
 
+  get isEmailJsConfigured(): boolean {
+    return (
+      this.SERVICE_ID.trim().length > 0 &&
+      this.TEMPLATE_ID.trim().length > 0 &&
+      this.PUBLIC_KEY.trim().length > 0
+    );
+  }
+
   get canRenderRecaptcha(): boolean {
     return this.isBrowser && this.isRecaptchaConfigured;
   }
 
   get hasValidEmail(): boolean {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email.trim());
+    return ContactComponent.emailPattern.test(this.email.trim());
   }
 
   get hasValidName(): boolean {
@@ -192,6 +203,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
   get isSubmitDisabled(): boolean {
     return (
       this.sending ||
+      !this.isEmailJsConfigured ||
       !this.isRecaptchaConfigured ||
       !this.hasValidName ||
       !this.hasValidEmail ||
@@ -224,7 +236,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     if (!this.email.trim()) this.errors.email = 'Email is required';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.email)) {
+    else if (!ContactComponent.emailPattern.test(this.email.trim())) {
       this.errors.email = 'Invalid email format';
     }
 
@@ -239,6 +251,10 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
       this.errors.captcha = this.recaptchaLoadError;
     } else if (!this.recaptchaToken) {
       this.errors.captcha = 'Please complete the reCAPTCHA verification.';
+    }
+
+    if (!this.isEmailJsConfigured) {
+      this.sendError = 'Contact form configuration is missing. Please try again later.';
     }
 
     return Object.keys(this.errors).length === 0;
@@ -267,10 +283,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
       });
 
       this.submitted = true;
-      this.name = '';
-      this.email = '';
-      this.message = '';
-      this.honeypot = '';
+      this.resetForm();
       this.resetRecaptcha();
     } catch (error) {
       const emailError = error as EmailJsError;
@@ -282,7 +295,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
       console.error('EmailJS error:', error);
     } finally {
       this.sending = false;
-      this.cdr.detectChanges();
+      this.refreshView();
     }
   }
 
@@ -290,7 +303,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.canRenderRecaptcha) {
       if (this.isBrowser && !this.isRecaptchaConfigured) {
         this.recaptchaLoadError =
-          'Set your Google reCAPTCHA site key to enable email verification.';
+          'Contact form configuration is incomplete.';
       }
       return;
     }
@@ -302,7 +315,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
       .catch(() => {
         this.recaptchaLoadError =
           'Unable to load reCAPTCHA right now. Please disable blockers and try again.';
-        this.cdr.detectChanges();
+        this.refreshView();
       });
   }
 
@@ -330,8 +343,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
 
       const script = document.createElement('script');
       script.id = ContactComponent.recaptchaScriptId;
-      script.src =
-        'https://www.google.com/recaptcha/api.js?render=explicit&onload=__portfolioRecaptchaOnload__';
+      script.src = 'https://www.google.com/recaptcha/api.js?render=explicit&onload=__portfolioRecaptchaOnload__';
       script.async = true;
       script.defer = true;
       script.onerror = () => reject();
@@ -359,23 +371,22 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
         this.recaptchaToken = token;
         delete this.errors.captcha;
         this.sendError = '';
-        this.cdr.detectChanges();
+        this.refreshView();
       },
       'expired-callback': () => {
         this.recaptchaToken = '';
-        this.cdr.detectChanges();
+        this.refreshView();
       },
       'error-callback': () => {
         this.recaptchaToken = '';
         this.recaptchaLoadError =
           'reCAPTCHA verification failed to load. Please refresh and try again.';
-        this.cdr.detectChanges();
+        this.refreshView();
       },
     });
 
-    this.recaptchaReady = true;
     this.recaptchaRendered = true;
-    this.cdr.detectChanges();
+    this.refreshView();
   }
 
   private observeThemeChanges(): void {
@@ -403,7 +414,6 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     }
 
     this.recaptchaToken = '';
-    this.recaptchaReady = false;
     this.recaptchaRendered = false;
     this.recaptchaWidgetId = undefined;
     this.renderRecaptcha();
@@ -418,7 +428,7 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     host.replaceChildren();
 
     const mountPoint = document.createElement('div');
-    mountPoint.className = 'contact__captcha-mount';
+    mountPoint.className = 'contact-captcha-mount';
     host.appendChild(mountPoint);
 
     return mountPoint;
@@ -429,6 +439,17 @@ export class ContactComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.recaptchaWidgetId !== undefined && window.grecaptcha) {
       window.grecaptcha.reset(this.recaptchaWidgetId);
     }
+  }
+
+  private resetForm(): void {
+    this.name = '';
+    this.email = '';
+    this.message = '';
+    this.honeypot = '';
+  }
+
+  private refreshView(): void {
+    this.cdr.detectChanges();
   }
 
   private getRecaptchaTheme(): 'light' | 'dark' {

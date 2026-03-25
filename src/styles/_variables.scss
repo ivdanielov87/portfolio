@@ -5,10 +5,7 @@
 // These SCSS vars map to CSS custom props set on :root
 $bg-primary: var(--bg-primary);
 $bg-secondary: var(--bg-secondary);
-$bg-sidebar: var(--bg-sidebar);
 $bg-card: var(--bg-card);
-$bg-card-hover: var(--bg-card-hover);
-$bg-input: var(--bg-input);
 
 $text-primary: var(--text-primary);
 $text-secondary: var(--text-secondary);
@@ -16,40 +13,34 @@ $text-muted: var(--text-muted);
 
 $accent-primary: var(--accent-primary);
 $accent-hover: var(--accent-hover);
-$accent-light: var(--accent-light);
 
-$border-color: var(--border-color);
-$border-light: var(--border-light);
+// Shared UI tokens
+$slate-fill-subtle: rgba(148, 163, 184, 0.04);
+$slate-fill: rgba(148, 163, 184, 0.1);
+$slate-border: rgba(148, 163, 184, 0.18);
 
-$tag-bg: var(--tag-bg);
-$tag-text: var(--tag-text);
+$accent-fill: rgba(234, 179, 8, 0.1);
+$accent-fill-strong: rgba(234, 179, 8, 0.15);
+$accent-border: rgba(234, 179, 8, 0.24);
+$accent-line: rgba(234, 179, 8, 0.56);
+
+$shadow-md: 0 12px 22px rgba(15, 23, 42, 0.1);
+$shadow-lg: 0 16px 30px rgba(15, 23, 42, 0.12);
+$shadow-dark: 0 22px 40px rgba(2, 6, 23, 0.32);
+
+$focus-ring: 0 0 0 4px rgba(234, 179, 8, 0.12);
 
 // Sidebar
 $sidebar-width: 300px;
-$right-bar-width: 60px;
-
-// Sidebar-specific colors (always dark)
-$sidebar-text: var(--sidebar-text);
-$sidebar-muted: var(--sidebar-muted);
-$sidebar-border: var(--sidebar-border);
-$sidebar-accent: var(--sidebar-accent);
-
-// Right bar
-$right-bar-bg: var(--right-bar-bg);
-$right-bar-icon: var(--right-bar-icon);
-$right-bar-icon-hover: var(--right-bar-icon-hover);
 
 // ============================================
 // Spacing Constants
 // ============================================
-$spacing-xs: 0.25rem;
 $spacing-sm: 0.5rem;
 $spacing-md: 1rem;
 $spacing-lg: 1.5rem;
 $spacing-xl: 2rem;
 $spacing-2xl: 3rem;
-$spacing-3xl: 4rem;
-$spacing-4xl: 6rem;
 
 // ============================================
 // Typography
@@ -58,13 +49,7 @@ $font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sa
 $font-size-xs: 0.75rem;
 $font-size-sm: 0.875rem;
 $font-size-base: 1rem;
-$font-size-lg: 1.125rem;
 $font-size-xl: 1.25rem;
-$font-size-2xl: 1.5rem;
-$font-size-3xl: 1.875rem;
-$font-size-4xl: 2.25rem;
-$font-size-5xl: 3rem;
-$font-size-6xl: 3.75rem;
 
 // ============================================
 // Breakpoints
@@ -77,8 +62,6 @@ $bp-xl: 1280px;
 // ============================================
 // Border Radius
 // ============================================
-$radius-sm: 0.375rem;
-$radius-md: 0.5rem;
 $radius-lg: 0.75rem;
 $radius-xl: 1rem;
 
@@ -88,9 +71,3 @@ $radius-xl: 1rem;
 $transition-fast: 150ms ease;
 $transition-base: 250ms ease;
 $transition-slow: 350ms ease;
-
-// ============================================
-// Container
-// ============================================
-$container-max: 1200px;
-$container-padding: $spacing-lg;

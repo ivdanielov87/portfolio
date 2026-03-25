@@ -16,7 +16,7 @@ interface Service {
   styleUrl: './services.component.scss',
 })
 export class ServicesComponent {
-  viewportWidth: number = typeof window !== 'undefined' ? window.innerWidth : 1440;
+  isMobileView: boolean = typeof window !== 'undefined' ? window.innerWidth < 768 : false;
 
   services: Service[] = [
     {
@@ -53,11 +53,7 @@ export class ServicesComponent {
 
   @HostListener('window:resize')
   onResize(): void {
-    this.viewportWidth = window.innerWidth;
-  }
-
-  get isMobileView(): boolean {
-    return this.viewportWidth < 768;
+    this.isMobileView = window.innerWidth < 768;
   }
 
   getSectionTitleDelay(): number {

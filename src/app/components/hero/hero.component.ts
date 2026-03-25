@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { RevealDirective } from '../../directives/reveal.directive';
 import { REVEAL_READY_CLASS, REVEAL_READY_EVENT } from '../../directives/reveal.constants';
+import { scrollToSection } from '../../utils/scroll.utils';
 
 @Component({
   selector: 'app-hero',
@@ -41,10 +42,6 @@ export class HeroComponent implements AfterViewInit, OnDestroy {
   }
 
   scrollTo(event: Event, sectionId: string): void {
-    event.preventDefault();
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection(event, sectionId);
   }
 }

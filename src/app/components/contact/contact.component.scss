@@ -4,11 +4,11 @@
   background-color: $bg-secondary;
 }
 
-.contact__wrapper {
+.contact-wrapper {
   max-width: 760px;
 }
 
-.contact__success {
+.contact-success {
   display: flex;
   align-items: center;
   gap: $spacing-md;
@@ -38,13 +38,13 @@
   }
 }
 
-.contact__form {
+.contact-form {
   display: flex;
   flex-direction: column;
   gap: 1.15rem;
 }
 
-.contact__honeypot {
+.contact-honeypot {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -145,18 +145,18 @@
   font-weight: 700;
 }
 
-.contact__captcha-widget {
+.contact-captcha-widget {
   transform-origin: left center;
 }
 
-.contact__captcha-note {
+.contact-captcha-note {
   font-size: $font-size-xs;
   color: $accent-hover;
   line-height: 1.5;
   font-weight: 500;
 }
 
-.contact__submit {
+.contact-submit {
   padding: 0.9rem 1.55rem;
   background-color: $accent-primary;
   color: #111827;
@@ -191,7 +191,7 @@
   }
 }
 
-.contact__error {
+.contact-error {
   font-size: 0.9rem;
   color: #ef4444;
   padding: 0.9rem 1rem;
@@ -211,18 +211,18 @@
 }
 
 @media (max-width: $bp-sm) {
-  .contact__captcha-widget {
+  .contact-captcha-widget {
     transform: scale(0.94);
   }
 
-  .contact__submit {
+  .contact-submit {
     width: 100%;
     text-align: center;
   }
 }
 
 @media (hover: none) {
-  .contact__submit:hover {
+  .contact-submit:hover {
     transform: none;
     box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
   }

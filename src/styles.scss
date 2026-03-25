@@ -10,10 +10,7 @@
   --bg-page: #e5e7eb;
   --bg-primary: #ffffff;
   --bg-secondary: #f8f9fa;
-  --bg-sidebar: #111827;
   --bg-card: #ffffff;
-  --bg-card-hover: #f3f4f6;
-  --bg-input: #ffffff;
 
   --text-primary: #111827;
   --text-secondary: #4b5563;
@@ -21,22 +18,7 @@
 
   --accent-primary: #eab308;
   --accent-hover: #ca8a04;
-  --accent-light: rgba(234, 179, 8, 0.1);
-
-  --border-color: #e5e7eb;
-  --border-light: #d1d5db;
-
-  --tag-bg: #f3f4f6;
-  --tag-text: #374151;
-
-  --sidebar-text: #e5e7eb;
-  --sidebar-muted: #9ca3af;
-  --sidebar-border: #1f2937;
-  --sidebar-accent: #eab308;
-
-  --right-bar-bg: #111827;
-  --right-bar-icon: #9ca3af;
-  --right-bar-icon-hover: #eab308;
+  --accent-light: #{$accent-fill};
 }
 
 // ============================================
@@ -45,10 +27,7 @@
 :root.dark-theme {
   --bg-primary: #0f172a;
   --bg-secondary: #1e293b;
-  --bg-sidebar: #0f172a;
   --bg-card: #1e293b;
-  --bg-card-hover: #334155;
-  --bg-input: #1e293b;
   --bg-page: #020617;
 
   --text-primary: #f1f5f9;
@@ -57,22 +36,7 @@
 
   --accent-primary: #eab308;
   --accent-hover: #ca8a04;
-  --accent-light: rgba(234, 179, 8, 0.15);
-
-  --border-color: #334155;
-  --border-light: #475569;
-
-  --tag-bg: #334155;
-  --tag-text: #e2e8f0;
-
-  --sidebar-text: #e2e8f0;
-  --sidebar-muted: #94a3b8;
-  --sidebar-border: #1e293b;
-  --sidebar-accent: #eab308;
-
-  --right-bar-bg: #1e293b;
-  --right-bar-icon: #94a3b8;
-  --right-bar-icon-hover: #eab308;
+  --accent-light: #{$accent-fill-strong};
 }
 
 // ============================================
@@ -145,7 +109,7 @@ textarea {
 
 :where(a, button, input, textarea, [tabindex]):focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.18);
+  box-shadow: $focus-ring;
 }
 
 // ============================================
@@ -270,19 +234,19 @@ section {
     transition: none;
   }
 
-  .hero__cta,
-  .sidebar__photo,
-  .sidebar__social-link,
-  .sidebar__nav-link,
-  .sidebar__download-cv,
-  .right-bar__link,
+  .hero-cta,
+  .sidebar-photo,
+  .sidebar-social-link,
+  .sidebar-nav-link,
+  .sidebar-download-cv,
+  .right-bar-link,
   .portfolio-card,
-  .portfolio-card__preview-text,
+  .portfolio-card-preview-text,
   .service-card,
-  .service-card__icon-wrap,
-  .about__content,
+  .service-card-icon-wrap,
+  .about-content,
   .stat-card,
-  .contact__submit,
+  .contact-submit,
   .form-group input,
   .form-group textarea {
     transition: none !important;

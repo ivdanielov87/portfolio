@@ -6,7 +6,7 @@
   overflow: hidden;
   padding: clamp(2.25rem, 1.8rem + 1.4vw, 3.5rem) clamp(1.25rem, 0.95rem + 1vw, 2.5rem);
 
-  &__inner {
+  &-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -16,13 +16,13 @@
     z-index: 1;
   }
 
-  &__content {
+  &-content {
     flex: 1;
     max-width: 38rem;
     position: relative;
   }
 
-  &__greeting {
+  &-greeting {
     display: inline-flex;
     width: max-content;
     font-size: $font-size-sm;
@@ -50,7 +50,7 @@
     }
   }
 
-  &__title {
+  &-title {
     font-size: clamp(2.25rem, 1.75rem + 1.5vw, 3.8rem);
     font-weight: 800;
     color: $text-primary;
@@ -60,7 +60,7 @@
     text-wrap: balance;
   }
 
-  &__subtitle {
+  &-subtitle {
     display: flex;
     align-items: center;
     gap: $spacing-md;
@@ -71,7 +71,7 @@
     margin-bottom: $spacing-lg;
   }
 
-  &__dash {
+  &-dash {
     display: inline-block;
     width: 42px;
     height: 3px;
@@ -80,7 +80,7 @@
     box-shadow: 0 0 0 6px var(--accent-light);
   }
 
-  &__description {
+  &-description {
     font-size: clamp(0.96rem, 0.9rem + 0.2vw, 1.05rem);
     color: $text-secondary;
     line-height: 1.85;
@@ -89,7 +89,7 @@
     text-wrap: pretty;
   }
 
-  &__cta {
+  &-cta {
     position: relative;
     display: inline-block;
     padding: 0.9rem 2.2rem;
@@ -127,7 +127,7 @@
     }
   }
 
-  &__image {
+  &-image {
     position: relative;
     flex-shrink: 0;
     width: clamp(240px, 22vw, 280px);
@@ -207,7 +207,7 @@
         transform: translate3d(-4px, -4px, 0);
       }
 
-      .hero__image-wrapper {
+      .hero-image-wrapper {
         transform: translate3d(0, -6px, 0);
         border-color: rgba(234, 179, 8, 0.48);
         box-shadow:
@@ -236,13 +236,13 @@
 
 @media (hover: none) {
   .hero {
-    &__image:hover {
+    &-image:hover {
       &::before,
       &::after {
         transform: none;
       }
 
-      .hero__image-wrapper {
+      .hero-image-wrapper {
         transform: none;
         box-shadow:
           0 18px 38px rgba(15, 23, 42, 0.1),
@@ -264,36 +264,36 @@
 
 @media (max-width: $bp-md) {
   .hero {
-    &__inner {
+    &-inner {
       flex-direction: column;
       align-items: stretch;
       text-align: center;
       gap: $spacing-2xl;
     }
 
-    &__subtitle {
+    &-subtitle {
       justify-content: center;
     }
 
-    &__greeting.reveal:not(.is-visible) {
+    &-greeting.reveal:not(.is-visible) {
       transform: translate3d(0, 5.2rem, 0) scale(1.04);
       font-size: clamp(1.65rem, 1.25rem + 1.3vw, 2.2rem);
     }
 
-    &__description {
+    &-description {
       max-width: 100%;
       margin-left: auto;
       margin-right: auto;
     }
 
-    &__image {
+    &-image {
       order: -1;
       width: min(100%, 270px);
       height: 270px;
       margin: 0 auto;
     }
 
-    &__cta {
+    &-cta {
       align-self: center;
     }
   }
@@ -301,7 +301,7 @@
 
 @media (max-width: $bp-sm) {
   .hero {
-    &__greeting {
+    &-greeting {
       margin-bottom: $spacing-sm;
 
       &.reveal:not(.is-visible) {
@@ -310,34 +310,34 @@
       }
     }
 
-    &__title {
+    &-title {
       font-size: clamp(2rem, 1.7rem + 1.4vw, 2.6rem);
       line-height: 1;
     }
 
-    &__subtitle {
+    &-subtitle {
       gap: $spacing-sm;
       font-size: $font-size-base;
       margin-bottom: $spacing-md;
     }
 
-    &__dash {
+    &-dash {
       width: 30px;
       box-shadow: 0 0 0 4px var(--accent-light);
     }
 
-    &__description {
+    &-description {
       font-size: $font-size-sm;
       margin-bottom: $spacing-lg;
     }
 
-    &__cta {
+    &-cta {
       width: 100%;
       max-width: 260px;
       text-align: center;
     }
 
-    &__image {
+    &-image {
       height: 270px;
 
       &::after {

@@ -5,7 +5,7 @@
   scroll-margin-top: 50px;
 }
 
-.about__content {
+.about-content {
   max-width: 760px;
   background-color: $bg-card;
   border: 1px solid rgba(148, 163, 184, 0.16);
@@ -34,7 +34,7 @@
   }
 }
 
-.about__stats {
+.about-stats {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
@@ -65,7 +65,7 @@
     box-shadow $transition-base,
     background-color $transition-base;
 
-  &__number {
+  &-number {
     display: block;
     font-size: clamp(1.15rem, 1.05rem + 0.3vw, 1.4rem);
     font-weight: 700;
@@ -74,20 +74,20 @@
     line-height: 1.3;
   }
 
-  &__label {
+  &-label {
     font-size: 0.82rem;
     color: $text-muted;
     line-height: 1.65;
   }
 }
 
-:root.dark-theme .about__content,
+:root.dark-theme .about-content,
 :root.dark-theme .stat-card {
   border-color: rgba(148, 163, 184, 0.2);
 }
 
 @media (max-width: $bp-sm) {
-  .about__content {
+  .about-content {
     margin-bottom: $spacing-xl;
   }
 

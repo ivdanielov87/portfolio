@@ -1,7 +1,8 @@
-import { Component, inject, ElementRef, AfterViewInit, HostListener, ChangeDetectorRef } from '@angular/core';
+import { Component, inject, AfterViewInit, HostListener, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
 import { RevealDirective } from '../../directives/reveal.directive';
+import { getActiveSection, scrollToSection, type SectionLink } from '../../utils/scroll.utils';
 
 type SectionTarget = 'hero' | 'about' | 'services' | 'portfolio' | 'contact';
 
@@ -27,9 +28,8 @@ interface SocialLink {
   icon: 'github' | 'linkedin' | 'link';
 }
 
-interface NavLink {
+interface NavLink extends SectionLink<SectionTarget> {
   label: string;
-  target: SectionTarget;
 }
 
 @Component({
@@ -41,11 +41,9 @@ interface NavLink {
 })
 export class NavbarComponent implements AfterViewInit {
   themeService: ThemeService = inject(ThemeService);
-  private readonly el = inject(ElementRef);
   private readonly cdr = inject(ChangeDetectorRef);
   mobileMenuOpen: boolean = false;
   activeSection: SectionTarget = 'hero';
-  private sidebarEl!: HTMLElement;
 
   personalInfo: PersonalInfoItem[] = [
     { label: 'Email', value: 'iv.danielov@gmail.com' },
@@ -113,15 +111,8 @@ export class NavbarComponent implements AfterViewInit {
   ];
 
   ngAfterViewInit(): void {
-    this.sidebarEl = this.el.nativeElement.querySelector('.sidebar');
-    this.updateStickyTop();
     this.updateActiveSection();
     this.cdr.detectChanges();
-  }
-
-  @HostListener('window:resize')
-  onResize(): void {
-    this.updateStickyTop();
   }
 
   @HostListener('window:scroll')
@@ -129,28 +120,8 @@ export class NavbarComponent implements AfterViewInit {
     this.updateActiveSection();
   }
 
-  private updateStickyTop(): void {
-    if (!this.sidebarEl) return;
-    const margin = 40;
-    this.sidebarEl.style.top = `${margin}px`;
-  }
-
   private updateActiveSection(): void {
-    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50) {
-      this.activeSection = this.navLinks[this.navLinks.length - 1].target;
-      return;
-    }
-
-    const scrollY = window.scrollY + 220;
-    for (let i = this.navLinks.length - 1; i >= 0; i--) {
-      const section = document.getElementById(this.navLinks[i].target);
-      if (section && section.offsetTop <= scrollY) {
-        this.activeSection = this.navLinks[i].target;
-        return;
-      }
-    }
-
-    this.activeSection = 'hero';
+    this.activeSection = getActiveSection(this.navLinks, 220, 'hero');
   }
 
   toggleMenu(): void {
@@ -168,11 +139,7 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   scrollTo(event: Event, sectionId: string): void {
-    event.preventDefault();
-    const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
+    scrollToSection(event, sectionId);
     this.closeMenu();
   }
 }

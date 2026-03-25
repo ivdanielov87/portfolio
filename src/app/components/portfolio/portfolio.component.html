@@ -3,7 +3,7 @@
     <h2 class="section-title" appReveal="up">Portfolio</h2>
   </div>
 
-  <div class="portfolio__grid">
+  <div class="portfolio-grid">
     @for (project of projects; track project.title; let i = $index) {
       <article
         class="portfolio-card"
@@ -11,22 +11,22 @@
         [revealDelay]="100 + i * 160"
         [revealDuration]="1400"
       >
-        <div class="portfolio-card__image">
-          <img class="portfolio-card__image-media" [src]="project.imageUrl" [alt]="project.imageAlt" loading="lazy" />
-          <span class="portfolio-card__badge">{{ project.accent }}</span>
-          <span class="portfolio-card__preview-text">{{ project.title }}</span>
+        <div class="portfolio-card-image">
+          <img class="portfolio-card-image-media" [src]="project.imageUrl" [alt]="project.imageAlt" loading="lazy" />
+          <span class="portfolio-card-badge">{{ project.accent }}</span>
+          <span class="portfolio-card-preview-text">{{ project.title }}</span>
         </div>
-        <div class="portfolio-card__content">
-          <span class="portfolio-card__category" appReveal="up" [revealDelay]="160 + i * 160" [revealDuration]="850">{{ project.category }}</span>
-          <h3 class="portfolio-card__title" appReveal="up" [revealDelay]="160 + i * 160" [revealDuration]="900">{{ project.title }}</h3>
-          <p class="portfolio-card__summary" appReveal="up" [revealDelay]="320 + i * 160" [revealDuration]="950">{{ project.summary }}</p>
-          <div class="portfolio-card__meta" appReveal="up" [revealDelay]="320 + i * 160" [revealDuration]="1000">
-            <div class="portfolio-card__tags">
+        <div class="portfolio-card-content">
+          <span class="portfolio-card-category" appReveal="up" [revealDelay]="160 + i * 160" [revealDuration]="850">{{ project.category }}</span>
+          <h3 class="portfolio-card-title" appReveal="up" [revealDelay]="160 + i * 160" [revealDuration]="900">{{ project.title }}</h3>
+          <p class="portfolio-card-summary" appReveal="up" [revealDelay]="320 + i * 160" [revealDuration]="950">{{ project.summary }}</p>
+          <div class="portfolio-card-meta" appReveal="up" [revealDelay]="320 + i * 160" [revealDuration]="1000">
+            <div class="portfolio-card-tags">
               @for (item of project.stack; track item) {
-                <span class="portfolio-card__tag">{{ item }}</span>
+                <span class="portfolio-card-tag">{{ item }}</span>
               }
             </div>
-            <span class="portfolio-card__link-text">Selected work</span>
+            <span class="portfolio-card-link-text">Selected work</span>
           </div>
         </div>
       </article>
