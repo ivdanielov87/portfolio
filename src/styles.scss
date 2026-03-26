@@ -177,32 +177,6 @@ section {
     box-shadow $transition-base;
 }
 
-:root:not(.ui-ready) .mobile-topbar,
-:root:not(.ui-ready) .mobile-topbar-toggle,
-:root:not(.ui-ready) .sidebar,
-:root:not(.ui-ready) .sidebar-photo,
-:root:not(.ui-ready) .sidebar-social-link,
-:root:not(.ui-ready) .sidebar-nav-link,
-:root:not(.ui-ready) .sidebar-chip,
-:root:not(.ui-ready) .sidebar-download-cv,
-:root:not(.ui-ready) .right-bar,
-:root:not(.ui-ready) .right-bar-link,
-:root:not(.ui-ready) .service-card,
-:root:not(.ui-ready) .service-card-icon-wrap,
-:root:not(.ui-ready) .portfolio-card,
-:root:not(.ui-ready) .portfolio-card-preview,
-:root:not(.ui-ready) .about-content,
-:root:not(.ui-ready) .stat-card,
-:root:not(.ui-ready) .contact-submit,
-:root:not(.ui-ready) .form-group input,
-:root:not(.ui-ready) .form-group textarea,
-:root:not(.ui-ready) .hero-cta,
-:root:not(.ui-ready) .hero-image-wrapper,
-:root:not(.ui-ready) .hero-image::before,
-:root:not(.ui-ready) .hero-image::after {
-  transition: none !important;
-}
-
 :root.dark-theme section {
   border-color: rgba(148, 163, 184, 0.18);
   box-shadow:
