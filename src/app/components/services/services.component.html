@@ -3,10 +3,10 @@
     <h2 class="section-title" appReveal="up" [revealDelay]="getSectionTitleDelay()">My Services</h2>
   </div>
 
-  <div class="services-grid">
+  <div class="services__grid">
     @for (service of services; track service.title; let i = $index) {
     <div class="service-card" appReveal="zoom" [revealDelay]="getCardRevealDelay(i)" [revealDuration]="1400">
-      <div class="service-card-icon-wrap">
+      <div class="service-card__icon-wrap">
         @switch (service.icon) {
         @case ('monitor') {
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
@@ -55,8 +55,8 @@
         }
         }
       </div>
-      <h3 class="service-card-title" appReveal="zoom" [revealDelay]="getCardRevealDelay(i) + 90" [revealDuration]="900">{{ service.title }}</h3>
-      <p class="service-card-description" appReveal="zoom" [revealDelay]="getCardRevealDelay(i) + 180" [revealDuration]="1000" [revealEasing]="'ease-out'">
+      <h3 class="service-card__title" appReveal="zoom" [revealDelay]="getCardRevealDelay(i) + 90" [revealDuration]="900">{{ service.title }}</h3>
+      <p class="service-card__description" appReveal="zoom" [revealDelay]="getCardRevealDelay(i) + 180" [revealDuration]="1000" [revealEasing]="'ease-out'">
         {{ service.description }}
       </p>
     </div>

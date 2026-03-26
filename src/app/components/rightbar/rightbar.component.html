@@ -1,6 +1,6 @@
 <aside class="right-bar">
   <button
-    class="right-bar-link right-bar-theme"
+    class="right-bar__link right-bar__theme"
     [class.is-dark]="themeService.darkMode"
     (click)="themeService.toggle()"
     aria-label="Toggle theme"
@@ -15,7 +15,7 @@
   @for (item of navItems; track item.target) {
     <a
       [href]="'#' + item.target"
-      class="right-bar-link"
+      class="right-bar__link"
       [class.active]="activeSection === item.target"
       [attr.title]="item.name"
       [attr.aria-label]="item.name"

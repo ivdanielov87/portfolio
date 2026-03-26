@@ -1,12 +1,12 @@
 import { Component, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ThemeService } from '../../services/theme.service';
-import { getActiveSection, scrollToSection, type SectionLink } from '../../utils/scroll.utils';
 
 type RightbarSectionTarget = 'hero' | 'services' | 'about' | 'portfolio' | 'contact';
 
-interface NavItem extends SectionLink<RightbarSectionTarget> {
+interface NavItem {
   name: string;
+  target: RightbarSectionTarget;
   icon: 'home' | 'briefcase' | 'user' | 'folder' | 'mail';
 }
 
@@ -32,10 +32,28 @@ export class RightbarComponent {
 
   @HostListener('window:scroll')
   onScroll(): void {
-    this.activeSection = getActiveSection(this.navItems, 200, 'hero');
+    // If scrolled to bottom of page, activate last section (contact)
+    if ((window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50) {
+      this.activeSection = this.navItems[this.navItems.length - 1].target;
+      return;
+    }
+
+    const scrollY = window.scrollY + 200;
+    for (let i = this.navItems.length - 1; i >= 0; i--) {
+      const el = document.getElementById(this.navItems[i].target);
+      if (el && el.offsetTop <= scrollY) {
+        this.activeSection = this.navItems[i].target;
+        return;
+      }
+    }
+    this.activeSection = 'hero';
   }
 
   scrollTo(event: Event, sectionId: string): void {
-    scrollToSection(event, sectionId, { behavior: 'smooth', block: 'start' });
+    event.preventDefault();
+    const el = document.getElementById(sectionId);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

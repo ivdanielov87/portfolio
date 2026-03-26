@@ -5,7 +5,7 @@
   scroll-margin-top: 50px;
 }
 
-.services-grid {
+.services__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1.3rem;
@@ -36,7 +36,7 @@
     box-shadow $transition-base,
     background-color $transition-base;
 
-  &-icon-wrap {
+  &__icon-wrap {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,7 +54,7 @@
       box-shadow $transition-base;
   }
 
-  &-title {
+  &__title {
     font-size: 1.02rem;
     font-weight: 700;
     line-height: 1.35;
@@ -62,7 +62,7 @@
     margin-bottom: 0.6rem;
   }
 
-  &-description {
+  &__description {
     font-size: 0.93rem;
     color: $text-secondary;
     line-height: 1.72;
@@ -77,7 +77,7 @@
 }
 
 @media (max-width: $bp-sm) {
-  .services-grid {
+  .services__grid {
     gap: $spacing-md;
   }
 

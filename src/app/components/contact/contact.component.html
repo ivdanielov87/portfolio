@@ -3,16 +3,16 @@
     <h2 class="section-title" appReveal="up">Contact Me</h2>
   </div>
 
-  <div class="contact-wrapper">
+  <div class="contact__wrapper">
     @if (submitted) {
-      <div class="contact-success" appReveal="up">
+      <div class="contact__success" appReveal="up">
         <span class="success-icon">&#10003;</span>
         <p>Thank you! Your message has been sent successfully.</p>
       </div>
     }
 
-    <form class="contact-form" (ngSubmit)="onSubmit()" novalidate appReveal="up" [revealDelay]="100">
-      <div class="contact-honeypot" aria-hidden="true">
+    <form class="contact__form" (ngSubmit)="onSubmit()" novalidate appReveal="up" [revealDelay]="100">
+      <div class="contact__honeypot" aria-hidden="true">
         <label for="company">Company</label>
         <input type="text" id="company" [(ngModel)]="honeypot" name="company" tabindex="-1" autocomplete="off" />
       </div>
@@ -41,17 +41,17 @@
 
       <div class="form-group form-group--captcha">
         @if (!recaptchaToken) {
-          <p class="contact-captcha-note">Please confirm you're human before sending your message.</p>
+          <p class="contact__captcha-note">Please confirm you're human before sending your message.</p>
         }
-        <div #recaptchaHost id="captcha" class="contact-captcha-widget"></div>
+        <div #recaptchaHost id="captcha" class="contact__captcha-widget"></div>
         @if (errors.captcha) { <span class="form-error">{{ errors.captcha }}</span> }
       </div>
 
       @if (sendError) {
-        <div class="contact-error">{{ sendError }}</div>
+        <div class="contact__error">{{ sendError }}</div>
       }
 
-      <button type="submit" class="contact-submit" [disabled]="isSubmitDisabled">
+      <button type="submit" class="contact__submit" [disabled]="isSubmitDisabled">
         {{ submitButtonText }}
       </button>
     </form>
