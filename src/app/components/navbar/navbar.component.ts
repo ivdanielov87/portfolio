@@ -24,7 +24,7 @@ interface PersonalInfoItem {
 interface SocialLink {
   name: string;
   url: string;
-  icon: 'github' | 'linkedin' | 'link';
+  icon: 'github' | 'linkedin';
 }
 
 interface NavLink {
@@ -51,18 +51,17 @@ export class NavbarComponent implements AfterViewInit {
     { label: 'Email', value: 'iv.danielov@gmail.com' },
     { label: 'Residence', value: 'Bulgaria' },
     { label: 'Freelance', value: 'Available' },
-    { label: 'Address', value: 'Ruse, Center' },
+    { label: 'Address', value: 'Ruse, Center' }
   ];
 
   socialLinks: SocialLink[] = [
     { name: 'GitHub', url: 'https://github.com/ivdanielov87', icon: 'github' },
-    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/ivelin-dimitrov-52aaa2186/', icon: 'linkedin' },
-    { name: 'Website', url: '#', icon: 'link' },
+    { name: 'LinkedIn', url: 'https://www.linkedin.com/in/ivelin-dimitrov-52aaa2186/', icon: 'linkedin' }
   ];
 
   languages: ChipItem[] = [
     { name: 'Bulgarian', detail: 'Native', icon: 'globe' },
-    { name: 'English', detail: 'Fluent', icon: 'message' },
+    { name: 'English', detail: 'Fluent', icon: 'message' }
   ];
 
   skillGroups: SkillGroup[] = [
@@ -101,7 +100,7 @@ export class NavbarComponent implements AfterViewInit {
     { name: 'Effective Communication', icon: 'message' },
     { name: 'Problem Solving', icon: 'bolt' },
     { name: 'Adaptability', icon: 'globe' },
-    { name: 'Ownership', icon: 'code' },
+    { name: 'Ownership', icon: 'code' }
   ];
 
   navLinks: NavLink[] = [
@@ -109,7 +108,7 @@ export class NavbarComponent implements AfterViewInit {
     { label: 'About', target: 'about' },
     { label: 'Services', target: 'services' },
     { label: 'Portfolio', target: 'portfolio' },
-    { label: 'Contact', target: 'contact' },
+    { label: 'Contact', target: 'contact' }
   ];
 
   ngAfterViewInit(): void {

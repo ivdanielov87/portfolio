@@ -22,32 +22,32 @@ export class ServicesComponent {
     {
       title: 'Web Development',
       description: 'Building modern, responsive websites using the latest technologies and best practices.',
-      icon: 'monitor',
+      icon: 'monitor'
     },
     {
       title: 'Mobile Development',
       description: 'Creating cross-platform mobile applications with React Native and modern frameworks.',
-      icon: 'smartphone',
+      icon: 'smartphone'
     },
     {
       title: 'SPA Development',
       description: 'Architecting and building robust, highly interactive Single Page Applications (SPAs) using Angular and component-driven design.',
-      icon: 'pen-tool',
+      icon: 'pen-tool'
     },
     {
       title: 'Clean Code',
       description: 'Writing maintainable, scalable and well-documented code following industry standards.',
-      icon: 'code',
+      icon: 'code'
     },
     {
       title: 'SEO Optimization',
       description: 'Improving search engine visibility and performance for better organic reach.',
-      icon: 'search',
+      icon: 'search'
     },
     {
       title: 'AI Integration',
       description: 'Integrating modern AI capabilities and APIs into web applications to deliver smart, automated and enhanced user experiences.',
-      icon: 'trending-up',
+      icon: 'trending-up'
     },
   ];
 
@@ -65,7 +65,7 @@ export class ServicesComponent {
   }
 
   getCardRevealDelay(index: number): number {
-    const startDelay = this.isMobileView ? 60 : index < 3 ? 2300 : 600;
+    const startDelay = this.isMobileView ? 60 : index < 3 ? 2000 : 400;
     const step = this.isMobileView ? 120 : 180;
     return startDelay + index * step;
   }

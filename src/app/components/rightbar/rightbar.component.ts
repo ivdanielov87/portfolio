@@ -15,7 +15,7 @@ interface NavItem {
   standalone: true,
   imports: [CommonModule],
   templateUrl: './rightbar.component.html',
-  styleUrl: './rightbar.component.scss',
+  styleUrl: './rightbar.component.scss'
 })
 export class RightbarComponent {
   navItems: NavItem[] = [
@@ -23,7 +23,7 @@ export class RightbarComponent {
     { name: 'Services', target: 'services', icon: 'briefcase' },
     { name: 'About', target: 'about', icon: 'user' },
     { name: 'Portfolio', target: 'portfolio', icon: 'folder' },
-    { name: 'Contact', target: 'contact', icon: 'mail' },
+    { name: 'Contact', target: 'contact', icon: 'mail' }
   ];
 
   activeSection: RightbarSectionTarget = 'hero';

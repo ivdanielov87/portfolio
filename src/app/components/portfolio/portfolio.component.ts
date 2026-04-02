@@ -17,7 +17,7 @@ interface Project {
   standalone: true,
   imports: [CommonModule, RevealDirective],
   templateUrl: './portfolio.component.html',
-  styleUrl: './portfolio.component.scss',
+  styleUrl: './portfolio.component.scss'
 })
 export class PortfolioComponent {
   projects: Project[] = [
@@ -28,7 +28,7 @@ export class PortfolioComponent {
       stack: ['Angular', 'TypeScript', 'SCSS'],
       accent: 'Commerce',
       imageUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock workspace image representing an e-commerce project',
+      imageAlt: 'Mock workspace image representing an e-commerce project'
     },
     {
       title: 'Brand Identity',
@@ -37,7 +37,7 @@ export class PortfolioComponent {
       stack: ['Design System', 'Figma', 'Prototype'],
       accent: 'Brand',
       imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock creative desktop image representing a brand identity project',
+      imageAlt: 'Mock creative desktop image representing a brand identity project'
     },
     {
       title: 'Mobile Banking App',
@@ -46,7 +46,7 @@ export class PortfolioComponent {
       stack: ['React Native', 'UI Audit', 'Accessibility'],
       accent: 'Finance',
       imageUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock mobile and laptop setup representing a banking application project',
+      imageAlt: 'Mock mobile and laptop setup representing a banking application project'
     },
     {
       title: 'Analytics Dashboard',
@@ -55,7 +55,7 @@ export class PortfolioComponent {
       stack: ['Angular', 'Charts', 'State Mgmt'],
       accent: 'Data',
       imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock analytics screen image representing a dashboard project',
+      imageAlt: 'Mock analytics screen image representing a dashboard project'
     },
     {
       title: 'Social Media App',
@@ -64,7 +64,7 @@ export class PortfolioComponent {
       stack: ['Mobile UI', 'Performance', 'UX'],
       accent: 'Community',
       imageUrl: 'https://images.unsplash.com/photo-1522542550221-31fd19575a2d?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock social media device image representing a community application project',
+      imageAlt: 'Mock social media device image representing a community application project'
     },
     {
       title: 'Portfolio Website',
@@ -73,7 +73,7 @@ export class PortfolioComponent {
       stack: ['Angular', 'Animation', 'Responsive'],
       accent: 'Personal',
       imageUrl: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',
-      imageAlt: 'Mock portfolio website image on a laptop screen',
+      imageAlt: 'Mock portfolio website image on a laptop screen'
     },
   ];
 }
